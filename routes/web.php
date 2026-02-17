@@ -1,10 +1,13 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home')->name('home');
 Route::view('/about', 'about')->name('about');
+Route::get('/news', [NewsController::class, 'index'])->name('news');
+Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
 Route::view('/projects', 'projects')->name('projects');
 Route::view('/stories', 'stories')->name('stories');
 Route::view('/get-involved', 'get-involved')->name('get-involved');
@@ -21,4 +24,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
