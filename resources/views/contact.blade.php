@@ -79,6 +79,45 @@
     </div>
 </section>
 
+{{-- REASONS TO CONNECT --}}
+<section class="py-16 bg-white">
+    <div class="mx-auto max-w-6xl px-4">
+        <h2 class="text-3xl font-bold text-center mb-4">Ways to Connect With Us</h2>
+        <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+            There are many ways to get involved with Educate the Orphans. Whether you want to learn more about our work, explore partnership opportunities, or invite us to speak at your church or organization, we'd love to hear from you.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Speaking Engagements -->
+            <div class="rounded-2xl border p-8 bg-gray-50 hover:shadow-lg transition">
+                <div class="text-4xl mb-4">🎤</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Speaking Engagements</h3>
+                <p class="text-gray-700 mb-4">
+                    We'd be honored to share about our work at your church, small group, school, or community organization. Contact us to discuss available dates and topics.
+                </p>
+            </div>
+
+            <!-- Partnership Opportunities -->
+            <div class="rounded-2xl border p-8 bg-gray-50 hover:shadow-lg transition">
+                <div class="text-4xl mb-4">🤝</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Partnership Opportunities</h3>
+                <p class="text-gray-700 mb-4">
+                    Interested in corporate partnerships, grants, or unique collaboration ideas? We'd love to explore how we can work together to make an impact.
+                </p>
+            </div>
+
+            <!-- Learn More -->
+            <div class="rounded-2xl border p-8 bg-gray-50 hover:shadow-lg transition">
+                <div class="text-4xl mb-4">📚</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Learn More About Us</h3>
+                <p class="text-gray-700 mb-4">
+                    Want to know more about our programs, impact, financial reports, or team? Get in touch—we're committed to transparency and happy to answer your questions.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
 {{-- CONTACT FORM --}}
 <section class="py-16 bg-gray-50">
     <div class="mx-auto max-w-2xl px-4">
@@ -151,6 +190,7 @@
                         <option value="">Select a topic...</option>
                         <option value="Child Sponsorship" @selected(old('subject') === 'Child Sponsorship')>Child Sponsorship</option>
                         <option value="Make a Donation" @selected(old('subject') === 'Make a Donation')>Make a Donation</option>
+                        <option value="Speaking Request" @selected(old('subject') === 'Speaking Request')>Speaking Request</option>
                         <option value="Volunteer Opportunity" @selected(old('subject') === 'Volunteer Opportunity')>Volunteer Opportunity</option>
                         <option value="Partnership/Business" @selected(old('subject') === 'Partnership/Business')>Partnership/Business</option>
                         <option value="Prayer Request" @selected(old('subject') === 'Prayer Request')>Prayer Request</option>
