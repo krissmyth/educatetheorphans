@@ -144,7 +144,7 @@
             <div class="border rounded-lg p-6">
                 <h3 class="text-xl font-bold">Share Our Story</h3>
                 <p class="mt-3 text-gray-700">
-                    Tell your friends and family about ETO. Follow us on social media and share our updates to expand our community of supporters.
+                    Tell your friends and family about Educate the Orphans. Follow us on social media and share our updates to expand our community of supporters.
                 </p>
                 <div class="mt-4 flex gap-3">
                     <a href="#" class="text-sm font-semibold text-blue-600 hover:underline">Facebook</a>

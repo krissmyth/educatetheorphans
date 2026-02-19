@@ -53,7 +53,7 @@
         <div>
             <h2 class="text-3xl font-bold">Our Mission</h2>
             <p class="mt-4 text-gray-700 leading-relaxed">
-                ETO Ministries exists to care for vulnerable children and families through Christ-centered outreach,
+                Educate the Orphans exists to care for vulnerable children and families through Christ-centered outreach,
                 education support, and community development.
             </p>
             <p class="mt-4 text-gray-700 leading-relaxed">
@@ -61,7 +61,7 @@
             </p>
             <div class="mt-7 flex gap-3">
                 <a href="{{ route('about') }}" class="rounded-lg border px-5 py-3 font-semibold hover:bg-gray-50">
-                    Learn About ETO
+                    Learn About Educate the Orphans
                 </a>
                 <a href="{{ route('get-involved') }}" class="rounded-lg bg-black px-5 py-3 text-white font-semibold hover:bg-gray-800">
                     Get Involved
@@ -176,7 +176,7 @@
         <div class="rounded-2xl border bg-white p-8">
             <p class="text-sm font-semibold text-gray-500">Featured Story</p>
             <blockquote class="mt-4 text-lg leading-relaxed">
-                “Because of ETO’s support, I was able to stay in school and pursue my education.
+                "Because of Educate the Orphans' support, I was able to stay in school and pursue my education.
                 Today I’m building a different future for my family.”
             </blockquote>
             <p class="mt-4 text-sm text-gray-600">— Example Graduate (replace with real story)</p>
@@ -219,7 +219,7 @@
     <div class="mx-auto max-w-6xl px-4">
         <div class="rounded-2xl border p-8 md:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
-                <h3 class="text-2xl font-bold">Get updates from ETO</h3>
+                <h3 class="text-2xl font-bold">Get updates from Educate the Orphans</h3>
                 <p class="mt-2 text-gray-700">Monthly stories, project updates, and ways to help.</p>
             </div>
 

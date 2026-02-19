@@ -28,79 +28,79 @@
 
             <!-- Story 1 -->
             <article class="border rounded-lg overflow-hidden hover:shadow-lg transition">
-                <img src="https://images.unsplash.com/photo-1503454537688-e6694fdbb9e1?auto=format&fit=crop&w=600&q=80" alt="Maria's Story" class="h-48 w-full object-cover">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" alt="Livingstone Njeru" class="h-48 w-full object-cover object-top">
                 <div class="p-6">
                     <p class="text-sm font-semibold text-blue-600 mb-2">Featured Story</p>
-                    <h3 class="text-lg font-bold">Maria's Journey to University</h3>
+                    <h3 class="text-lg font-bold">Livingstone Njeru: From Sponsored Child to Director</h3>
                     <p class="mt-3 text-sm text-gray-600 leading-relaxed">
-                        Sponsored since age 8, Maria stayed in school through ETO's support. Now she's in university studying to become a teacher and give back to her community.
+                        Livingstone started as a sponsored child and rose through Educate the Orphans' programs to become our Kenya Director. His journey showcases how education and community support create leaders who give back.
                     </p>
-                    <p class="mt-4 text-xs text-gray-500">"ETO believed in me when I didn't believe in myself."</p>
+                    <p class="mt-4 text-xs text-gray-500">"Education opened doors I never thought possible."</p>
                 </div>
             </article>
 
             <!-- Story 2 -->
             <article class="border rounded-lg overflow-hidden hover:shadow-lg transition">
-                <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=600&q=80" alt="Samuel's Story" class="h-48 w-full object-cover">
+                <img src="https://images.unsplash.com/photo-1579154204601-01d2cc9134c4?auto=format&fit=crop&w=600&q=80" alt="Makena N Gilugu" class="h-48 w-full object-cover object-top">
                 <div class="p-6">
-                    <p class="text-sm font-semibold text-green-600 mb-2">Impact Story</p>
-                    <h3 class="text-lg font-bold">Samuel: From Orphan to Teacher</h3>
+                    <p class="text-sm font-semibold text-green-600 mb-2">Professional Achievement</p>
+                    <h3 class="text-lg font-bold">Makena N Gilugu: Now an Accountant</h3>
                     <p class="mt-3 text-sm text-gray-600 leading-relaxed">
-                        Rescued from the streets as a child, Samuel received education and care through ETO. He's now a teacher mentoring vulnerable children.
+                        With sponsorship from A+P McKenna, Makena received the education and support needed to pursue her dreams. Today she works as an accountant with a Kenyan bank, serving her community.
                     </p>
-                    <p class="mt-4 text-xs text-gray-500">"I teach because I remember what it feels like to be forgotten."</p>
+                    <p class="mt-4 text-xs text-gray-500">"My sponsor believed in my potential when I couldn't see it myself."</p>
                 </div>
             </article>
 
             <!-- Story 3 -->
             <article class="border rounded-lg overflow-hidden hover:shadow-lg transition">
-                <img src="https://images.unsplash.com/photo-1594643987237-36876b5e23e4?auto=format&fit=crop&w=600&q=80" alt="Water Project" class="h-48 w-full object-cover">
+                <img src="https://images.unsplash.com/photo-1576091160629-112173faf246?auto=format&fit=crop&w=600&q=80" alt="Muthuuri Kabea" class="h-48 w-full object-cover object-top">
                 <div class="p-6">
-                    <p class="text-sm font-semibold text-purple-600 mb-2">Community Impact</p>
-                    <h3 class="text-lg font-bold">A Village Gets Clean Water</h3>
+                    <p class="text-sm font-semibold text-purple-600 mb-2">Overcoming Adversity</p>
+                    <h3 class="text-lg font-bold">Muthuuri Kabea: From Loss to Healing Professions</h3>
                     <p class="mt-3 text-sm text-gray-600 leading-relaxed">
-                        When ETO drilled wells in Mwambi village, children finally had water for school instead of spending hours collecting it. Enrollment doubled.
+                        Despite losing his father at a young age, Muthuuri persevered through Educate the Orphans' support. Thanks to T. Kelly's sponsorship, he became a radiographer at Chogoria Hospital, helping others heal.
                     </p>
-                    <p class="mt-4 text-xs text-gray-500">"Clean water changed everything for us."</p>
+                    <p class="mt-4 text-xs text-gray-500">"Pain became my purpose to serve others."</p>
                 </div>
             </article>
 
             <!-- Story 4 -->
             <article class="border rounded-lg overflow-hidden hover:shadow-lg transition">
-                <img src="https://images.unsplash.com/photo-1427504494785-cdba58dabf8d?auto=format&fit=crop&w=600&q=80" alt="School Hope" class="h-48 w-full object-cover">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=600&q=80" alt="Mukembi Karegi" class="h-48 w-full object-cover object-top">
                 <div class="p-6">
-                    <p class="text-sm font-semibold text-orange-600 mb-2">Education</p>
-                    <h3 class="text-lg font-bold">Hope School Opens Doors</h3>
+                    <p class="text-sm font-semibold text-orange-600 mb-2">Financial Security</p>
+                    <h3 class="text-lg font-bold">Mukembi Karegi: Rising in Banking</h3>
                     <p class="mt-3 text-sm text-gray-600 leading-relaxed">
-                        Hope ETO School, started in 2010, now educates 450 children annually. Many graduates have gone to secondary school and beyond.
+                        With W. Taylor's sponsorship, Mukembi gained the education necessary to pursue a career in finance. He now works as a banker with one of Kenya's national banks in Nairobi.
                     </p>
-                    <p class="mt-4 text-xs text-gray-500">"Education is the foundation of everything."</p>
+                    <p class="mt-4 text-xs text-gray-500">"I'm building a secure future for my family."</p>
                 </div>
             </article>
 
             <!-- Story 5 -->
             <article class="border rounded-lg overflow-hidden hover:shadow-lg transition">
-                <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&w=600&q=80" alt="Farm Success" class="h-48 w-full object-cover">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" alt="Pastor and Teacher" class="h-48 w-full object-cover object-top">
                 <div class="p-6">
-                    <p class="text-sm font-semibold text-green-600 mb-2">Sustainability</p>
-                    <h3 class="text-lg font-bold">ETO Shamba Transforms Livelihoods</h3>
+                    <p class="text-sm font-semibold text-indigo-600 mb-2">Community Leaders</p>
+                    <h3 class="text-lg font-bold">Sponsored Children Becoming Spiritual Leaders</h3>
                     <p class="mt-3 text-sm text-gray-600 leading-relaxed">
-                        Youth trained on ETO's farm now have sustainable income. They support their families while feeding emergency relief efforts during droughts.
+                        Many former Educate the Orphans students have answered the call to ministry. They now serve as pastors, church leaders, and spiritual counselors, bringing hope and faith to their communities.
                     </p>
-                    <p class="mt-4 text-xs text-gray-500">"I have hope for the future now."</p>
+                    <p class="mt-4 text-xs text-gray-500">"Education gave me the tools to serve my faith and community."</p>
                 </div>
             </article>
 
             <!-- Story 6 -->
             <article class="border rounded-lg overflow-hidden hover:shadow-lg transition">
-                <img src="https://images.unsplash.com/photo-1576091160550-112173faf246?auto=format&fit=crop&w=600&q=80" alt="Community Care" class="h-48 w-full object-cover">
+                <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80" alt="Sponsor Reunion" class="h-48 w-full object-cover object-top">
                 <div class="p-6">
-                    <p class="text-sm font-semibold text-indigo-600 mb-2">Community</p>
-                    <h3 class="text-lg font-bold">Prayer and Discipleship Transform a Village</h3>
+                    <p class="text-sm font-semibold text-red-600 mb-2">Sponsor Impact</p>
+                    <h3 class="text-lg font-bold">Living Proof: A Sponsor Meets Her Impact</h3>
                     <p class="mt-3 text-sm text-gray-600 leading-relaxed">
-                        Through Christ-centered community programs, families have experienced healing, hope, and restoration. The gospel is changing hearts and communities.
+                        When sponsors visit Kenya, they witness firsthand the transformation their investment makes. Former sponsored children, now professionals, warmly greet their sponsors—a profound moment showing education's lasting legacy.
                     </p>
-                    <p class="mt-4 text-xs text-gray-500">"We finally feel valued and loved."</p>
+                    <p class="mt-4 text-xs text-gray-500">"This is truly a miracle, all thanks to our sponsors."</p>
                 </div>
             </article>
 
@@ -119,7 +119,7 @@
             </div>
             <div class="text-center">
                 <p class="text-4xl font-bold text-blue-600">200+</p>
-                <p class="mt-2 text-gray-700">University graduates from ETO programs</p>
+                <p class="mt-2 text-gray-700">University graduates from Educate the Orphans programs</p>
             </div>
             <div class="text-center">
                 <p class="text-4xl font-bold text-purple-600">40,000+</p>

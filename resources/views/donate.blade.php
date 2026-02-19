@@ -16,7 +16,7 @@
             <li><span class="font-semibold">$250</span> — Support a program/project need</li>
         </ul>
 
-        <a href="https://www.justgiving.com/eto/donate"
+        <a href="https://www.justgiving.com/educatetheorphans/donate"
            target="_blank" rel="noopener"
            class="mt-6 inline-flex items-center justify-center rounded-xl bg-black px-6 py-3 text-white font-semibold hover:bg-gray-800">
             Donate securely on JustGiving
