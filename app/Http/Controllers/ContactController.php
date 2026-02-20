@@ -34,12 +34,13 @@ class ContactController extends Controller
         try {
             Mail::html($emailContent, function ($message) use ($validated) {
                 $message->to('eto-ministries@outlook.com')
-                        ->from($validated['email'], $validated['name'])
-                        ->subject('New Contact Form: ' . $validated['subject']);
+                    ->from($validated['email'], $validated['name'])
+                    ->subject('New Contact Form: ' . $validated['subject']);
             });
 
             return back()->with('success', 'Thank you! Your message has been sent successfully. We\'ll be in touch within 48 hours.');
         } catch (\Exception $e) {
+            \Log::error('Contact form email error: ' . $e->getMessage());
             return back()->with('error', 'Sorry, there was an issue sending your message. Please try again or email us directly at info@educatetheorphans.org')->withInput();
         }
     }

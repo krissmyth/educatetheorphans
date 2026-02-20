@@ -3,9 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     <title>{{ $title ?? 'Educate the Orphans' }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    @stack('scripts')
 </head>
 <body class="min-h-screen bg-white text-gray-900">
 
@@ -17,8 +20,9 @@
     <div class="mx-auto max-w-6xl px-4 py-4 flex items-center justify-between">
 
         <!-- Logo -->
-        <a href="{{ route('home') }}" class="font-semibold text-lg">
-            Educate the Orphans
+        <a href="{{ route('home') }}" class="flex items-center gap-2 font-semibold text-lg hover:opacity-90 transition-opacity">
+            <img src="{{ asset('images/logo.png') }}" alt="Educate the Orphans Logo" class="h-12 w-auto">
+            <span>Educate the Orphans</span>
         </a>
 
         <!-- Desktop Nav -->

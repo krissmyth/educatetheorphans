@@ -1,21 +1,268 @@
 @extends('layouts.public')
 
+@push('scripts')
+<script src="https://js.stripe.com/v3/"></script>
+@endpush
+
 @section('content')
 
-{{-- HERO --}}
+{{-- HERO WITH DONATION WIDGET --}}
 <section class="relative">
     <img
         src="https://images.unsplash.com/photo-1532996122724-8f6ba07a18e3?auto=format&fit=crop&w=2000&q=80"
-        class="h-[560px] w-full object-cover"
+        class="h-[900px] lg:h-[700px] w-full object-cover"
         alt="Donate"
     >
-    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="absolute inset-0 bg-black/50"></div>
 
     <div class="absolute inset-0">
-        <div class="mx-auto max-w-6xl px-4 h-full flex items-center">
-            <div class="max-w-2xl text-white">
-                <h1 class="text-5xl font-bold leading-tight">Make a Donation</h1>
-                <p class="mt-5 text-lg text-gray-200">Your generosity directly helps vulnerable children and families in Kenya access education, food, water, and care.</p>
+        <div class="mx-auto max-w-6xl px-4 h-full flex flex-col lg:flex-row items-center justify-between gap-8 py-12">
+            {{-- Left side - Text Content --}}
+            <div class="max-w-xl text-white text-center lg:text-left">
+                <h1 class="text-4xl lg:text-5xl font-bold leading-tight">Make a Donation</h1>
+                <p class="mt-5 text-base lg:text-lg text-gray-200">Your generosity directly helps vulnerable children and families in Kenya access education, food, water, and care.</p>
+            </div>
+
+            {{-- Right side - Donation Widget --}}
+            <div class="w-full max-w-md" x-data="donationWidget()" x-init="init()">
+                <div class="bg-white rounded-lg shadow-2xl overflow-hidden">
+                    {{-- Header --}}
+                    <div class="bg-gray-900 text-white text-center py-4 px-6">
+                        <h2 class="text-xl font-bold uppercase tracking-wide">Donate to Charity Online</h2>
+                    </div>
+
+                    {{-- Widget Content --}}
+                    <div class="p-6">
+                        {{-- Frequency Toggle --}}
+                        <div class="grid grid-cols-2 gap-0 mb-6 border-2 border-gray-300 rounded overflow-hidden">
+                            <button
+                                type="button"
+                                @click="frequency = 'single'"
+                                :class="frequency === 'single' ? 'bg-red-600 text-white' : 'bg-gray-100 text-gray-600'"
+                                class="py-3 px-6 font-bold text-sm uppercase border-r-2 border-gray-300 transition-colors"
+                            >
+                                Single
+                            </button>
+                            <button
+                                type="button"
+                                @click="frequency = 'monthly'"
+                                :class="frequency === 'monthly' ? 'bg-red-600 text-white' : 'bg-gray-100 text-gray-600'"
+                                class="py-3 px-6 font-bold text-sm uppercase transition-colors"
+                            >
+                                Monthly
+                            </button>
+                        </div>
+
+                        {{-- Preset Amounts --}}
+                        <div class="grid grid-cols-3 gap-0 mb-4 border-2 border-gray-300 rounded overflow-hidden">
+                            <button
+                                type="button"
+                                @click="amount = 5"
+                                :class="amount === 5 ? 'bg-red-600 text-white' : 'bg-white text-gray-900'"
+                                class="py-3 px-4 font-bold text-base border-r-2 border-gray-300 transition-colors"
+                            >
+                                £5
+                            </button>
+                            <button
+                                type="button"
+                                @click="amount = 10"
+                                :class="amount === 10 ? 'bg-red-600 text-white' : 'bg-white text-gray-900'"
+                                class="py-3 px-4 font-bold text-base border-r-2 border-gray-300 transition-colors"
+                            >
+                                £10
+                            </button>
+                            <button
+                                type="button"
+                                @click="amount = 15"
+                                :class="amount === 15 ? 'bg-red-600 text-white' : 'bg-white text-gray-900'"
+                                class="py-3 px-4 font-bold text-base transition-colors"
+                            >
+                                £15
+                            </button>
+                        </div>
+
+                        {{-- Impact Text --}}
+                        <div class="mb-6 text-center min-h-[48px]">
+                            <p class="text-sm text-gray-700 leading-snug" x-text="impactText"></p>
+                        </div>
+
+                        {{-- Custom Amount Input --}}
+                        <div class="mb-6">
+                            <div class="flex items-center border-2 border-gray-300 rounded">
+                                <span class="pl-4 pr-2 text-gray-700 font-bold text-lg">£</span>
+                                <input
+                                    type="number"
+                                    x-model.number="amount"
+                                    min="5"
+                                    step="5"
+                                    placeholder="Or enter other amount"
+                                    class="flex-1 py-3 px-2 text-gray-700 placeholder-gray-400 text-base border-0 focus:outline-none focus:ring-0"
+                                >
+                            </div>
+                        </div>
+
+                        {{-- Donate Button --}}
+                        <button
+                            type="button"
+                            @click="showPaymentModal = true"
+                            class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-6 rounded transition-colors text-lg uppercase tracking-wide"
+                        >
+                            ❤ Donate Now
+                        </button>
+
+                        {{-- Payment Methods --}}
+                        <div class="mt-4 flex items-center justify-center gap-4 opacity-60">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png" alt="Visa" class="h-5 grayscale">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/200px-Mastercard-logo.svg.png" alt="Mastercard" class="h-5 grayscale">
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Payment Modal --}}
+                <div 
+                    x-show="showPaymentModal" 
+                    x-cloak
+                    @click.self="showPaymentModal = false"
+                    class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4"
+                    style="display: none;"
+                >
+                    <div class="bg-white rounded-lg shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+                        {{-- Modal Header --}}
+                        <div class="bg-green-600 text-white p-6 flex justify-between items-center sticky top-0">
+                            <div>
+                                <h3 class="text-xl font-bold">
+                                    <span x-text="frequency === 'monthly' ? 'Monthly' : 'Single'"></span> Donation
+                                </h3>
+                                <p class="text-sm opacity-90 mt-1">
+                                    You are donating £<span x-text="amount"></span>
+                                </p>
+                            </div>
+                            <button 
+                                @click="showPaymentModal = false"
+                                class="text-white hover:bg-green-700 rounded-full w-8 h-8 flex items-center justify-center"
+                            >
+                                ✕
+                            </button>
+                        </div>
+
+                        {{-- Modal Content --}}
+                        <div class="p-6 space-y-5">
+                            {{-- Success Message --}}
+                            <div x-show="success" x-transition class="bg-green-100 border-2 border-green-500 text-green-800 rounded-lg p-4">
+                                <div class="font-bold mb-1">✓ Thank you for your donation!</div>
+                                <div class="text-sm">Your payment has been processed successfully.</div>
+                            </div>
+
+                            <div x-show="!success">
+                                {{-- Gift Aid Checkbox --}}
+                                <div class="bg-green-50 border-2 border-green-200 rounded-lg p-4">
+                                    <label class="flex items-start gap-3 cursor-pointer">
+                                        <input
+                                            type="checkbox"
+                                            x-model="giftAidEnabled"
+                                            class="mt-1 h-5 w-5 text-green-600 border-gray-300 rounded focus:ring-green-500"
+                                        >
+                                        <div class="flex-1">
+                                            <div class="font-bold text-gray-900 mb-1">
+                                                Boost your donation by <span x-text="'£' + (amount * 0.25).toFixed(2)"></span> at no extra cost to you with Gift Aid *
+                                            </div>
+                                            <div class="text-xs text-gray-600 leading-relaxed">
+                                                * YES, I want to Gift Aid this donation and any future donations I make or have made in the past four years to Educate the Orphans. I am a UK taxpayer and understand that if I pay less Income Tax and/or Capital Gains Tax in that tax year than the amount of Gift Aid claimed on all my donations it is my responsibility to pay any difference.
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                {{-- Donor Email --}}
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address *</label>
+                                    <input
+                                        type="email"
+                                        x-model="donorEmail"
+                                        required
+                                        placeholder="your@email.com"
+                                        class="w-full py-3 px-4 border-2 border-gray-300 rounded focus:outline-none focus:border-green-500"
+                                    >
+                                    <p class="text-xs text-gray-500 mt-1">We'll send your receipt to this email</p>
+                                </div>
+
+                                {{-- Gift Aid Details (conditional) --}}
+                                <div x-show="giftAidEnabled" x-transition class="space-y-4">
+                                    <div class="bg-green-50 border-2 border-green-200 rounded-lg p-4">
+                                        <h4 class="font-bold text-gray-900 mb-3">Gift Aid Details</h4>
+                                        <p class="text-xs text-gray-600 mb-4">Please provide your details for Gift Aid</p>
+                                        
+                                        <div class="space-y-3">
+                                            <div class="grid grid-cols-3 gap-2">
+                                                <div>
+                                                    <label class="block text-xs font-semibold text-gray-700 mb-1">Title *</label>
+                                                    <select x-model="giftAid.title" required class="w-full py-2 px-2 text-sm border-2 border-gray-300 rounded focus:outline-none focus:border-green-500">
+                                                        <option value="">Select</option>
+                                                        <option value="Mr">Mr</option>
+                                                        <option value="Mrs">Mrs</option>
+                                                        <option value="Miss">Miss</option>
+                                                        <option value="Ms">Ms</option>
+                                                        <option value="Dr">Dr</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-span-2">
+                                                    <label class="block text-xs font-semibold text-gray-700 mb-1">First Name *</label>
+                                                    <input type="text" x-model="giftAid.firstName" required class="w-full py-2 px-3 text-sm border-2 border-gray-300 rounded focus:outline-none focus:border-green-500">
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label class="block text-xs font-semibold text-gray-700 mb-1">Last Name *</label>
+                                                <input type="text" x-model="giftAid.lastName" required class="w-full py-2 px-3 text-sm border-2 border-gray-300 rounded focus:outline-none focus:border-green-500">
+                                            </div>
+                                            <div>
+                                                <label class="block text-xs font-semibold text-gray-700 mb-1">Address Line 1 *</label>
+                                                <input type="text" x-model="giftAid.addressLine1" required class="w-full py-2 px-3 text-sm border-2 border-gray-300 rounded focus:outline-none focus:border-green-500">
+                                            </div>
+                                            <div>
+                                                <label class="block text-xs font-semibold text-gray-700 mb-1">Address Line 2</label>
+                                                <input type="text" x-model="giftAid.addressLine2" class="w-full py-2 px-3 text-sm border-2 border-gray-300 rounded focus:outline-none focus:border-green-500">
+                                            </div>
+                                            <div class="grid grid-cols-2 gap-2">
+                                                <div>
+                                                    <label class="block text-xs font-semibold text-gray-700 mb-1">City *</label>
+                                                    <input type="text" x-model="giftAid.city" required class="w-full py-2 px-3 text-sm border-2 border-gray-300 rounded focus:outline-none focus:border-green-500">
+                                                </div>
+                                                <div>
+                                                    <label class="block text-xs font-semibold text-gray-700 mb-1">Postcode *</label>
+                                                    <input type="text" x-model="giftAid.postcode" required class="w-full py-2 px-3 text-sm border-2 border-gray-300 rounded focus:outline-none focus:border-green-500">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{-- Card Details --}}
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Card Details *</label>
+                                    <div id="card-element" class="py-3 px-4 border-2 border-gray-300 rounded"></div>
+                                    <div id="card-errors" class="text-red-600 text-sm mt-2" x-text="cardError"></div>
+                                </div>
+
+                                {{-- Process Payment Button --}}
+                                <button
+                                    type="button"
+                                    @click="processPayment()"
+                                    :disabled="processing"
+                                    class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-6 rounded transition-colors text-lg uppercase tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
+                                >
+                                    <span x-show="!processing">Complete Donation</span>
+                                    <span x-show="processing">Processing...</span>
+                                </button>
+
+                                <p class="text-xs text-gray-500 text-center">
+                                    🔒 Your payment is secure and encrypted
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>
@@ -114,88 +361,123 @@
 
         {{-- Donate Button --}}
         <div class="text-center">
-            <button
-                type="button"
-                @click="showDonationModal = true"
+            <a
+                href="#donation-form"
                 class="inline-flex items-center justify-center rounded-lg bg-green-600 text-white px-12 py-4 font-semibold hover:bg-green-700 transition text-lg"
             >
-                Donate Now
-            </button>
+                ❤ Donate Now
+            </a>
+            <p class="text-sm text-gray-500 mt-4">
+                Secure payment processed by Stripe
+            </p>
         </div>
 
-        {{-- Donation Modal --}}
-        <div
-            x-show="showDonationModal"
-            x-cloak
-            @click.outside="showDonationModal = false"
-            class="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50"
-            style="display: none;"
-        >
-            <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 animate-in">
-                {{-- Close Button --}}
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-2xl font-bold text-gray-900">Confirm Your Donation</h3>
-                    <button
-                        type="button"
-                        @click="showDonationModal = false"
-                        class="text-gray-500 hover:text-gray-700 text-2xl"
-                    >
-                        ×
-                    </button>
-                </div>
 
-                {{-- Donation Summary --}}
-                <div class="bg-green-50 rounded-xl p-6 mb-6 border border-green-200">
-                    <p class="text-sm text-gray-600 mb-2">Donation Amount</p>
-                    <p class="text-4xl font-bold text-green-600 mb-2">
-                        £<span x-text="amount"></span>
+    </div>
+</section>
+
+{{-- CTA SECTION --}}
+<section class="py-16 bg-gray-50" id="donation-form">
+    <div class="mx-auto max-w-4xl px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">Why Give Online?</h2>
+        
+        <div class="grid md:grid-cols-3 gap-8 mb-12">
+            <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
+                <div class="text-5xl mb-4">🛡️</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Charity Verified</h3>
+                <p class="text-gray-600">
+                    We're a registered and audited charity committed to transparency and accountability.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
+                <div class="text-5xl mb-4">💳</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Secure Payments</h3>
+                <p class="text-gray-600">
+                    All payments are processed securely through Stripe with bank-level encryption.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
+                <div class="text-5xl mb-4">📈</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Gift Aid Boost</h3>
+                <p class="text-gray-600">
+                    UK taxpayers can add 25% to their donation at no extra cost through Gift Aid.
+                </p>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-green-50 rounded-2xl p-8 border-2 border-green-200">
+                <h4 class="font-bold text-gray-900 mb-4 text-xl">Lower Fees, More Impact</h4>
+                <div class="space-y-3 text-gray-700">
+                    <div class="flex justify-between">
+                        <span>Card Payments:</span>
+                        <span class="font-bold text-green-600">1.5% + 20p</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Direct Debit:</span>
+                        <span class="font-bold text-green-600">1% (max £2)</span>
+                    </div>
+                    <p class="text-sm pt-3 border-t border-green-300">
+                        Lower processing fees mean more of your donation goes directly to helping children and families.
                     </p>
-                    <p class="text-gray-700 font-semibold">
-                        <span x-text="frequency === 'monthly' ? 'Monthly donation' : 'One-time donation'"></span>
-                    </p>
                 </div>
+            </div>
 
-                {{-- Gift Aid Option --}}
-                <div class="mb-8 p-4 bg-blue-50 rounded-lg border border-blue-200">
-                    <label class="flex items-start gap-3 cursor-pointer">
-                        <input
-                            type="checkbox"
-                            x-model="giftAid"
-                            class="mt-1 w-5 h-5 rounded accent-green-600"
-                        >
-                        <div>
-                            <p class="font-semibold text-gray-900">Gift Aid</p>
-                            <p class="text-sm text-gray-600 mt-1">
-                                By selecting Gift Aid, we can claim an extra 25% from HMRC, at no extra cost to you. This makes your donation even more valuable to the children and families we support.
-                            </p>
-                            <p class="text-xs text-gray-500 mt-2">
-                                You must be a UK taxpayer to use Gift Aid
-                            </p>
-                        </div>
-                    </label>
-                </div>
+            <div class="bg-blue-50 rounded-2xl p-8 border-2 border-blue-200">
+                <h4 class="font-bold text-gray-900 mb-4 text-xl">100% Goes to Our Work</h4>
+                <p class="text-gray-700 mb-4">
+                    Every penny you donate goes directly to supporting vulnerable children and families. 
+                    We cover our operating costs separately, so your gift makes maximum impact.
+                </p>
+                <a href="/about" 
+                   class="inline-block bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition">
+                    Learn More About Us
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
 
-                {{-- Action Buttons --}}
-                <div class="space-y-3">
-                    <button
-                        type="button"
-                        @click="processDonation()"
-                        class="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition"
-                    >
-                        Proceed to Payment
-                    </button>
-                    <button
-                        type="button"
-                        @click="showDonationModal = false"
-                        class="w-full bg-gray-200 text-gray-900 py-3 rounded-lg font-semibold hover:bg-gray-300 transition"
-                    >
-                        Cancel
-                    </button>
-                </div>
+{{-- FAQ SECTION --}}
+<section class="py-16">
+    <div class="mx-auto max-w-3xl px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">Donation Questions</h2>
 
-                {{-- Security Note --}}
-                <p class="text-xs text-gray-500 text-center mt-4">
-                    🔒 Your donation is secure and handled by our trusted payment partner
+        <div class="space-y-6">
+            <div class="rounded-2xl border p-8 bg-white">
+                <h3 class="font-bold text-lg text-gray-900 mb-3">Is my donation secure?</h3>
+                <p class="text-gray-700">
+                    Yes! All donations are processed securely through JustGiving, a trusted charitable giving platform used by millions of donors worldwide.
+                </p>
+            </div>
+
+            <div class="rounded-2xl border p-8 bg-white">
+                <h3 class="font-bold text-lg text-gray-900 mb-3">Is my donation tax-deductible?</h3>
+                <p class="text-gray-700">
+                    Yes! Educate the Orphans is a registered nonprofit organisation. You will receive a tax receipt for your donation, making it eligible for tax deductions where applicable.
+                </p>
+            </div>
+
+            <div class="rounded-2xl border p-8 bg-white">
+                <h3 class="font-bold text-lg text-gray-900 mb-3">How can I give regularly?</h3>
+                <p class="text-gray-700">
+                    Through JustGiving, you can set up a monthly donation to provide ongoing support. Regular donors make a tremendous difference in our ability to plan and expand our programmes.
+                </p>
+            </div>
+
+            <div class="rounded-2xl border p-8 bg-white">
+                <h3 class="font-bold text-lg text-gray-900 mb-3">How is my money used?</h3>
+                <p class="text-gray-700">
+                    We maintain full transparency about how donations are used. Visit our About page to see our financial reports and impact statistics. Most donations go directly to programmes—we keep administrative costs minimal.
+                </p>
+            </div>
+
+            <div class="rounded-2xl border p-8 bg-white">
+                <h3 class="font-bold text-lg text-gray-900 mb-3">Can I donate in another way?</h3>
+                <p class="text-gray-700">
+                    Yes! You can contact us directly at <a href="mailto:info@educatetheorphans.org" class="text-green-600 font-semibold hover:underline">info@educatetheorphans.org</a> to discuss other giving options such as bank transfers, corporate donations, or grants.
                 </p>
             </div>
         </div>
@@ -203,14 +485,198 @@
 </section>
 
 <script>
+// Initialize Stripe
+const stripe = Stripe('{{ $stripeKey }}');
+const elements = stripe.elements();
+let cardElement;
+
+function donationWidget() {
+    return {
+        amount: 10,
+        frequency: 'monthly',
+        impactText: '',
+        donorEmail: '',
+        giftAidEnabled: false,
+        giftAid: {
+            title: '',
+            firstName: '',
+            lastName: '',
+            addressLine1: '',
+            addressLine2: '',
+            city: '',
+            postcode: ''
+        },
+        processing: false,
+        success: false,
+        cardError: '',
+        showPaymentModal: false,
+
+        init() {
+            this.updateImpact();
+            this.$watch('amount', () => this.updateImpact());
+            this.$watch('frequency', () => this.updateImpact());
+            
+            // Initialize Stripe Card Element when modal is shown
+            this.$watch('showPaymentModal', (value) => {
+                if (value === true) {
+                    this.$nextTick(() => {
+                        if (!cardElement) {
+                            cardElement = elements.create('card', {
+                                style: {
+                                    base: {
+                                        fontSize: '16px',
+                                        color: '#374151',
+                                        '::placeholder': {
+                                            color: '#9CA3AF',
+                                        },
+                                    },
+                                },
+                            });
+                            cardElement.mount('#card-element');
+                            
+                            cardElement.on('change', (event) => {
+                                if (event.error) {
+                                    this.cardError = event.error.message;
+                                } else {
+                                    this.cardError = '';
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        },
+
+        updateImpact() {
+            if (this.frequency === 'monthly') {
+                if (this.amount >= 15) {
+                    this.impactText = `Your donation could supply ${Math.floor(this.amount * 2.5)} sachets of food paste to malnourished children each month`;
+                } else if (this.amount >= 10) {
+                    this.impactText = `Your donation could provide educational supplies for ${Math.floor(this.amount / 5)} children each month`;
+                } else {
+                    this.impactText = `Your donation could help provide meals for children in need each month`;
+                }
+            } else {
+                if (this.amount >= 50) {
+                    this.impactText = `Your donation could provide a month of food support for a family`;
+                } else if (this.amount >= 25) {
+                    this.impactText = `Your donation could outfit a child with uniform and school materials`;
+                } else if (this.amount >= 15) {
+                    this.impactText = `Your donation could provide essential school supplies for a child`;
+                } else {
+                    this.impactText = `Your donation could help provide school books and materials`;
+                }
+            }
+        },
+
+        async processPayment() {
+            // Validation
+            if (!this.donorEmail || this.amount < 5) {
+                alert('Please enter your email and a donation amount of at least £5');
+                return;
+            }
+
+            if (this.giftAidEnabled) {
+                if (!this.giftAid.title || !this.giftAid.firstName || !this.giftAid.lastName || 
+                    !this.giftAid.addressLine1 || !this.giftAid.city || !this.giftAid.postcode) {
+                    alert('Please complete all Gift Aid fields');
+                    return;
+                }
+            }
+
+            this.processing = true;
+            this.cardError = '';
+
+            try {
+                // Create Payment Intent
+                const response = await fetch('/stripe/create-payment-intent', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    body: JSON.stringify({
+                        amount: this.amount,
+                        frequency: this.frequency === 'monthly' ? 'monthly' : 'one-time',
+                        donor_email: this.donorEmail,
+                        gift_aid_enabled: this.giftAidEnabled,
+                        gift_aid: this.giftAidEnabled ? this.giftAid : null
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Payment failed');
+                }
+
+                // Confirm the payment with Stripe
+                const { error, paymentIntent } = await stripe.confirmCardPayment(data.clientSecret, {
+                    payment_method: {
+                        card: cardElement,
+                        billing_details: {
+                            email: this.donorEmail,
+                        },
+                    },
+                });
+
+                if (error) {
+                    this.cardError = error.message;
+                    this.processing = false;
+                } else if (paymentIntent.status === 'succeeded') {
+                    // Payment succeeded
+                    await fetch('/stripe/payment-success', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                        },
+                        body: JSON.stringify({
+                            payment_intent_id: paymentIntent.id
+                        })
+                    });
+
+                    this.success = true;
+                    this.processing = false;
+                    this.resetForm();
+                }
+            } catch (error) {
+                this.cardError = error.message;
+                this.processing = false;
+            }
+        },
+
+        resetForm() {
+            this.donorEmail = '';
+            this.giftAid = {
+                title: '',
+                firstName: '',
+                lastName: '',
+                addressLine1: '',
+                addressLine2: '',
+                city: '',
+                postcode: ''
+            };
+            this.cardError = '';
+            if (cardElement) {
+                cardElement.clear();
+            }
+            
+            // Close modal after a delay to show success message
+            setTimeout(() => {
+                this.success = false;
+                this.showPaymentModal = false;
+            }, 2000);
+        }
+    }
+}
+
 function donationSlider() {
     return {
         amount: 10,
         frequency: 'monthly',
         donationBreakdown: [],
         summaryText: '',
-        showDonationModal: false,
-        giftAid: false,
 
         init() {
             this.updateSlider();
@@ -367,93 +833,9 @@ function donationSlider() {
 
                 this.summaryText = ' ' + (oneOffSummaries[closest] || oneOffSummaries[5]);
             }
-        },
-
-        processDonation() {
-            // Prepare donation data
-            const donationData = {
-                amount: this.amount,
-                frequency: this.frequency,
-                giftAid: this.giftAid,
-                timestamp: new Date().toISOString()
-            };
-
-            // Log for debugging - will be replaced with actual payment processing
-            console.log('Processing donation:', donationData);
-
-            // Show a confirmation message
-            alert(`Thank you! Processing your £${this.amount} ${this.frequency === 'monthly' ? 'monthly' : 'one-time'} donation${this.giftAid ? ' with Gift Aid' : ''}.`);
-
-            // TODO: Integrate with payment processor (Stripe, JustGiving API, etc.)
-            // For now, this is just a placeholder
         }
     }
 }
 </script>
-
-{{-- CTA SECTION --}}
-<section class="py-16 bg-gray-50">
-    <div class="mx-auto max-w-3xl px-4 text-center">
-        <h2 class="text-3xl font-bold mb-4">Ready to Make a Difference?</h2>
-        <p class="text-gray-600 mb-8">
-            Donate any amount you choose. All donations go directly to programmes and services. We're committed to transparency—you can see exactly how your gift is used.
-        </p>
-
-        <a href="https://www.justgiving.com/educatetheorphans/donate"
-           target="_blank" rel="noopener"
-           class="inline-flex items-center justify-center rounded-lg bg-green-600 text-white px-8 py-4 font-semibold hover:bg-green-700 transition text-lg">
-            Donate Now
-        </a>
-
-        <p class="mt-6 text-sm text-gray-500">
-            You'll be taken to our secure JustGiving page to complete your donation.<br>
-            <span class="font-semibold">100% of donations go directly to programmes and services.</span>
-        </p>
-    </div>
-</section>
-
-{{-- FAQ SECTION --}}
-<section class="py-16">
-    <div class="mx-auto max-w-3xl px-4">
-        <h2 class="text-3xl font-bold text-center mb-12">Donation Questions</h2>
-
-        <div class="space-y-6">
-            <div class="rounded-2xl border p-8 bg-white">
-                <h3 class="font-bold text-lg text-gray-900 mb-3">Is my donation secure?</h3>
-                <p class="text-gray-700">
-                    Yes! All donations are processed securely through JustGiving, a trusted charitable giving platform used by millions of donors worldwide.
-                </p>
-            </div>
-
-            <div class="rounded-2xl border p-8 bg-white">
-                <h3 class="font-bold text-lg text-gray-900 mb-3">Is my donation tax-deductible?</h3>
-                <p class="text-gray-700">
-                    Yes! Educate the Orphans is a registered nonprofit organisation. You will receive a tax receipt for your donation, making it eligible for tax deductions where applicable.
-                </p>
-            </div>
-
-            <div class="rounded-2xl border p-8 bg-white">
-                <h3 class="font-bold text-lg text-gray-900 mb-3">How can I give regularly?</h3>
-                <p class="text-gray-700">
-                    Through JustGiving, you can set up a monthly donation to provide ongoing support. Regular donors make a tremendous difference in our ability to plan and expand our programmes.
-                </p>
-            </div>
-
-            <div class="rounded-2xl border p-8 bg-white">
-                <h3 class="font-bold text-lg text-gray-900 mb-3">How is my money used?</h3>
-                <p class="text-gray-700">
-                    We maintain full transparency about how donations are used. Visit our About page to see our financial reports and impact statistics. Most donations go directly to programmes—we keep administrative costs minimal.
-                </p>
-            </div>
-
-            <div class="rounded-2xl border p-8 bg-white">
-                <h3 class="font-bold text-lg text-gray-900 mb-3">Can I donate in another way?</h3>
-                <p class="text-gray-700">
-                    Yes! You can contact us directly at <a href="mailto:info@educatetheorphans.org" class="text-green-600 font-semibold hover:underline">info@educatetheorphans.org</a> to discuss other giving options such as bank transfers, corporate donations, or grants.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
 
 @endsection

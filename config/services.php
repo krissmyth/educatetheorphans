@@ -35,4 +35,18 @@ return [
         ],
     ],
 
+    'justgiving' => [
+        'charity_slug' => env('JUSTGIVING_CHARITY_SLUG'),
+        'charity_url' => env('JUSTGIVING_CHARITY_URL'),
+        'api_key' => env('JUSTGIVING_API_KEY'),
+        'charity_id' => env('JUSTGIVING_CHARITY_ID'),
+        'widget_type' => env('JUSTGIVING_WIDGET_TYPE', 'embed'),
+    ],
+
+    'stripe' => [
+        'key' => env('STRIPE_KEY'),
+        'secret' => env('STRIPE_SECRET'),
+        'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
+    ],
+
 ];

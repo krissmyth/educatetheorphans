@@ -4,6 +4,10 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DonationController;
+use App\Http\Controllers\StripeController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Admin\DonationController as AdminDonationController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home')->name('home');
@@ -13,13 +17,28 @@ Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
 Route::get('/projects', [ProjectsController::class, 'index'])->name('projects');
 Route::view('/stories', 'stories')->name('stories');
 Route::view('/get-involved', 'get-involved')->name('get-involved');
-Route::view('/donate', 'donate')->name('donate');
-Route::get('/contact', function () { return view('contact'); })->name('contact');
+Route::get('/donate', [DonationController::class, 'show'])->name('donate');
+Route::post('/donate/redirect', [DonationController::class, 'redirectToJustGiving'])->name('donate.redirect');
+Route::get('/api/campaign-data', [DonationController::class, 'getCampaignData'])->name('campaign.data');
+
+// Stripe payment routes
+Route::post('/stripe/create-payment-intent', [StripeController::class, 'createPaymentIntent'])->name('stripe.create-intent');
+Route::post('/stripe/payment-success', [StripeController::class, 'handleSuccess'])->name('stripe.success');
+Route::post('/stripe/webhook', [StripeController::class, 'webhook'])->name('stripe.webhook');
+
+// Admin routes for donation management
+Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
+    Route::get('/donations', [AdminDonationController::class, 'index'])->name('donations.index');
+    Route::get('/donations/{donation}', [AdminDonationController::class, 'show'])->name('donations.show');
+    Route::get('/donations/export/gift-aid', [AdminDonationController::class, 'exportGiftAid'])->name('donations.export-gift-aid');
+});
+
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
