@@ -35,18 +35,20 @@
         <div class="flex justify-center mb-12">
             <div class="inline-flex rounded-full border-2 border-gray-300 bg-gray-50 p-1">
                 <button
-                    @click="frequency = 'one-off'; updateSlider()"
-                    :class="frequency === 'one-off' ? 'bg-green-600 text-white' : 'text-gray-700'"
-                    class="px-8 py-3 rounded-full font-semibold transition-all duration-200"
-                >
-                    One-off Donation
-                </button>
-                <button
+                    type="button"
                     @click="frequency = 'monthly'; updateSlider()"
                     :class="frequency === 'monthly' ? 'bg-green-600 text-white' : 'text-gray-700'"
                     class="px-8 py-3 rounded-full font-semibold transition-all duration-200"
                 >
                     Monthly Donation
+                </button>
+                <button
+                    type="button"
+                    @click="frequency = 'one-off'; updateSlider()"
+                    :class="frequency === 'one-off' ? 'bg-green-600 text-white' : 'text-gray-700'"
+                    class="px-8 py-3 rounded-full font-semibold transition-all duration-200"
+                >
+                    One-off Donation
                 </button>
             </div>
         </div>
@@ -115,8 +117,8 @@
 <script>
 function donationSlider() {
     return {
-        amount: 15,
-        frequency: 'one-off',
+        amount: 10,
+        frequency: 'monthly',
         donationBreakdown: [],
         summaryText: '',
 
