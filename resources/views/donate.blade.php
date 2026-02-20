@@ -21,131 +21,211 @@
     </div>
 </section>
 
-{{-- DONATION IMPACT SECTION --}}
-<section class="py-16">
-    <div class="mx-auto max-w-6xl px-4">
-        <div class="text-center max-w-3xl mx-auto mb-12">
+{{-- INTERACTIVE DONATION SLIDER --}}
+<section class="py-16 bg-green-50">
+    <div class="mx-auto max-w-4xl px-4">
+        <div class="text-center mb-12">
             <h2 class="text-3xl font-bold mb-4">See Your Impact</h2>
             <p class="text-gray-600">
-                Every pounds you donate makes a real difference. Here's how your support can help the children and families we serve.
+                Adjust the slider to see what your donation can accomplish
             </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {{-- £25 --}}
-            <div class="rounded-2xl border-2 border-green-200 p-8 bg-white hover:shadow-lg transition">
-                <div class="flex items-start justify-between mb-4">
-                    <div>
-                        <p class="text-4xl font-bold text-green-600">£25</p>
-                    </div>
-                    <div class="text-4xl">📚</div>
+        <div class="rounded-2xl border-2 border-green-200 p-8 bg-white" x-data="donationSlider()" x-init="init()">
+            {{-- Slider Control --}}
+            <div class="mb-8">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="text-lg font-semibold text-gray-700">Your donation:</span>
+                    <span class="text-4xl font-bold text-green-600">£<span x-text="amount"></span></span>
                 </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-3">School Supplies</h3>
-                <p class="text-gray-700 mb-4">
-                    Provides school uniforms, notebooks, pens, and learning materials for a child for an entire term.
-                </p>
-                <ul class="space-y-2 text-sm text-gray-600">
-                    <li class="flex items-start">
-                        <span class="text-green-600 mr-2 font-bold">•</span>
-                        <span>School uniform and shoes</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="text-green-600 mr-2 font-bold">•</span>
-                        <span>Notebooks and stationery</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="text-green-600 mr-2 font-bold">•</span>
-                        <span>School bag and learning materials</span>
-                    </li>
-                </ul>
+                <input
+                    type="range"
+                    x-model.number="amount"
+                    min="10"
+                    max="500"
+                    step="10"
+                    class="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-green-600"
+                    @input="updateSlider()"
+                >
+                <div class="flex justify-between text-sm text-gray-500 mt-2">
+                    <span>£10</span>
+                    <span>£500+</span>
+                </div>
             </div>
 
-            {{-- £50 --}}
-            <div class="rounded-2xl border-2 border-green-200 p-8 bg-white hover:shadow-lg transition">
-                <div class="flex items-start justify-between mb-4">
-                    <div>
-                        <p class="text-4xl font-bold text-green-600">£50</p>
-                    </div>
-                    <div class="text-4xl">🍲</div>
+            {{-- Impact Display --}}
+            <div class="border-t-2 border-gray-200 pt-8">
+                <div class="space-y-4">
+                    <template x-for="item in impacts" :key="item.id">
+                        <div class="flex items-start gap-4">
+                            <div class="text-3xl flex-shrink-0" x-text="item.emoji"></div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-gray-900 mb-1" x-text="item.title"></h4>
+                                <p class="text-gray-700 text-sm" x-text="item.description"></p>
+                            </div>
+                        </div>
+                    </template>
                 </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-3">Food Support</h3>
-                <p class="text-gray-700 mb-4">
-                    Provides nutritious meals and food support for a family for a month, helping children stay healthy and focused on learning.
-                </p>
-                <ul class="space-y-2 text-sm text-gray-600">
-                    <li class="flex items-start">
-                        <span class="text-green-600 mr-2 font-bold">•</span>
-                        <span>Monthly food provisions for a family</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="text-green-600 mr-2 font-bold">•</span>
-                        <span>School meals for several weeks</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="text-green-600 mr-2 font-bold">•</span>
-                        <span>Nutritional support for children</span>
-                    </li>
-                </ul>
             </div>
 
-            {{-- £100 --}}
-            <div class="rounded-2xl border-2 border-green-200 p-8 bg-white hover:shadow-lg transition">
-                <div class="flex items-start justify-between mb-4">
-                    <div>
-                        <p class="text-4xl font-bold text-green-600">£100</p>
-                    </div>
-                    <div class="text-4xl">🎓</div>
-                </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-3">Education Support</h3>
-                <p class="text-gray-700 mb-4">
-                    Provides comprehensive education support for a student including school fees, tutoring, and learning materials for a term.
+            {{-- Summary Text --}}
+            <div class="mt-8 p-4 bg-green-50 rounded-lg border border-green-200">
+                <p class="text-center text-gray-700">
+                    <span class="font-semibold">Your £<span x-text="amount"></span> donation</span>
+                    <span x-text="summaryText"></span>
                 </p>
-                <ul class="space-y-2 text-sm text-gray-600">
-                    <li class="flex items-start">
-                        <span class="text-green-600 mr-2 font-bold">•</span>
-                        <span>School fees for a term</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="text-green-600 mr-2 font-bold">•</span>
-                        <span>Educational materials and books</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="text-green-600 mr-2 font-bold">•</span>
-                        <span>Exam preparation and tutoring support</span>
-                    </li>
-                </ul>
-            </div>
-
-            {{-- £250 --}}
-            <div class="rounded-2xl border-2 border-green-200 p-8 bg-white hover:shadow-lg transition">
-                <div class="flex items-start justify-between mb-4">
-                    <div>
-                        <p class="text-4xl font-bold text-green-600">£250</p>
-                    </div>
-                    <div class="text-4xl">💧</div>
-                </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-3">Community Project</h3>
-                <p class="text-gray-700 mb-4">
-                    Supports a major community initiative such as water systems, school improvements, healthcare access, or skills training programmes.
-                </p>
-                <ul class="space-y-2 text-sm text-gray-600">
-                    <li class="flex items-start">
-                        <span class="text-green-600 mr-2 font-bold">•</span>
-                        <span>Contributes to clean water projects</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="text-green-600 mr-2 font-bold">•</span>
-                        <span>School facility improvements</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="text-green-600 mr-2 font-bold">•</span>
-                        <span>Healthcare and skills training initiatives</span>
-                    </li>
-                </ul>
             </div>
         </div>
     </div>
 </section>
+
+<script>
+function donationSlider() {
+    return {
+        amount: 50,
+        impacts: [],
+        summaryText: '',
+
+        init() {
+            this.updateSlider();
+        },
+
+        updateSlider() {
+            const impactGuide = {
+                10: {
+                    title: 'School Supplies',
+                    description: 'Pencils, notebooks, and basic learning materials for a child',
+                    emoji: '✏️'
+                },
+                25: {
+                    title: 'School Supplies',
+                    description: 'School uniform, shoes, notebooks, and learning materials for a term',
+                    emoji: '📚'
+                },
+                50: {
+                    title: 'Food Support',
+                    description: 'Monthly food provisions for a family of 5, ensuring children can focus on learning',
+                    emoji: '🍲'
+                },
+                75: {
+                    title: 'Education Bundle',
+                    description: 'School fees and supplies for one child for a quarter of the school year',
+                    emoji: '🎓'
+                },
+                100: {
+                    title: 'Full Education Support',
+                    description: 'Complete education support including school fees, materials, and exam preparation for one term',
+                    emoji: '📖'
+                },
+                150: {
+                    title: 'Community Impact',
+                    description: 'Contributes to school infrastructure, water systems, or healthcare initiatives in the community',
+                    emoji: '🏗️'
+                },
+                250: {
+                    title: 'Major Project Support',
+                    description: 'Funds a significant portion of a clean water project, school improvement, or skills training programme',
+                    emoji: '💧'
+                },
+                500: {
+                    title: 'Year-Round Impact',
+                    description: 'Provides comprehensive annual support for a child including education, food, and healthcare, plus community projects',
+                    emoji: '🌟'
+                }
+            };
+
+            // Find the closest impact level
+            let closestAmount = 10;
+            Object.keys(impactGuide).forEach(key => {
+                if (Math.abs(this.amount - key) < Math.abs(this.amount - closestAmount)) {
+                    closestAmount = parseInt(key);
+                }
+            });
+
+            // Also show impacts for amounts between milestones
+            let impactTexts = [];
+
+            if (this.amount <= 10) {
+                impactTexts.push({
+                    title: 'School Supplies',
+                    description: 'Pencils, notebooks, and basic learning materials for a child',
+                    emoji: '✏️',
+                    id: 1
+                });
+            } else if (this.amount <= 25) {
+                impactTexts.push({
+                    title: 'School Supplies',
+                    description: 'School uniform, shoes, notebooks, and learning materials for a term',
+                    emoji: '📚',
+                    id: 1
+                });
+            } else if (this.amount <= 50) {
+                impactTexts.push({
+                    title: 'Food Support',
+                    description: 'Monthly food provisions for a family, ensuring children stay healthy and focused on learning',
+                    emoji: '🍲',
+                    id: 2
+                });
+            } else if (this.amount <= 100) {
+                impactTexts.push({
+                    title: 'Education Support',
+                    description: 'School fees, learning materials, and educational support for one child for a term',
+                    emoji: '🎓',
+                    id: 3
+                });
+                if (this.amount > 75) {
+                    impactTexts.push({
+                        title: 'Plus Food Support',
+                        description: 'Nutritious meals and food support for a vulnerable family',
+                        emoji: '🍲',
+                        id: 4
+                    });
+                }
+            } else if (this.amount <= 250) {
+                impactTexts.push({
+                    title: 'Community Project',
+                    description: 'Contributes to major initiatives like clean water systems, school improvements, or healthcare',
+                    emoji: '💧',
+                    id: 5
+                });
+            } else {
+                impactTexts.push({
+                    title: 'Transformative Impact',
+                    description: 'Provides comprehensive annual support for a child plus significant community infrastructure projects',
+                    emoji: '🌟',
+                    id: 6
+                });
+            }
+
+            this.impacts = impactTexts;
+            this.updateSummary();
+        },
+
+        updateSummary() {
+            const summaries = {
+                10: 'will help provide basic school supplies',
+                25: 'will equip a child with school essentials for a term',
+                50: 'will feed a family for a month',
+                75: 'will support a child\'s education for a quarter of the year',
+                100: 'will provide full education support for one child for a term',
+                150: 'will contribute to community infrastructure improvements',
+                250: 'will fund a major community project or initiative',
+                500: 'will provide year-round comprehensive support for a child plus community projects'
+            };
+
+            // Find the closest summary
+            let closest = 10;
+            Object.keys(summaries).forEach(key => {
+                if (this.amount >= key && Math.abs(this.amount - key) < Math.abs(this.amount - closest)) {
+                    closest = parseInt(key);
+                }
+            });
+
+            this.summaryText = summaries[closest] || summaries[10];
+        }
+    }
+}
+</script>
 
 {{-- CTA SECTION --}}
 <section class="py-16 bg-gray-50">
