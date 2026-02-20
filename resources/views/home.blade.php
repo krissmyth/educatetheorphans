@@ -40,7 +40,7 @@
                 </div>
 
                 <p class="mt-6 text-sm text-gray-300">
-                    100% of donations go toward programs and services (update this line if your policy differs).
+                    100% of donations go toward programmes and services (update this line if your policy differs).
                 </p>
             </div>
         </div>

@@ -13,7 +13,7 @@
             <li><span class="font-semibold">$25</span> — School supplies</li>
             <li><span class="font-semibold">$50</span> — Food support for a family</li>
             <li><span class="font-semibold">$100</span> — Education support for a student</li>
-            <li><span class="font-semibold">$250</span> — Support a program/project need</li>
+            <li><span class="font-semibold">$250</span> — Support a programme/project need</li>
         </ul>
 
         <a href="https://www.justgiving.com/educatetheorphans/donate"

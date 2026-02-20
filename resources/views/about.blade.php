@@ -73,7 +73,7 @@
             </div>
             <div class="rounded-2xl border p-6">
                 <p class="text-4xl font-bold">7 Schools</p>
-                <p class="mt-2 text-gray-600">Operating education programs across multiple locations</p>
+                <p class="mt-2 text-gray-600">Operating education programmes across multiple locations</p>
             </div>
             <div class="rounded-2xl border p-6">
                 <p class="text-4xl font-bold">3,000+ Children</p>
@@ -153,7 +153,7 @@
             <div>
                 <h4 class="text-xl font-semibold">Donations</h4>
                 <p class="mt-2 text-gray-700 leading-relaxed">
-                    Make a one-time or recurring donation to support our programs and reach more children in need.
+                    Make a one-time or recurring donation to support our programmes and reach more children in need.
                 </p>
             </div>
         </div>

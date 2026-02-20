@@ -14,7 +14,7 @@
     <div class="absolute inset-0">
         <div class="mx-auto max-w-6xl px-4 h-full flex items-center">
             <div class="max-w-2xl text-white">
-                <h1 class="text-5xl font-bold leading-tight">Our Projects and Programs</h1>
+                <h1 class="text-5xl font-bold leading-tight">Our Projects and Programmes</h1>
                 <p class="mt-5 text-lg text-gray-200">Transforming lives through education, care, and sustainable community development</p>
             </div>
         </div>
@@ -27,7 +27,7 @@
         <div class="text-center max-w-3xl mx-auto mb-12">
             <h2 class="text-3xl font-bold">Our Work in Action</h2>
             <p class="mt-4 text-gray-700 leading-relaxed">
-                We operate a comprehensive range of programs designed to meet the urgent needs of vulnerable children and families in the Tharaka region of Kenya. Each project works together to create lasting change.
+                We operate a comprehensive range of programmes designed to meet the urgent needs of vulnerable children and families in the Tharaka region of Kenya. Each project works together to create lasting change.
             </p>
         </div>
 

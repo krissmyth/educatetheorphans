@@ -16,7 +16,7 @@ class ProjectsController extends Controller
                 'id' => 'famine-relief',
                 'title' => 'Famine Relief',
                 'description' => 'Emergency food support during drought and crisis.',
-                'long_description' => 'During times of drought and food scarcity, we provide emergency food assistance to vulnerable families and children in the Tharaka region. Our famine relief programs ensure that no child goes hungry during critical periods.',
+                'long_description' => 'During times of drought and food scarcity, we provide emergency food assistance to vulnerable families and children in the Tharaka region. Our famine relief programmes ensure that no child goes hungry during critical periods.',
                 'impact' => 'Supports hundreds of children and families during crisis periods',
                 'icon' => '🍎'
             ],
@@ -32,7 +32,7 @@ class ProjectsController extends Controller
                 'id' => 'eto-shamba',
                 'title' => 'ETO Shamba (Farm)',
                 'description' => 'Sustainable agriculture and skills training.',
-                'long_description' => 'Our farm project teaches practical agricultural skills while producing food for the communities we serve. The ETO Shamba serves as both a training center and a sustainable food production initiative, teaching modern and traditional farming techniques.',
+                'long_description' => 'Our farm project teaches practical agricultural skills while producing food for the communities we serve. The ETO Shamba serves as both a training centre and a sustainable food production initiative, teaching modern and traditional farming techniques.',
                 'impact' => 'Trains youth in sustainable agriculture and provides ongoing food support',
                 'icon' => '🌾'
             ],
@@ -46,17 +46,17 @@ class ProjectsController extends Controller
             ],
             [
                 'id' => 'education',
-                'title' => 'Education Programs',
+                'title' => 'Education Programmes',
                 'description' => 'Operating schools across multiple locations serving over 3,000 children.',
-                'long_description' => 'Education is at the heart of everything we do. We operate seven schools across the Tharaka region, serving over 3,000 children annually. Our education programs provide not just academic instruction, but also nutritional support, school supplies, and pastoral care.',
+                'long_description' => 'Education is at the heart of everything we do. We operate seven schools across the Tharaka region, serving over 3,000 children annually. Our education programmes provide not just academic instruction, but also nutritional support, school supplies, and pastoral care.',
                 'impact' => 'Educates and feeds 3,000+ children annually across 7 schools',
                 'icon' => '📚'
             ],
             [
                 'id' => 'sponsorship',
-                'title' => 'Child Sponsorship Program',
+                'title' => 'Child Sponsorship Programme',
                 'description' => 'Support a child\'s education, nutrition, and care within their family.',
-                'long_description' => 'Rather than operating orphanages, we believe in keeping children with their families while providing the financial support they need. Through our sponsorship program, supporters worldwide can directly impact a child\'s life while maintaining family bonds and cultural connections.',
+                'long_description' => 'Rather than operating orphanages, we believe in keeping children with their families while providing the financial support they need. Through our sponsorship programme, supporters worldwide can directly impact a child\'s life while maintaining family bonds and cultural connections.',
                 'impact' => 'Supports children to remain with extended family while receiving care and education',
                 'icon' => '👨‍👧‍👦'
             ]
@@ -64,7 +64,7 @@ class ProjectsController extends Controller
 
         return view('projects', [
             'projects' => $projects,
-            'title' => 'Projects and Programs',
+            'title' => 'Projects and Programmes',
         ]);
     }
 }

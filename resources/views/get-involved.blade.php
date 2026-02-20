@@ -54,12 +54,12 @@
             <div class="border rounded-2xl p-8 hover:shadow-lg transition">
                 <h3 class="text-2xl font-bold">Make a Donation</h3>
                 <p class="mt-3 text-gray-700 leading-relaxed">
-                    Give a one-time gift or set up monthly giving. Every donation directly funds our programs and services.
+                    Give a one-time gift or set up monthly giving. Every donation directly funds our programmes and services.
                 </p>
                 <ul class="mt-4 space-y-2 text-sm text-gray-600">
                     <li class="flex gap-2">
                         <span class="text-green-600 font-bold">✓</span>
-                        <span>100% goes to programs</span>
+                        <span>100% goes to programmes</span>
                     </li>
                     <li class="flex gap-2">
                         <span class="text-green-600 font-bold">✓</span>
@@ -122,7 +122,7 @@
             </div>
             <div class="rounded-lg border p-6 bg-white">
                 <p class="font-semibold text-lg">$250+</p>
-                <p class="mt-2 text-sm text-gray-600">Supports community programs</p>
+                <p class="mt-2 text-sm text-gray-600">Supports community programmes</p>
             </div>
         </div>
     </div>

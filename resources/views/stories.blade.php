@@ -33,7 +33,7 @@
                     <p class="text-sm font-semibold text-blue-600 mb-2">Featured Story</p>
                     <h3 class="text-lg font-bold">Livingstone Njeru: From Sponsored Child to Director</h3>
                     <p class="mt-3 text-sm text-gray-600 leading-relaxed">
-                        Livingstone started as a sponsored child and rose through Educate the Orphans' programs to become our Kenya Director. His journey showcases how education and community support create leaders who give back.
+                        Livingstone started as a sponsored child and rose through Educate the Orphans' programmes to become our Kenya Director. His journey showcases how education and community support create leaders who give back.
                     </p>
                     <p class="mt-4 text-xs text-gray-500">"Education opened doors I never thought possible."</p>
                 </div>
@@ -119,7 +119,7 @@
             </div>
             <div class="text-center">
                 <p class="text-4xl font-bold text-blue-600">200+</p>
-                <p class="mt-2 text-gray-700">University graduates from Educate the Orphans programs</p>
+                <p class="mt-2 text-gray-700">University graduates from Educate the Orphans programmes</p>
             </div>
             <div class="text-center">
                 <p class="text-4xl font-bold text-purple-600">40,000+</p>

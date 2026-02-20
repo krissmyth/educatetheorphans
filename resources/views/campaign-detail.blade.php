@@ -73,12 +73,12 @@
     }
 
     .campaign-content a {
-        color: #16a34a;
+        colour: #16a34a;
         text-decoration: underline;
     }
 
     .campaign-content a:hover {
-        color: #15803d;
+        colour: #15803d;
     }
 
     .campaign-content img {
@@ -91,7 +91,7 @@
     .campaign-content h1,
     .campaign-content h2,
     .campaign-content h3 {
-        color: #111827;
+        colour: #111827;
         margin-top: 1.5rem;
         margin-bottom: 0.75rem;
     }

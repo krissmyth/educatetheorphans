@@ -84,7 +84,7 @@
     <div class="mx-auto max-w-6xl px-4">
         <h2 class="text-3xl font-bold text-center mb-4">Ways to Connect With Us</h2>
         <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-            There are many ways to get involved with Educate the Orphans. Whether you want to learn more about our work, explore partnership opportunities, or invite us to speak at your church or organization, we'd love to hear from you.
+            There are many ways to get involved with Educate the Orphans. Whether you want to learn more about our work, explore partnership opportunities, or invite us to speak at your church or organisation, we'd love to hear from you.
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -93,7 +93,7 @@
                 <div class="text-4xl mb-4">🎤</div>
                 <h3 class="text-xl font-bold text-gray-900 mb-3">Speaking Engagements</h3>
                 <p class="text-gray-700 mb-4">
-                    We'd be honored to share about our work at your church, small group, school, or community organization. Contact us to discuss available dates and topics.
+                    We'd be honoured to share about our work at your church, small group, school, or community organisation. Contact us to discuss available dates and topics.
                 </p>
             </div>
 
@@ -111,7 +111,7 @@
                 <div class="text-4xl mb-4">📚</div>
                 <h3 class="text-xl font-bold text-gray-900 mb-3">Learn More About Us</h3>
                 <p class="text-gray-700 mb-4">
-                    Want to know more about our programs, impact, financial reports, or team? Get in touch—we're committed to transparency and happy to answer your questions.
+                    Want to know more about our programmes, impact, financial reports, or team? Get in touch—we're committed to transparency and happy to answer your questions.
                 </p>
             </div>
         </div>
@@ -242,14 +242,14 @@
             <div class="rounded-2xl border p-8 bg-white hover:shadow-lg transition">
                 <h3 class="font-bold text-lg text-gray-900 mb-3">How can I sponsor a child?</h3>
                 <p class="text-gray-700">
-                    Contact us directly to get started. Our team will help match you with a child and explain the sponsorship program in detail.
+                    Contact us directly to get started. Our team will help match you with a child and explain the sponsorship programme in detail.
                 </p>
             </div>
 
             <div class="rounded-2xl border p-8 bg-white hover:shadow-lg transition">
                 <h3 class="font-bold text-lg text-gray-900 mb-3">Where does my donation go?</h3>
                 <p class="text-gray-700">
-                    100% of donations go directly to programs and services. We maintain full transparency through regular financial reports.
+                    100% of donations go directly to programmes and services. We maintain full transparency through regular financial reports.
                 </p>
             </div>
 
