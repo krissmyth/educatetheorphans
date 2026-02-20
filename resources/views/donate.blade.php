@@ -111,6 +111,94 @@
                 <span x-text="summaryText" class="text-gray-700"></span>
             </p>
         </div>
+
+        {{-- Donate Button --}}
+        <div class="text-center">
+            <button
+                type="button"
+                @click="showDonationModal = true"
+                class="inline-flex items-center justify-center rounded-lg bg-green-600 text-white px-12 py-4 font-semibold hover:bg-green-700 transition text-lg"
+            >
+                Donate Now
+            </button>
+        </div>
+
+        {{-- Donation Modal --}}
+        <div
+            x-show="showDonationModal"
+            x-cloak
+            @click.outside="showDonationModal = false"
+            class="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50"
+            style="display: none;"
+        >
+            <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 animate-in">
+                {{-- Close Button --}}
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-gray-900">Confirm Your Donation</h3>
+                    <button
+                        type="button"
+                        @click="showDonationModal = false"
+                        class="text-gray-500 hover:text-gray-700 text-2xl"
+                    >
+                        ×
+                    </button>
+                </div>
+
+                {{-- Donation Summary --}}
+                <div class="bg-green-50 rounded-xl p-6 mb-6 border border-green-200">
+                    <p class="text-sm text-gray-600 mb-2">Donation Amount</p>
+                    <p class="text-4xl font-bold text-green-600 mb-2">
+                        £<span x-text="amount"></span>
+                    </p>
+                    <p class="text-gray-700 font-semibold">
+                        <span x-text="frequency === 'monthly' ? 'Monthly donation' : 'One-time donation'"></span>
+                    </p>
+                </div>
+
+                {{-- Gift Aid Option --}}
+                <div class="mb-8 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                    <label class="flex items-start gap-3 cursor-pointer">
+                        <input
+                            type="checkbox"
+                            x-model="giftAid"
+                            class="mt-1 w-5 h-5 rounded accent-green-600"
+                        >
+                        <div>
+                            <p class="font-semibold text-gray-900">Gift Aid</p>
+                            <p class="text-sm text-gray-600 mt-1">
+                                By selecting Gift Aid, we can claim an extra 25% from HMRC, at no extra cost to you. This makes your donation even more valuable to the children and families we support.
+                            </p>
+                            <p class="text-xs text-gray-500 mt-2">
+                                You must be a UK taxpayer to use Gift Aid
+                            </p>
+                        </div>
+                    </label>
+                </div>
+
+                {{-- Action Buttons --}}
+                <div class="space-y-3">
+                    <button
+                        type="button"
+                        @click="processDonation()"
+                        class="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition"
+                    >
+                        Proceed to Payment
+                    </button>
+                    <button
+                        type="button"
+                        @click="showDonationModal = false"
+                        class="w-full bg-gray-200 text-gray-900 py-3 rounded-lg font-semibold hover:bg-gray-300 transition"
+                    >
+                        Cancel
+                    </button>
+                </div>
+
+                {{-- Security Note --}}
+                <p class="text-xs text-gray-500 text-center mt-4">
+                    🔒 Your donation is secure and handled by our trusted payment partner
+                </p>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -121,6 +209,8 @@ function donationSlider() {
         frequency: 'monthly',
         donationBreakdown: [],
         summaryText: '',
+        showDonationModal: false,
+        giftAid: false,
 
         init() {
             this.updateSlider();
@@ -277,6 +367,25 @@ function donationSlider() {
 
                 this.summaryText = ' ' + (oneOffSummaries[closest] || oneOffSummaries[5]);
             }
+        },
+
+        processDonation() {
+            // Prepare donation data
+            const donationData = {
+                amount: this.amount,
+                frequency: this.frequency,
+                giftAid: this.giftAid,
+                timestamp: new Date().toISOString()
+            };
+
+            // Log for debugging - will be replaced with actual payment processing
+            console.log('Processing donation:', donationData);
+
+            // Show a confirmation message
+            alert(`Thank you! Processing your £${this.amount} ${this.frequency === 'monthly' ? 'monthly' : 'one-time'} donation${this.giftAid ? ' with Gift Aid' : ''}.`);
+
+            // TODO: Integrate with payment processor (Stripe, JustGiving API, etc.)
+            // For now, this is just a placeholder
         }
     }
 }
