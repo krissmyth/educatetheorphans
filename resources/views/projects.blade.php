@@ -55,7 +55,7 @@
 <section class="py-16 bg-gray-50">
     <div class="mx-auto max-w-6xl px-4">
         @foreach ($projects as $index => $project)
-            <div id="project-{{ $project['id'] }}" class="mb-16 pb-16 {{ $index !== count($projects) - 1 ? 'border-b' : '' }}">
+            <div id="project-{{ $project['id'] }}" class="scroll-mt-24 mb-16 pb-16 {{ $index !== count($projects) - 1 ? 'border-b' : '' }}">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
                     {{-- Image/Icon --}}
                     <div class="{{ $index % 2 === 1 ? 'order-2' : '' }}">

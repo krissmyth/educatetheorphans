@@ -15,6 +15,36 @@ class NewsController extends Controller
     }
 
     /**
+     * Subscribe an email to the newsletter
+     */
+    public function subscribe()
+    {
+        request()->validate([
+            'email' => 'required|email',
+            'firstName' => 'required|string',
+            'lastName' => 'required|string',
+        ]);
+
+        $success = $this->mailchimp->subscribe(
+            request('email'),
+            request('firstName'),
+            request('lastName')
+        );
+
+        if ($success) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Thanks for subscribing! Check your email for confirmation.'
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Unable to subscribe. Please try again later.'
+        ], 422);
+    }
+
+    /**
      * Display the news listing page with latest campaigns
      */
     public function index(): View

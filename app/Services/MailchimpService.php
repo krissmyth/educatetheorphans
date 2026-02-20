@@ -189,4 +189,43 @@ class MailchimpService
             return null;
         }
     }
+
+    /**
+     * Subscribe an email to the mailing list
+     */
+    public function subscribe(string $email, ?string $firstName = null, ?string $lastName = null): bool
+    {
+        try {
+            $listId = config('mailchimp.list_id');
+
+            if (!$listId) {
+                Log::error('Mailchimp list ID not configured');
+                return false;
+            }
+
+            $data = [
+                'email_address' => strtolower($email),
+                'status' => 'pending',
+                'merge_fields' => [
+                    'FNAME' => $firstName ?: 'Friend',
+                    'LNAME' => $lastName ?: 'of ETO',
+                ]
+            ];
+
+            Log::info('Mailchimp subscription attempt', ['email' => $email, 'data' => $data]);
+
+            $this->client->lists->addListMember($listId, $data);
+            Log::info('Mailchimp subscription success', ['email' => $email]);
+
+            return true;
+        } catch (\GuzzleHttp\Exception\ClientException $e) {
+            $response = $e->getResponse();
+            $body = $response->getBody()->getContents();
+            Log::error('Mailchimp error', ['body' => $body]);
+            return false;
+        } catch (\Throwable $e) {
+            Log::error('Mailchimp error', ['message' => $e->getMessage()]);
+            return false;
+        }
+    }
 }

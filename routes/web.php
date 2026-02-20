@@ -21,6 +21,9 @@ Route::get('/donate', [DonationController::class, 'show'])->name('donate');
 Route::post('/donate/redirect', [DonationController::class, 'redirectToJustGiving'])->name('donate.redirect');
 Route::get('/api/campaign-data', [DonationController::class, 'getCampaignData'])->name('campaign.data');
 
+// Newsletter subscription
+Route::post('/subscribe', [NewsController::class, 'subscribe'])->name('newsletter.subscribe');
+
 // Stripe payment routes
 Route::post('/stripe/create-payment-intent', [StripeController::class, 'createPaymentIntent'])->name('stripe.create-intent');
 Route::post('/stripe/payment-success', [StripeController::class, 'handleSuccess'])->name('stripe.success');

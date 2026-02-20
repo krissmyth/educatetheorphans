@@ -77,32 +77,23 @@
 </main>
 
 <footer class="border-t mt-20">
-    <div class="mx-auto max-w-6xl px-4 py-10 grid gap-8 md:grid-cols-3">
-        <div>
+    <div class="mx-auto max-w-6xl px-4 py-10 grid gap-8 md:grid-cols-2">
+        <div class="text-center">
             <p class="font-semibold">Educate the Orphans</p>
             <p class="text-sm text-gray-600 mt-2">
-                Serving orphaned and needy children through education, care, and Christ-centered community support.
+                Serving orphaned and needy children<br>
+                through education, care, and<br>
+                Christ-centered community support.
             </p>
         </div>
 
-        <div>
-            <p class="font-semibold">Quick Links</p>
-            <ul class="mt-2 text-sm text-gray-600 space-y-1">
-                <li><a class="hover:underline" href="{{ route('news') }}">News</a></li>
-                <li><a class="hover:underline" href="{{ route('projects') }}">Projects</a></li>
-                <li><a class="hover:underline" href="{{ route('stories') }}">Stories</a></li>
-                <li><a class="hover:underline" href="{{ route('get-involved') }}">Get Involved</a></li>
-                <li><a class="hover:underline" href="{{ route('contact') }}">Contact</a></li>
-            </ul>
-        </div>
-
-        <div>
+        <div class="text-center">
             <p class="font-semibold">Contact & Follow</p>
             <p class="text-sm text-gray-600 mt-2">
                 Email: info@educatetheorphans.org<br>
                 Location: Tharaka, Kenya
             </p>
-            <div class="flex gap-4 mt-4">
+            <div class="flex gap-4 mt-4 justify-center">
                 <a href="https://www.facebook.com/EducatetheOrphans" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-600 transition" title="Follow us on Facebook">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                 </a>
@@ -119,8 +110,9 @@
         </div>
     </div>
 
-    <div class="mx-auto max-w-6xl px-4 pb-10 text-sm text-gray-500">
-        © {{ now()->year }} Educate the Orphans. All rights reserved.
+    <div class="mx-auto max-w-6xl px-4 pb-10 text-sm text-gray-500 text-center">
+        <p>© {{ now()->year }} Educate the Orphans. All rights reserved.</p>
+        <p class="mt-2">Educate the Orphans is a fully registered charity, recognised by the Northern Ireland Charity Commission (Charity No. 102736).</p>
     </div>
 </footer>
 
