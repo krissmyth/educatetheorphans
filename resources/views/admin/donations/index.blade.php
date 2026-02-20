@@ -35,6 +35,16 @@
 {{-- Filters & Export --}}
 <div class="bg-white rounded-lg shadow mb-6">
     <form method="GET" action="{{ route('admin.donations.index') }}" class="p-6">
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+            <div class="flex items-start gap-2">
+                <div class="text-blue-600 text-xl">ℹ️</div>
+                <div>
+                    <h3 class="text-sm font-bold text-blue-900 mb-1">HMRC Gift Aid Export</h3>
+                    <p class="text-xs text-blue-700">Export format: Title (max 4) | First name/initial (max 35, no spaces) | Last name (max 35) | House name/number (max 40) | Postcode (UPPER CASE with space) | Aggregated donations (description only) | Sponsored event (Yes or blank) | Donation date (DD/MM/YY) | Amount (no £ sign)</p>
+                </div>
+            </div>
+        </div>
+
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-4">
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-2">Status</label>
@@ -90,7 +100,7 @@
                     Clear
                 </a>
                 <a href="{{ route('admin.donations.export-gift-aid', request()->all()) }}" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors ml-auto">
-                    📥 Export Gift Aid CSV
+                    📥 Export HMRC Gift Aid CSV
                 </a>
             </div>
         </div>

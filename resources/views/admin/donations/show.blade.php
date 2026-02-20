@@ -103,6 +103,7 @@
             <div class="bg-green-50 border-2 border-green-200 rounded-lg shadow">
                 <div class="px-6 py-4 border-b border-green-200 bg-green-100">
                     <h2 class="text-xl font-bold text-green-900">Gift Aid Declaration ✓</h2>
+                    <p class="text-sm text-green-700 mt-1">HMRC Compliant Format</p>
                 </div>
                 <div class="p-6 space-y-4">
                     <div class="bg-white rounded-lg p-4 mb-4">
@@ -122,37 +123,74 @@
                         </div>
                     </div>
 
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                        <h3 class="text-sm font-bold text-blue-900 mb-2">HMRC Submission Data</h3>
+                        <p class="text-xs text-blue-700">The following fields are formatted for HMRC Gift Aid submission:</p>
+                    </div>
+
                     <div class="grid grid-cols-3 gap-4">
                         <div>
-                            <label class="block text-sm font-semibold text-gray-600 mb-1">Title</label>
-                            <div class="text-lg">{{ $donation->gift_aid_title }}</div>
+                            <label class="block text-sm font-semibold text-gray-600 mb-1">Title (max 4 chars)</label>
+                            <div class="text-lg font-mono bg-white px-3 py-2 rounded border">{{ $donation->gift_aid_title }}</div>
                         </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-600 mb-1">First Name</label>
-                            <div class="text-lg">{{ $donation->gift_aid_first_name }}</div>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-600 mb-1">Last Name</label>
-                            <div class="text-lg">{{ $donation->gift_aid_last_name }}</div>
+                        <div class="col-span-2">
+                            <label class="block text-sm font-semibold text-gray-600 mb-1">First name or initial (max 35 chars, no spaces)</label>
+                            <div class="text-lg font-mono bg-white px-3 py-2 rounded border">{{ $donation->gift_aid_first_name }}</div>
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-semibold text-gray-600 mb-1">Address</label>
-                        <div class="text-lg">
-                            {{ $donation->gift_aid_address_line1 }}<br>
-                            @if($donation->gift_aid_address_line2)
-                                {{ $donation->gift_aid_address_line2 }}<br>
-                            @endif
-                            {{ $donation->gift_aid_city }}<br>
-                            {{ $donation->gift_aid_postcode }}
+                        <label class="block text-sm font-semibold text-gray-600 mb-1">Last name (max 35 chars)</label>
+                        <div class="text-lg font-mono bg-white px-3 py-2 rounded border">{{ $donation->gift_aid_last_name }}</div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-600 mb-1">House name or number (max 40 chars)</label>
+                        <div class="text-lg font-mono bg-white px-3 py-2 rounded border">{{ $donation->gift_aid_address_line1 }}</div>
+                    </div>
+
+                    @if($donation->gift_aid_address_line2)
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-600 mb-1">Street Name (additional info)</label>
+                            <div class="text-lg bg-white px-3 py-2 rounded border">{{ $donation->gift_aid_address_line2 }}</div>
                         </div>
+                    @endif
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-600 mb-1">City</label>
+                            <div class="text-lg bg-white px-3 py-2 rounded border">{{ $donation->gift_aid_city }}</div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-600 mb-1">Postcode (UPPER CASE, with space)</label>
+                            <div class="text-lg font-mono bg-white px-3 py-2 rounded border">{{ $donation->gift_aid_postcode }}</div>
+                        </div>
+                    </div>
+
+                    @if($donation->aggregated_donations)
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-600 mb-1">Aggregated Donations (max 35 chars)</label>
+                            <div class="text-lg bg-white px-3 py-2 rounded border">{{ $donation->aggregated_donations }}</div>
+                            <p class="text-xs text-gray-500 mt-1">Description for HMRC - DON'T use "Yes" or "Not Applicable"</p>
+                        </div>
+                    @endif
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-600 mb-1">Sponsored Event</label>
+                        <div class="text-lg bg-white px-3 py-2 rounded border">
+                            @if($donation->sponsored_event)
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs font-semibold">Yes</span>
+                            @else
+                                <span class="text-gray-400">(blank)</span>
+                            @endif
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">HMRC format: "Yes" or blank only</p>
                     </div>
 
                     @if($donation->gift_aid_declaration_date)
                         <div>
                             <label class="block text-sm font-semibold text-gray-600 mb-1">Declaration Date</label>
-                            <div class="text-lg">{{ $donation->gift_aid_declaration_date->format('d/m/Y') }}</div>
+                            <div class="text-lg bg-white px-3 py-2 rounded border">{{ $donation->gift_aid_declaration_date->format('d/m/Y') }}</div>
                         </div>
                     @endif
                 </div>

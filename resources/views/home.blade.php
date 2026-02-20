@@ -7,7 +7,7 @@
     {{-- If you want to use your own image:
          put it in public/images/hero.jpg and change src to: {{ asset('images/hero.jpg') }} --}}
     <img
-        src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=2000&q=80"
+        src="{{ asset('images/home.jpg') }}"
         class="h-[560px] w-full object-cover"
         alt="Education and community"
     >
@@ -17,15 +17,15 @@
         <div class="mx-auto max-w-6xl px-4 h-full flex items-center">
             <div class="max-w-2xl text-white">
                 <p class="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-sm">
-                    Serving in Tharaka, Kenya
+                    Serving Needy and Orphaned Children in Tharaka, Kenya
                 </p>
 
                 <h1 class="mt-4 text-5xl font-bold leading-tight">
-                    Transforming Lives Through Education and Faith
+                    Transforming Children's Lives Through Education and Faith
                 </h1>
 
                 <p class="mt-5 text-lg text-gray-200">
-                    Our mission is to feed, clothe, and educate destitute children—empowering them with hope and a future.
+                    Our mission is to feed, clothe, and educate orphaned and needy children, to give them hope and a future (Jeremiah 29:11)
                 </p>
 
                 <div class="mt-8 flex flex-wrap gap-3">
@@ -40,7 +40,8 @@
                 </div>
 
                 <p class="mt-6 text-sm text-gray-300">
-                    100% of donations go toward programmes and services (update this line if your policy differs).
+                    Every penny we receive goes directly to our work in Tharaka, Kenya,<br>
+                    All our UK staff are volunteers ensuring all donations go to support those most in need
                 </p>
             </div>
         </div>
@@ -57,7 +58,7 @@
                 education support, and community development.
             </p>
             <p class="mt-4 text-gray-700 leading-relaxed">
-                We believe education creates lasting change—breaking cycles of poverty and opening doors for future generations.
+                We believe education creates lasting change and can break cycles of poverty, providing hope for this and future generations.
             </p>
             <div class="mt-7 flex gap-3">
                 <a href="{{ route('about') }}" class="rounded-lg border px-5 py-3 font-semibold hover:bg-gray-50">
@@ -70,11 +71,11 @@
         </div>
 
         <div class="rounded-2xl border p-8 bg-gray-50">
-            <p class="text-sm font-semibold text-gray-500">Guiding focus</p>
+            <p class="text-sm font-semibold text-gray-500">Our Core Focus:</p>
             <ul class="mt-4 space-y-3 text-gray-800">
                 <li class="flex gap-3">
                     <span class="mt-1 h-2 w-2 rounded-full bg-black"></span>
-                    Child sponsorship & education support
+                    To provide an education for needy and orphaned children
                 </li>
                 <li class="flex gap-3">
                     <span class="mt-1 h-2 w-2 rounded-full bg-black"></span>
@@ -102,21 +103,18 @@
                 <p class="mt-2 text-gray-600">Children Supported</p>
             </div>
             <div class="rounded-2xl border p-6">
-                <p class="text-4xl font-bold">8</p>
+                <p class="text-4xl font-bold">7</p>
                 <p class="mt-2 text-gray-600">Schools Established</p>
             </div>
             <div class="rounded-2xl border p-6">
-                <p class="text-4xl font-bold">40,000+</p>
+                <p class="text-4xl font-bold">60,000+</p>
                 <p class="mt-2 text-gray-600">People With Clean Water</p>
             </div>
             <div class="rounded-2xl border p-6">
-                <p class="text-4xl font-bold">200+</p>
-                <p class="mt-2 text-gray-600">University Graduates</p>
+                <p class="text-4xl font-bold">∞</p>
+                <p class="mt-2 text-gray-600">Many lives changed</p>
             </div>
         </div>
-        <p class="mt-6 text-sm text-gray-500 text-center">
-            Replace these stats with your exact numbers anytime.
-        </p>
     </div>
 </section>
 

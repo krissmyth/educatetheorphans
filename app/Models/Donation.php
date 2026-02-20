@@ -28,6 +28,8 @@ class Donation extends Model
         'gift_aid_address_line2',
         'gift_aid_city',
         'gift_aid_postcode',
+        'aggregated_donations',
+        'sponsored_event',
         'gift_aid_declaration_date',
         'metadata',
         'completed_at',
@@ -36,6 +38,7 @@ class Donation extends Model
     protected $casts = [
         'amount' => 'decimal:2',
         'gift_aid_eligible' => 'boolean',
+        'sponsored_event' => 'boolean',
         'gift_aid_declaration_date' => 'date',
         'completed_at' => 'datetime',
         'metadata' => 'array',

@@ -28,7 +28,7 @@
                 <div class="bg-white rounded-lg shadow-2xl overflow-hidden">
                     {{-- Header --}}
                     <div class="bg-gray-900 text-white text-center py-4 px-6">
-                        <h2 class="text-xl font-bold uppercase tracking-wide">Donate to Charity Online</h2>
+                        <h2 class="text-xl font-bold uppercase tracking-wide">Donate to Educate the Orphans</h2>
                     </div>
 
                     {{-- Widget Content --}}
@@ -38,7 +38,7 @@
                             <button
                                 type="button"
                                 @click="frequency = 'single'"
-                                :class="frequency === 'single' ? 'bg-red-600 text-white' : 'bg-gray-100 text-gray-600'"
+                                :class="frequency === 'single' ? 'bg-green-600 text-white' : 'bg-gray-100 text-gray-600'"
                                 class="py-3 px-6 font-bold text-sm uppercase border-r-2 border-gray-300 transition-colors"
                             >
                                 Single
@@ -46,7 +46,7 @@
                             <button
                                 type="button"
                                 @click="frequency = 'monthly'"
-                                :class="frequency === 'monthly' ? 'bg-red-600 text-white' : 'bg-gray-100 text-gray-600'"
+                                :class="frequency === 'monthly' ? 'bg-green-600 text-white' : 'bg-gray-100 text-gray-600'"
                                 class="py-3 px-6 font-bold text-sm uppercase transition-colors"
                             >
                                 Monthly
@@ -58,7 +58,7 @@
                             <button
                                 type="button"
                                 @click="amount = 5"
-                                :class="amount === 5 ? 'bg-red-600 text-white' : 'bg-white text-gray-900'"
+                                :class="amount === 5 ? 'bg-green-600 text-white' : 'bg-white text-gray-900'"
                                 class="py-3 px-4 font-bold text-base border-r-2 border-gray-300 transition-colors"
                             >
                                 £5
@@ -66,7 +66,7 @@
                             <button
                                 type="button"
                                 @click="amount = 10"
-                                :class="amount === 10 ? 'bg-red-600 text-white' : 'bg-white text-gray-900'"
+                                :class="amount === 10 ? 'bg-green-600 text-white' : 'bg-white text-gray-900'"
                                 class="py-3 px-4 font-bold text-base border-r-2 border-gray-300 transition-colors"
                             >
                                 £10
@@ -74,7 +74,7 @@
                             <button
                                 type="button"
                                 @click="amount = 15"
-                                :class="amount === 15 ? 'bg-red-600 text-white' : 'bg-white text-gray-900'"
+                                :class="amount === 15 ? 'bg-green-600 text-white' : 'bg-white text-gray-900'"
                                 class="py-3 px-4 font-bold text-base transition-colors"
                             >
                                 £15
@@ -107,7 +107,7 @@
                             @click="showPaymentModal = true"
                             class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-6 rounded transition-colors text-lg uppercase tracking-wide"
                         >
-                            ❤ Donate Now
+                            🤝 Donate Now
                         </button>
 
                         {{-- Payment Methods --}}
@@ -196,7 +196,7 @@
                                             <div class="grid grid-cols-3 gap-2">
                                                 <div>
                                                     <label class="block text-xs font-semibold text-gray-700 mb-1">Title *</label>
-                                                    <select x-model="giftAid.title" required class="w-full py-2 px-2 text-sm border-2 border-gray-300 rounded focus:outline-none focus:border-green-500">
+                                                    <select x-model="giftAid.title" required maxlength="4" class="w-full py-2 px-2 text-sm border-2 border-gray-300 rounded focus:outline-none focus:border-green-500">
                                                         <option value="">Select</option>
                                                         <option value="Mr">Mr</option>
                                                         <option value="Mrs">Mrs</option>
@@ -206,20 +206,20 @@
                                                     </select>
                                                 </div>
                                                 <div class="col-span-2">
-                                                    <label class="block text-xs font-semibold text-gray-700 mb-1">First Name *</label>
-                                                    <input type="text" x-model="giftAid.firstName" required class="w-full py-2 px-3 text-sm border-2 border-gray-300 rounded focus:outline-none focus:border-green-500">
+                                                    <label class="block text-xs font-semibold text-gray-700 mb-1">First Name or Initial *</label>
+                                                    <input type="text" x-model="giftAid.firstName" required maxlength="35" placeholder="No spaces in first name" class="w-full py-2 px-3 text-sm border-2 border-gray-300 rounded focus:outline-none focus:border-green-500">
                                                 </div>
                                             </div>
                                             <div>
                                                 <label class="block text-xs font-semibold text-gray-700 mb-1">Last Name *</label>
-                                                <input type="text" x-model="giftAid.lastName" required class="w-full py-2 px-3 text-sm border-2 border-gray-300 rounded focus:outline-none focus:border-green-500">
+                                                <input type="text" x-model="giftAid.lastName" required maxlength="35" class="w-full py-2 px-3 text-sm border-2 border-gray-300 rounded focus:outline-none focus:border-green-500">
                                             </div>
                                             <div>
-                                                <label class="block text-xs font-semibold text-gray-700 mb-1">Address Line 1 *</label>
-                                                <input type="text" x-model="giftAid.addressLine1" required class="w-full py-2 px-3 text-sm border-2 border-gray-300 rounded focus:outline-none focus:border-green-500">
+                                                <label class="block text-xs font-semibold text-gray-700 mb-1">House Name or Number *</label>
+                                                <input type="text" x-model="giftAid.addressLine1" required maxlength="40" placeholder="House name or number" class="w-full py-2 px-3 text-sm border-2 border-gray-300 rounded focus:outline-none focus:border-green-500">
                                             </div>
                                             <div>
-                                                <label class="block text-xs font-semibold text-gray-700 mb-1">Address Line 2</label>
+                                                <label class="block text-xs font-semibold text-gray-700 mb-1">Street Name</label>
                                                 <input type="text" x-model="giftAid.addressLine2" class="w-full py-2 px-3 text-sm border-2 border-gray-300 rounded focus:outline-none focus:border-green-500">
                                             </div>
                                             <div class="grid grid-cols-2 gap-2">
@@ -228,9 +228,20 @@
                                                     <input type="text" x-model="giftAid.city" required class="w-full py-2 px-3 text-sm border-2 border-gray-300 rounded focus:outline-none focus:border-green-500">
                                                 </div>
                                                 <div>
-                                                    <label class="block text-xs font-semibold text-gray-700 mb-1">Postcode *</label>
-                                                    <input type="text" x-model="giftAid.postcode" required class="w-full py-2 px-3 text-sm border-2 border-gray-300 rounded focus:outline-none focus:border-green-500">
+                                                    <label class="block text-xs font-semibold text-gray-700 mb-1">Postcode * (e.g. SW1A 1AA)</label>
+                                                    <input type="text" x-model="giftAid.postcode" @input="giftAid.postcode = giftAid.postcode.toUpperCase()" required maxlength="10" placeholder="SW1A 1AA" class="w-full py-2 px-3 text-sm border-2 border-gray-300 rounded focus:outline-none focus:border-green-500 uppercase">
                                                 </div>
+                                            </div>
+                                            <div>
+                                                <label class="block text-xs font-semibold text-gray-700 mb-1">Aggregated Donations Description</label>
+                                                <input type="text" x-model="giftAid.aggregatedDonations" maxlength="35" placeholder="e.g. Monthly donations 2025 (optional)" class="w-full py-2 px-3 text-sm border-2 border-gray-300 rounded focus:outline-none focus:border-green-500">
+                                                <p class="text-xs text-gray-500 mt-1">Optional: Brief description, max 35 characters</p>
+                                            </div>
+                                            <div>
+                                                <label class="flex items-center gap-2 cursor-pointer">
+                                                    <input type="checkbox" x-model="giftAid.sponsoredEvent" class="h-4 w-4 text-green-600 border-gray-300 rounded focus:ring-green-500">
+                                                    <span class="text-xs font-semibold text-gray-700">This is a sponsored event donation</span>
+                                                </label>
                                             </div>
                                         </div>
                                     </div>
@@ -279,7 +290,7 @@
         </div>
 
         {{-- Frequency Toggle --}}
-        <div class="flex justify-center mb-12">
+        <div class="flex justify-center mb-8">
             <div class="inline-flex rounded-full border-2 border-gray-300 bg-gray-50 p-1">
                 <button
                     type="button"
@@ -301,13 +312,13 @@
         </div>
 
         {{-- Main Slider Section --}}
-        <div class="bg-gradient-to-b from-green-50 to-white rounded-3xl border-2 border-green-100 p-12 mb-12">
+        <div class="bg-gradient-to-b from-green-50 to-white rounded-3xl border-2 border-green-100 p-8 mb-8">
             {{-- Slider and Amount Display --}}
-            <div class="flex items-end gap-8 mb-8">
+            <div class="flex items-end gap-6 mb-6">
                 {{-- Slider --}}
                 <div class="flex-1">
-                    <div class="mb-4">
-                        <p class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Your donation</p>
+                    <div class="mb-3">
+                        <p class="text-xs font-semibold text-gray-600 uppercase tracking-wide">Your donation</p>
                     </div>
                     <input
                         type="range"
@@ -319,7 +330,7 @@
                         @input="updateSlider()"
                         style="min-height: 24px;"
                     >
-                    <div class="flex justify-between text-xs text-gray-500 mt-3 font-semibold">
+                    <div class="flex justify-between text-xs text-gray-500 mt-2 font-semibold">
                         <span x-text="frequency === 'monthly' ? '£2' : '£5'"></span>
                         <span x-text="frequency === 'monthly' ? '£100+' : '£500+'"></span>
                     </div>
@@ -327,24 +338,24 @@
 
                 {{-- Amount Display --}}
                 <div class="text-right">
-                    <div class="text-7xl font-bold text-green-600 leading-none mb-2">
+                    <div class="text-6xl font-bold text-green-600 leading-none mb-1">
                         £<span x-text="amount"></span>
                     </div>
-                    <p class="text-sm text-gray-600 font-semibold">
+                    <p class="text-xs text-gray-600 font-semibold">
                         <span x-text="frequency === 'monthly' ? 'per month' : 'one-time'"></span>
                     </p>
                 </div>
             </div>
 
             {{-- What Your Donation Buys Section --}}
-            <div class="pt-10 border-t-2 border-green-200">
-                <p class="text-sm font-bold text-gray-700 uppercase tracking-wide mb-8">What your donation could provide:</p>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="pt-6 border-t-2 border-green-200">
+                <p class="text-xs font-bold text-gray-700 uppercase tracking-wide mb-4">What your donation could provide:</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                     <template x-for="item in donationBreakdown" :key="item.id">
-                        <div class="text-center p-4 rounded-xl bg-white border border-green-100 hover:shadow-lg transition">
-                            <div class="text-5xl mb-3" x-text="item.emoji"></div>
-                            <p class="font-bold text-lg text-gray-900 mb-2" x-text="item.quantity"></p>
-                            <p class="text-sm text-gray-700 leading-tight" x-text="item.item"></p>
+                        <div class="text-center p-3 rounded-xl bg-white border border-green-100 hover:shadow-lg transition">
+                            <div class="text-4xl mb-2" x-text="item.emoji"></div>
+                            <p class="font-bold text-base text-gray-900 mb-1" x-text="item.quantity"></p>
+                            <p class="text-xs text-gray-700 leading-tight" x-text="item.item"></p>
                         </div>
                     </template>
                 </div>
@@ -352,8 +363,8 @@
         </div>
 
         {{-- Impact Statement --}}
-        <div class="text-center bg-green-50 rounded-2xl p-8 border border-green-200 mb-12">
-            <p class="text-lg text-gray-700">
+        <div class="text-center bg-green-50 rounded-2xl p-6 border border-green-200 mb-8">
+            <p class="text-base text-gray-700">
                 <span class="font-bold text-green-700" x-text="'£' + amount + ' ' + (frequency === 'monthly' ? 'every month' : 'today')"></span>
                 <span x-text="summaryText" class="text-gray-700"></span>
             </p>
@@ -363,11 +374,11 @@
         <div class="text-center">
             <a
                 href="#donation-form"
-                class="inline-flex items-center justify-center rounded-lg bg-green-600 text-white px-12 py-4 font-semibold hover:bg-green-700 transition text-lg"
+                class="inline-flex items-center justify-center rounded-lg bg-green-600 text-white px-16 py-5 font-bold hover:bg-green-700 transition text-xl"
             >
-                ❤ Donate Now
+                🤝 Donate Now
             </a>
-            <p class="text-sm text-gray-500 mt-4">
+            <p class="text-sm text-gray-500 mt-3">
                 Secure payment processed by Stripe
             </p>
         </div>
@@ -504,7 +515,9 @@ function donationWidget() {
             addressLine1: '',
             addressLine2: '',
             city: '',
-            postcode: ''
+            postcode: '',
+            aggregatedDonations: '',
+            sponsoredEvent: false
         },
         processing: false,
         success: false,
@@ -598,9 +611,18 @@ function donationWidget() {
                     body: JSON.stringify({
                         amount: this.amount,
                         frequency: this.frequency === 'monthly' ? 'monthly' : 'one-time',
+                        payment_method: 'card',
                         donor_email: this.donorEmail,
-                        gift_aid_enabled: this.giftAidEnabled,
-                        gift_aid: this.giftAidEnabled ? this.giftAid : null
+                        gift_aid: this.giftAidEnabled,
+                        gift_aid_title: this.giftAidEnabled ? this.giftAid.title : null,
+                        gift_aid_first_name: this.giftAidEnabled ? this.giftAid.firstName : null,
+                        gift_aid_last_name: this.giftAidEnabled ? this.giftAid.lastName : null,
+                        gift_aid_address_line1: this.giftAidEnabled ? this.giftAid.addressLine1 : null,
+                        gift_aid_address_line2: this.giftAidEnabled ? this.giftAid.addressLine2 : null,
+                        gift_aid_city: this.giftAidEnabled ? this.giftAid.city : null,
+                        gift_aid_postcode: this.giftAidEnabled ? this.giftAid.postcode : null,
+                        aggregated_donations: this.giftAidEnabled ? this.giftAid.aggregatedDonations : null,
+                        sponsored_event: this.giftAidEnabled ? this.giftAid.sponsoredEvent : false
                     })
                 });
 
@@ -655,7 +677,9 @@ function donationWidget() {
                 addressLine1: '',
                 addressLine2: '',
                 city: '',
-                postcode: ''
+                postcode: '',
+                aggregatedDonations: '',
+                sponsoredEvent: false
             };
             this.cardError = '';
             if (cardElement) {

@@ -28,14 +28,16 @@ class StripeController extends Controller
             'donor_email' => 'required|email',
             'donor_name' => 'nullable|string',
             'gift_aid' => 'boolean',
-            // Gift Aid fields
-            'gift_aid_title' => 'nullable|string',
-            'gift_aid_first_name' => 'nullable|string',
-            'gift_aid_last_name' => 'nullable|string',
-            'gift_aid_address_line1' => 'nullable|string',
+            // Gift Aid fields - HMRC compliant validation
+            'gift_aid_title' => 'nullable|string|max:4',
+            'gift_aid_first_name' => 'nullable|string|max:35',
+            'gift_aid_last_name' => 'nullable|string|max:35',
+            'gift_aid_address_line1' => 'nullable|string|max:40',
             'gift_aid_address_line2' => 'nullable|string',
             'gift_aid_city' => 'nullable|string',
-            'gift_aid_postcode' => 'nullable|string',
+            'gift_aid_postcode' => 'nullable|string|max:10',
+            'aggregated_donations' => 'nullable|string|max:35',
+            'sponsored_event' => 'boolean',
         ]);
 
         try {
@@ -81,13 +83,16 @@ class StripeController extends Controller
                 'donor_email' => $validated['donor_email'],
                 'donor_name' => $validated['donor_name'] ?? null,
                 'gift_aid_eligible' => $validated['gift_aid'] ?? false,
-                'gift_aid_title' => $validated['gift_aid_title'] ?? null,
-                'gift_aid_first_name' => $validated['gift_aid_first_name'] ?? null,
-                'gift_aid_last_name' => $validated['gift_aid_last_name'] ?? null,
-                'gift_aid_address_line1' => $validated['gift_aid_address_line1'] ?? null,
+                // Format Gift Aid fields for HMRC compliance
+                'gift_aid_title' => isset($validated['gift_aid_title']) ? substr($validated['gift_aid_title'], 0, 4) : null,
+                'gift_aid_first_name' => isset($validated['gift_aid_first_name']) ? substr(str_replace(' ', '', $validated['gift_aid_first_name']), 0, 35) : null,
+                'gift_aid_last_name' => isset($validated['gift_aid_last_name']) ? substr($validated['gift_aid_last_name'], 0, 35) : null,
+                'gift_aid_address_line1' => isset($validated['gift_aid_address_line1']) ? substr($validated['gift_aid_address_line1'], 0, 40) : null,
                 'gift_aid_address_line2' => $validated['gift_aid_address_line2'] ?? null,
                 'gift_aid_city' => $validated['gift_aid_city'] ?? null,
-                'gift_aid_postcode' => $validated['gift_aid_postcode'] ?? null,
+                'gift_aid_postcode' => isset($validated['gift_aid_postcode']) ? strtoupper($validated['gift_aid_postcode']) : null,
+                'aggregated_donations' => isset($validated['aggregated_donations']) ? substr($validated['aggregated_donations'], 0, 35) : null,
+                'sponsored_event' => $validated['sponsored_event'] ?? false,
                 'gift_aid_declaration_date' => ($validated['gift_aid'] ?? false) ? now() : null,
             ]);
 

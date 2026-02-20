@@ -83,7 +83,7 @@ class DonationController extends Controller
     }
 
     /**
-     * Export Gift Aid donations to CSV
+     * Export Gift Aid donations to CSV for HMRC submission
      */
     public function exportGiftAid(Request $request)
     {
@@ -103,7 +103,7 @@ class DonationController extends Controller
 
         $donations = $query->orderBy('created_at', 'desc')->get();
 
-        $filename = 'gift-aid-donations-' . now()->format('Y-m-d') . '.csv';
+        $filename = 'gift-aid-hmrc-' . now()->format('Y-m-d') . '.csv';
 
         $headers = [
             'Content-Type' => 'text/csv',
@@ -113,45 +113,31 @@ class DonationController extends Controller
         $callback = function () use ($donations) {
             $file = fopen('php://output', 'w');
 
-            // CSV Headers
+            // HMRC Required CSV Headers (exactly as required)
             fputcsv($file, [
-                'Donation ID',
-                'Date',
                 'Title',
-                'First Name',
-                'Last Name',
-                'Email',
-                'Donation Amount (£)',
-                'Gift Aid Amount (£)',
-                'Total (£)',
-                'Address Line 1',
-                'Address Line 2',
-                'City',
+                'First name or initial',
+                'Last name',
+                'House name or number',
                 'Postcode',
-                'Declaration Date',
-                'Frequency',
-                'Payment Method'
+                'Aggregated donations',
+                'Sponsored event',
+                'Donation date',
+                'Amount'
             ]);
 
-            // Data rows
+            // Data rows - formatted exactly for HMRC requirements
             foreach ($donations as $donation) {
                 fputcsv($file, [
-                    $donation->id,
-                    $donation->created_at->format('d/m/Y'),
-                    $donation->gift_aid_title,
-                    $donation->gift_aid_first_name,
-                    $donation->gift_aid_last_name,
-                    $donation->donor_email,
-                    number_format($donation->amount, 2),
-                    number_format($donation->gift_aid_amount, 2),
-                    number_format($donation->total_with_gift_aid, 2),
-                    $donation->gift_aid_address_line1,
-                    $donation->gift_aid_address_line2,
-                    $donation->gift_aid_city,
-                    $donation->gift_aid_postcode,
-                    $donation->gift_aid_declaration_date ? $donation->gift_aid_declaration_date->format('d/m/Y') : '',
-                    ucfirst($donation->frequency),
-                    ucfirst(str_replace('_', ' ', $donation->payment_method))
+                    substr($donation->gift_aid_title ?? '', 0, 4), // Max 4 characters
+                    substr(str_replace(' ', '', $donation->gift_aid_first_name ?? ''), 0, 35), // Max 35, no spaces
+                    substr($donation->gift_aid_last_name ?? '', 0, 35), // Max 35 characters
+                    substr($donation->gift_aid_address_line1 ?? '', 0, 40), // Max 40 characters
+                    strtoupper($donation->gift_aid_postcode ?? ''), // UPPER CASE with space
+                    substr($donation->aggregated_donations ?? '', 0, 35), // Max 35 chars description, DON'T use Yes/No
+                    $donation->sponsored_event ? 'Yes' : '', // "Yes" or blank, NOT "No"
+                    $donation->created_at->format('d/m/y'), // DD/MM/YY format (2-digit year)
+                    number_format($donation->amount, 2, '.', '') // NO £ sign
                 ]);
             }
 
