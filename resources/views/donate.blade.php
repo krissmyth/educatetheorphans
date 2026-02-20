@@ -41,20 +41,20 @@
                 <input
                     type="range"
                     x-model.number="amount"
-                    min="10"
+                    min="5"
                     max="500"
-                    step="10"
+                    step="5"
                     class="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-green-600"
                     @input="updateSlider()"
                 >
                 <div class="flex justify-between text-sm text-gray-500 mt-2">
-                    <span>£10</span>
+                    <span>£5</span>
                     <span>£500+</span>
                 </div>
             </div>
 
             {{-- Impact Display --}}
-            <div class="border-t-2 border-gray-200 pt-8">
+            <div class="border-t-2 border-gray-200 pt-8 mb-8">
                 <div class="space-y-4">
                     <template x-for="item in impacts" :key="item.id">
                         <div class="flex items-start gap-4">
@@ -68,8 +68,22 @@
                 </div>
             </div>
 
+            {{-- What Your Donation Buys Section --}}
+            <div class="bg-green-50 rounded-lg border border-green-200 p-6 mb-8">
+                <h4 class="font-bold text-gray-900 mb-4">What your donation buys:</h4>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <template x-for="item in donationBreakdown" :key="item.id">
+                        <div class="text-center">
+                            <div class="text-2xl mb-2" x-text="item.emoji"></div>
+                            <p class="text-sm font-semibold text-gray-900" x-text="item.quantity"></p>
+                            <p class="text-xs text-gray-600" x-text="item.item"></p>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
             {{-- Summary Text --}}
-            <div class="mt-8 p-4 bg-green-50 rounded-lg border border-green-200">
+            <div class="p-4 bg-green-50 rounded-lg border border-green-200">
                 <p class="text-center text-gray-700">
                     <span class="font-semibold">Your £<span x-text="amount"></span> donation</span>
                     <span x-text="summaryText"></span>
@@ -82,8 +96,9 @@
 <script>
 function donationSlider() {
     return {
-        amount: 50,
+        amount: 25,
         impacts: [],
+        donationBreakdown: [],
         summaryText: '',
 
         init() {
@@ -91,58 +106,7 @@ function donationSlider() {
         },
 
         updateSlider() {
-            const impactGuide = {
-                10: {
-                    title: 'School Supplies',
-                    description: 'Pencils, notebooks, and basic learning materials for a child',
-                    emoji: '✏️'
-                },
-                25: {
-                    title: 'School Supplies',
-                    description: 'School uniform, shoes, notebooks, and learning materials for a term',
-                    emoji: '📚'
-                },
-                50: {
-                    title: 'Food Support',
-                    description: 'Monthly food provisions for a family of 5, ensuring children can focus on learning',
-                    emoji: '🍲'
-                },
-                75: {
-                    title: 'Education Bundle',
-                    description: 'School fees and supplies for one child for a quarter of the school year',
-                    emoji: '🎓'
-                },
-                100: {
-                    title: 'Full Education Support',
-                    description: 'Complete education support including school fees, materials, and exam preparation for one term',
-                    emoji: '📖'
-                },
-                150: {
-                    title: 'Community Impact',
-                    description: 'Contributes to school infrastructure, water systems, or healthcare initiatives in the community',
-                    emoji: '🏗️'
-                },
-                250: {
-                    title: 'Major Project Support',
-                    description: 'Funds a significant portion of a clean water project, school improvement, or skills training programme',
-                    emoji: '💧'
-                },
-                500: {
-                    title: 'Year-Round Impact',
-                    description: 'Provides comprehensive annual support for a child including education, food, and healthcare, plus community projects',
-                    emoji: '🌟'
-                }
-            };
-
-            // Find the closest impact level
-            let closestAmount = 10;
-            Object.keys(impactGuide).forEach(key => {
-                if (Math.abs(this.amount - key) < Math.abs(this.amount - closestAmount)) {
-                    closestAmount = parseInt(key);
-                }
-            });
-
-            // Also show impacts for amounts between milestones
+            // Update the main impact display
             let impactTexts = [];
 
             if (this.amount <= 10) {
@@ -198,13 +162,133 @@ function donationSlider() {
             }
 
             this.impacts = impactTexts;
+
+            // Update the donation breakdown (what it buys)
+            this.updateDonationBreakdown();
             this.updateSummary();
+        },
+
+        updateDonationBreakdown() {
+            let items = [];
+
+            // At £5
+            if (this.amount >= 5) {
+                items.push({
+                    id: 1,
+                    emoji: '📖',
+                    quantity: '2',
+                    item: 'School books'
+                });
+            }
+
+            // At £10
+            if (this.amount >= 10) {
+                items.push({
+                    id: 2,
+                    emoji: '📓',
+                    quantity: '5',
+                    item: 'Notebooks'
+                });
+            }
+
+            // At £15
+            if (this.amount >= 15) {
+                items.push({
+                    id: 3,
+                    emoji: '✏️',
+                    quantity: '20',
+                    item: 'Pens & pencils'
+                });
+            }
+
+            // At £25
+            if (this.amount >= 25) {
+                items.push({
+                    id: 4,
+                    emoji: '👕',
+                    quantity: '1',
+                    item: 'School uniform'
+                });
+            }
+
+            // At £35
+            if (this.amount >= 35) {
+                items.push({
+                    id: 5,
+                    emoji: '👟',
+                    quantity: '1',
+                    item: 'School shoes'
+                });
+            }
+
+            // At £50
+            if (this.amount >= 50) {
+                items.push({
+                    id: 6,
+                    emoji: '🍎',
+                    quantity: '30',
+                    item: 'Days of meals'
+                });
+            }
+
+            // At £75
+            if (this.amount >= 75) {
+                items.push({
+                    id: 7,
+                    emoji: '🏫',
+                    quantity: '3 months',
+                    item: 'School fees'
+                });
+            }
+
+            // At £100
+            if (this.amount >= 100) {
+                items.push({
+                    id: 8,
+                    emoji: '💼',
+                    quantity: '1',
+                    item: 'School bag'
+                });
+            }
+
+            // At £150
+            if (this.amount >= 150) {
+                items.push({
+                    id: 9,
+                    emoji: '💧',
+                    quantity: '1',
+                    item: 'Water point'
+                });
+            }
+
+            // At £250
+            if (this.amount >= 250) {
+                items.push({
+                    id: 10,
+                    emoji: '🏗️',
+                    quantity: 'Partial',
+                    item: 'School building'
+                });
+            }
+
+            // At £500
+            if (this.amount >= 500) {
+                items.push({
+                    id: 11,
+                    emoji: '👨‍👩‍👧‍👦',
+                    quantity: '1 year',
+                    item: 'Full support/child'
+                });
+            }
+
+            this.donationBreakdown = items;
         },
 
         updateSummary() {
             const summaries = {
-                10: 'will help provide basic school supplies',
-                25: 'will equip a child with school essentials for a term',
+                5: 'will provide basic learning materials',
+                10: 'will provide school supplies',
+                25: 'will outfit a child with school essentials for a term',
                 50: 'will feed a family for a month',
                 75: 'will support a child\'s education for a quarter of the year',
                 100: 'will provide full education support for one child for a term',
@@ -214,14 +298,14 @@ function donationSlider() {
             };
 
             // Find the closest summary
-            let closest = 10;
+            let closest = 5;
             Object.keys(summaries).forEach(key => {
                 if (this.amount >= key && Math.abs(this.amount - key) < Math.abs(this.amount - closest)) {
                     closest = parseInt(key);
                 }
             });
 
-            this.summaryText = summaries[closest] || summaries[10];
+            this.summaryText = summaries[closest] || summaries[5];
         }
     }
 }
