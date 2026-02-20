@@ -10,10 +10,10 @@
     <div class="mt-10 rounded-2xl border p-6 bg-gray-50">
         <p class="font-semibold">What your gift can do</p>
         <ul class="mt-4 space-y-2 text-gray-700">
-            <li><span class="font-semibold">$25</span> — School supplies</li>
-            <li><span class="font-semibold">$50</span> — Food support for a family</li>
-            <li><span class="font-semibold">$100</span> — Education support for a student</li>
-            <li><span class="font-semibold">$250</span> — Support a programme/project need</li>
+            <li><span class="font-semibold">£25</span> — School supplies</li>
+            <li><span class="font-semibold">£50</span> — Food support for a family</li>
+            <li><span class="font-semibold">£100</span> — Education support for a student</li>
+            <li><span class="font-semibold">£250</span> — Support a programme/project need</li>
         </ul>
 
         <a href="https://www.justgiving.com/educatetheorphans/donate"
