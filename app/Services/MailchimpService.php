@@ -192,15 +192,19 @@ class MailchimpService
 
     /**
      * Subscribe an email to the mailing list
+     * Returns an array with 'success' boolean and 'message' string
      */
-    public function subscribe(string $email, ?string $firstName = null, ?string $lastName = null): bool
+    public function subscribe(string $email, ?string $firstName = null, ?string $lastName = null): array
     {
         try {
             $listId = config('mailchimp.list_id');
 
             if (!$listId) {
                 Log::error('Mailchimp list ID not configured');
-                return false;
+                return [
+                    'success' => false,
+                    'message' => 'Service configuration error. Please try again later.'
+                ];
             }
 
             $data = [
@@ -217,15 +221,67 @@ class MailchimpService
             $this->client->lists->addListMember($listId, $data);
             Log::info('Mailchimp subscription success', ['email' => $email]);
 
-            return true;
+            return [
+                'success' => true,
+                'message' => 'Thanks for subscribing! Check your email for confirmation.'
+            ];
         } catch (\GuzzleHttp\Exception\ClientException $e) {
             $response = $e->getResponse();
+            $statusCode = $response->getStatusCode();
             $body = $response->getBody()->getContents();
-            Log::error('Mailchimp error', ['body' => $body]);
-            return false;
+
+            Log::error('Mailchimp API error', ['status' => $statusCode, 'body' => $body]);
+
+            // Parse JSON response to get specific error message
+            $errorData = json_decode($body, true);
+
+            if ($statusCode === 400 && isset($errorData['title'])) {
+                $title = $errorData['title'];
+                $detail = $errorData['detail'] ?? '';
+
+                // Handle specific Mailchimp errors
+                if (stripos($title, 'Forgotten Email') !== false) {
+                    // For forgotten emails, try to re-add with 'subscribed' status
+                    // which can work for previously deleted members
+                    try {
+                        Log::info('Attempting to re-add forgotten email with subscribed status', ['email' => $email]);
+                        $data['status'] = 'subscribed';
+                        $this->client->lists->addListMember($listId, $data);
+                        Log::info('Successfully re-added forgotten email', ['email' => $email]);
+                        return [
+                            'success' => true,
+                            'message' => 'Thanks for subscribing! Check your email for confirmation.'
+                        ];
+                    } catch (\Throwable $retryError) {
+                        Log::error('Failed to re-add forgotten email', ['email' => $email, 'error' => $retryError->getMessage()]);
+                        return [
+                            'success' => false,
+                            'message' => 'We had trouble adding this email. Please try again in a few moments, or contact us at support@educatetheorphans.com if the problem persists.'
+                        ];
+                    }
+                } elseif (stripos($title, 'Member Exists') !== false) {
+                    return [
+                        'success' => false,
+                        'message' => 'This email is already subscribed to our list.'
+                    ];
+                } else {
+                    return [
+                        'success' => false,
+                        'message' => $detail ?: 'Unable to subscribe. Please try again later.'
+                    ];
+                }
+            }
+
+            return [
+                'success' => false,
+                'message' => 'Unable to subscribe. Please try again later.'
+            ];
         } catch (\Throwable $e) {
-            Log::error('Mailchimp error', ['message' => $e->getMessage()]);
-            return false;
+            Log::error('Mailchimp subscription error', ['message' => $e->getMessage(), 'type' => get_class($e)]);
+            return [
+                'success' => false,
+                'message' => 'Unable to subscribe. Please try again later.'
+            ];
         }
     }
 }

@@ -25,22 +25,22 @@ class NewsController extends Controller
             'lastName' => 'required|string',
         ]);
 
-        $success = $this->mailchimp->subscribe(
+        $result = $this->mailchimp->subscribe(
             request('email'),
             request('firstName'),
             request('lastName')
         );
 
-        if ($success) {
+        if ($result['success']) {
             return response()->json([
                 'success' => true,
-                'message' => 'Thanks for subscribing! Check your email for confirmation.'
+                'message' => $result['message']
             ]);
         }
 
         return response()->json([
             'success' => false,
-            'message' => 'Unable to subscribe. Please try again later.'
+            'message' => $result['message']
         ], 422);
     }
 

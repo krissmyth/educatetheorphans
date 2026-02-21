@@ -222,99 +222,67 @@
 </section>
 
 {{-- NEWSLETTER --}}
-<section class="py-16 border-t">
+<section class="py-16 border-t" id="newsletter">
     <div class="mx-auto max-w-6xl px-4">
-        <div class="flex flex-col md:flex-row gap-8 md:gap-12 md:items-start">
+        <div class="flex flex-col md:flex-row gap-8 md:gap-12 md:items-center">
             <!-- Left side: Text -->
             <div class="flex-1">
                 <h3 class="text-3xl font-bold">Get updates from Educate the Orphans</h3>
-                <p class="mt-6 text-gray-700">Subscribe to our mailing list to keep up to date with what GOD is doing within ETO</p>
-                <p class="mt-4 text-gray-700">By receiving our update email you can keep up to date with our work, projects and pray requests.</p>
+                <p class="mt-6 text-gray-700">By subscribing to our mailing list, you can stay connected with us and up to date with all that God is doing through Educate the Orphans.</p>
+                <p class="mt-4 text-gray-700">Our emails help you stay connected to the difference your prayers and support are making in the lives of vulnerable children and the communities we serve, with regular updates on our projects, encouraging testimonies, and specific prayer requests so you can continue to stand with us in this mission.</p>
             </div>
 
-            <!-- Right side: Form in contained box -->
+            <!-- Right side: Mailchimp Embed Form -->
             <div class="flex-1">
-                <div class="rounded-2xl border p-6 md:p-8 bg-gray-50">
-                    <form id="newsletter-form" class="flex flex-col gap-3" onsubmit="handleNewsletterSubmit(event)">
-                        @csrf
-                        <div class="flex flex-col md:flex-row gap-3">
-                            <input
-                                type="text"
-                                name="firstName"
-                                placeholder="First name"
-                                class="flex-1 rounded-lg border px-3 py-2 text-sm"
-                                required
-                            >
-                            <input
-                                type="text"
-                                name="lastName"
-                                placeholder="Last name"
-                                class="flex-1 rounded-lg border px-3 py-2 text-sm"
-                                required
-                            >
-                        </div>
-                        <input
-                            type="email"
-                            name="email"
-                            placeholder="you@email.com"
-                            class="rounded-lg border px-3 py-2 text-sm"
-                            required
-                        >
-                        <button
-                            id="subscribe-btn"
-                            type="submit"
-                            class="rounded-lg bg-black px-5 py-3 text-white font-semibold hover:bg-gray-800"
-                        >
-                            Subscribe
-                        </button>
-                    </form>
-                    <div id="newsletter-message" class="mt-3 text-sm"></div>
+                <div id="mc_embed_shell">
+                    <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+                    <style type="text/css">
+                        #mc_embed_signup{background:#fff; false;clear:left; font:14px Helvetica,Arial,sans-serif; width: 100%;}
+                        #mc-embedded-subscribe {
+                            background-color: black !important;
+                            color: white !important;
+                            padding: 0.75rem 1.25rem !important;
+                            border-radius: 0.5rem !important;
+                            font-weight: 600 !important;
+                            font-size: 1rem !important;
+                            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+                            transition: background-color 0.2s !important;
+                            border: none !important;
+                            cursor: pointer !important;
+                            min-height: auto !important;
+                            height: auto !important;
+                            line-height: 1.5 !important;
+                        }
+                        #mc-embedded-subscribe:hover {
+                            background-color: #1f2937 !important;
+                        }
+                    </style>
+                    <div id="mc_embed_signup">
+                        <form action="https://eto-ministries.us20.list-manage.com/subscribe/post?u=4e19ab77a2020248a46932b37&amp;id=1010eefcd1&amp;f_id=004e5eeef0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+                            <div id="mc_embed_signup_scroll">
+                                <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+                                <div class="mc-field-group"><label for="mce-FNAME">First Name <span class="asterisk">*</span></label><input type="text" name="FNAME" class="required text" id="mce-FNAME" value="" required=""></div><div class="mc-field-group"><label for="mce-LNAME">Last Name <span class="asterisk">*</span></label><input type="text" name="LNAME" class="required text" id="mce-LNAME" value="" required=""></div><div class="mc-field-group"><label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label><input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required="" value=""></div>
+                                <div id="mce-responses" class="clear foot">
+                                    <div class="response" id="mce-error-response" style="display: none;"></div>
+                                    <div class="response" id="mce-success-response" style="display: none;"></div>
+                                </div>
+                                <div aria-hidden="true" style="position: absolute; left: -5000px;">
+                                    <input type="text" name="b_4e19ab77a2020248a46932b37_1010eefcd1" tabindex="-1" value="">
+                                </div>
+                                <div class="optionalParent">
+                                    <div class="clear foot">
+                                        <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Subscribe">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+                    <script type="text/javascript">
+                        (function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';}(jQuery));var $mcj = jQuery.noConflict(true);
+                    </script>
                 </div>
             </div>
-        </div>
-            <script>
-                async function handleNewsletterSubmit(event) {
-                    event.preventDefault();
-                    const email = event.target.querySelector('[name="email"]').value;
-                    const firstName = event.target.querySelector('[name="firstName"]').value;
-                    const lastName = event.target.querySelector('[name="lastName"]').value;
-                    const btn = event.target.querySelector('#subscribe-btn');
-                    const messageDiv = document.querySelector('#newsletter-message');
-
-                    btn.disabled = true;
-                    btn.textContent = 'Subscribing...';
-                    messageDiv.textContent = '';
-                    messageDiv.className = 'md:col-span-2 mt-3 text-sm';
-
-                    try {
-                        const response = await fetch('{{ route("newsletter.subscribe") }}', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                            },
-                            body: JSON.stringify({ email, firstName, lastName })
-                        });
-
-                        const data = await response.json();
-
-                        if (data.success) {
-                            messageDiv.textContent = data.message;
-                            messageDiv.className = 'md:col-span-2 mt-3 text-sm text-green-600';
-                            event.target.reset();
-                        } else {
-                            messageDiv.textContent = data.message || 'Error subscribing. Please try again.';
-                            messageDiv.className = 'md:col-span-2 mt-3 text-sm text-red-600';
-                        }
-                    } catch (error) {
-                        messageDiv.textContent = 'Error subscribing. Please try again.';
-                        messageDiv.className = 'md:col-span-2 mt-3 text-sm text-red-600';
-                    } finally {
-                        btn.disabled = false;
-                        btn.textContent = 'Subscribe';
-                    }
-                }
-            </script>
         </div>
     </div>
 </section>
