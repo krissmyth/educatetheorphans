@@ -5,7 +5,7 @@
 {{-- HERO --}}
 <section class="relative">
     <img
-        src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=2000&q=80"
+        src="{{ asset('images/Stories.jpg') }}"
         class="h-[560px] w-full object-cover"
         alt="Stories of Change"
     >

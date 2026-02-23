@@ -5,7 +5,7 @@
 {{-- HERO --}}
 <section class="relative">
     <img
-        src="https://images.unsplash.com/photo-1559027615-cd02920f8f58?auto=format&fit=crop&w=2000&q=80"
+        src="{{ asset('images/projects.jpg') }}"
         class="h-[560px] w-full object-cover"
         alt="Our Projects"
     >

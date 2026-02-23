@@ -6,11 +6,26 @@
 <section class="relative">
     {{-- If you want to use your own image:
          put it in public/images/hero.jpg and change src to: {{ asset('images/hero.jpg') }} --}}
-    <img
-        src="{{ asset('images/home.jpg') }}"
-        class="h-[560px] w-full object-cover"
-        alt="Education and community"
-    >
+    <div class="relative h-[560px] w-full overflow-hidden">
+        <!-- Main Image -->
+        <img
+            id="heroImage"
+            src="{{ asset('images/home.jpg') }}"
+            class="h-[560px] w-full object-cover"
+            alt="Education and community"
+        >
+        
+        <!-- Video Element (initially hidden) -->
+        <video
+            id="heroVideo"
+            class="absolute inset-0 h-[560px] w-full object-cover hidden"
+            autoplay
+            muted
+        >
+            <source src="{{ asset('images/home_video.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
     <div class="absolute inset-0 bg-black/60"></div>
 
     <div class="absolute inset-0">
@@ -286,5 +301,25 @@
         </div>
     </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const heroImage = document.getElementById('heroImage');
+    const heroVideo = document.getElementById('heroVideo');
+    
+    // After 4 seconds, show video and hide image
+    setTimeout(function() {
+        heroImage.classList.add('hidden');
+        heroVideo.classList.remove('hidden');
+        heroVideo.play();
+    }, 4000);
+    
+    // When video ends, hide video and show image again
+    heroVideo.addEventListener('ended', function() {
+        heroVideo.classList.add('hidden');
+        heroImage.classList.remove('hidden');
+    });
+});
+</script>
 
 @endsection

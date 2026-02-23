@@ -65,8 +65,8 @@ class MailchimpService
                     foreach ($response->campaigns as $campaign) {
                         $formatted = $this->formatCampaign($campaign);
 
-                        // Try to extract featured image from campaign
-                        $formatted['featured_image'] = $this->extractFeaturedImage($campaign->id);
+                        // Featured images are now loaded on-demand in detail view only
+                        // to improve list performance (prevents N+1 API calls)
 
                         $campaigns[] = $formatted;
                     }

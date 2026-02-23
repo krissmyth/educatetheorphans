@@ -5,7 +5,7 @@
 {{-- HERO --}}
 <section class="relative">
     <img
-        src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=2000&q=80"
+        src="{{ asset('images/contacts.jpg') }}"
         class="h-[560px] w-full object-cover"
         alt="Contact Us"
     >

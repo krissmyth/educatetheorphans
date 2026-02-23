@@ -9,7 +9,7 @@
 {{-- HERO WITH DONATION WIDGET --}}
 <section class="relative">
     <img
-        src="https://images.unsplash.com/photo-1532996122724-8f6ba07a18e3?auto=format&fit=crop&w=2000&q=80"
+        src="{{ asset('images/Donate.jpg') }}"
         class="h-[900px] lg:h-[700px] w-full object-cover"
         alt="Donate"
     >
@@ -57,14 +57,6 @@
                         <div class="grid grid-cols-3 gap-0 mb-4 border-2 border-gray-300 rounded overflow-hidden">
                             <button
                                 type="button"
-                                @click="amount = 5"
-                                :class="amount === 5 ? 'bg-green-600 text-white' : 'bg-white text-gray-900'"
-                                class="py-3 px-4 font-bold text-base border-r-2 border-gray-300 transition-colors"
-                            >
-                                £5
-                            </button>
-                            <button
-                                type="button"
                                 @click="amount = 10"
                                 :class="amount === 10 ? 'bg-green-600 text-white' : 'bg-white text-gray-900'"
                                 class="py-3 px-4 font-bold text-base border-r-2 border-gray-300 transition-colors"
@@ -73,11 +65,19 @@
                             </button>
                             <button
                                 type="button"
-                                @click="amount = 15"
-                                :class="amount === 15 ? 'bg-green-600 text-white' : 'bg-white text-gray-900'"
+                                @click="amount = 20"
+                                :class="amount === 20 ? 'bg-green-600 text-white' : 'bg-white text-gray-900'"
+                                class="py-3 px-4 font-bold text-base border-r-2 border-gray-300 transition-colors"
+                            >
+                                £20
+                            </button>
+                            <button
+                                type="button"
+                                @click="amount = 50"
+                                :class="amount === 50 ? 'bg-green-600 text-white' : 'bg-white text-gray-900'"
                                 class="py-3 px-4 font-bold text-base transition-colors"
                             >
-                                £15
+                                £50
                             </button>
                         </div>
 
@@ -323,15 +323,15 @@
                     <input
                         type="range"
                         x-model.number="amount"
-                        :min="frequency === 'monthly' ? 2 : 5"
+                        :min="5"
                         :max="frequency === 'monthly' ? 100 : 500"
-                        :step="frequency === 'monthly' ? 1 : 5"
+                        :step="5"
                         class="w-full h-4 bg-gradient-to-r from-green-200 to-green-400 rounded-full appearance-none cursor-pointer accent-green-600"
                         @input="updateSlider()"
                         style="min-height: 24px;"
                     >
                     <div class="flex justify-between text-xs text-gray-500 mt-2 font-semibold">
-                        <span x-text="frequency === 'monthly' ? '£2' : '£5'"></span>
+                        <span>£5</span>
                         <span x-text="frequency === 'monthly' ? '£100+' : '£500+'"></span>
                     </div>
                 </div>
@@ -420,18 +420,24 @@
 
         <div class="grid md:grid-cols-2 gap-8">
             <div class="bg-green-50 rounded-2xl p-8 border-2 border-green-200">
-                <h4 class="font-bold text-gray-900 mb-4 text-xl">Lower Fees, More Impact</h4>
+                <h4 class="font-bold text-gray-900 mb-4 text-xl">Flexible Giving Options</h4>
                 <div class="space-y-3 text-gray-700">
-                    <div class="flex justify-between">
-                        <span>Card Payments:</span>
-                        <span class="font-bold text-green-600">1.5% + 20p</span>
+                    <div class="flex gap-4">
+                        <span class="text-green-600 font-bold">📅</span>
+                        <div>
+                            <p class="font-semibold text-gray-900">Monthly Giving</p>
+                            <p class="text-sm">Sustain our programmes year-round</p>
+                        </div>
                     </div>
-                    <div class="flex justify-between">
-                        <span>Direct Debit:</span>
-                        <span class="font-bold text-green-600">1% (max £2)</span>
+                    <div class="flex gap-4">
+                        <span class="text-green-600 font-bold">💚</span>
+                        <div>
+                            <p class="font-semibold text-gray-900">One-Off Donation</p>
+                            <p class="text-sm">Make an immediate difference</p>
+                        </div>
                     </div>
                     <p class="text-sm pt-3 border-t border-green-300">
-                        Lower processing fees mean more of your donation goes directly to helping children and families.
+                        Both options reach children in need quickly. Your support creates lasting change.
                     </p>
                 </div>
             </div>
@@ -439,8 +445,8 @@
             <div class="bg-blue-50 rounded-2xl p-8 border-2 border-blue-200">
                 <h4 class="font-bold text-gray-900 mb-4 text-xl">100% Goes to Our Work</h4>
                 <p class="text-gray-700 mb-4">
-                    Every penny you donate goes directly to supporting vulnerable children and families. 
-                    We cover our operating costs separately, so your gift makes maximum impact.
+                    Every penny we receive goes directly to supporting vulnerable children and families. 
+                    All our UK staff are volunteers, ensuring that all donations support those most in need.
                 </p>
                 <a href="/about" 
                    class="inline-block bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition">
@@ -697,7 +703,7 @@ function donationWidget() {
 
 function donationSlider() {
     return {
-        amount: 10,
+        amount: 50,
         frequency: 'monthly',
         donationBreakdown: [],
         summaryText: '',
