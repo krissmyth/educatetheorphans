@@ -7,7 +7,7 @@
 {{-- HERO --}}
 <section class="relative">
     <img
-        src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=2000&q=80"
+        src="{{ asset('images/about.jpg') }}"
         class="h-[560px] w-full object-cover"
         alt="About Educate the Orphans"
     >

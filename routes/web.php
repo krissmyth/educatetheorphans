@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProjectsController;
+use App\Http\Controllers\StoriesController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\StripeController;
@@ -15,7 +16,7 @@ Route::view('/about', 'about')->name('about');
 Route::get('/news', [NewsController::class, 'index'])->name('news');
 Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
 Route::get('/projects', [ProjectsController::class, 'index'])->name('projects');
-Route::view('/stories', 'stories')->name('stories');
+Route::get('/stories', [StoriesController::class, 'index'])->name('stories');
 Route::view('/get-involved', 'get-involved')->name('get-involved');
 Route::get('/donate', [DonationController::class, 'show'])->name('donate');
 Route::post('/donate/redirect', [DonationController::class, 'redirectToJustGiving'])->name('donate.redirect');

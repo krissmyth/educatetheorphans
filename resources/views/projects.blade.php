@@ -34,17 +34,25 @@
         {{-- PROJECTS GRID --}}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach ($projects as $project)
-                <div class="rounded-2xl border p-8 bg-white hover:shadow-lg transition group">
-                    <div class="text-4xl mb-4">{{ $project['icon'] }}</div>
-                    <h3 class="text-xl font-bold text-gray-900 group-hover:text-green-600 transition mb-3">
-                        {{ $project['title'] }}
-                    </h3>
-                    <p class="text-gray-700 text-sm leading-relaxed mb-4">
-                        {{ $project['description'] }}
-                    </p>
-                    <a href="#project-{{ $project['id'] }}" class="text-green-600 font-semibold text-sm hover:text-green-700">
-                        Learn more →
-                    </a>
+                <div class="rounded-2xl border bg-white hover:shadow-lg transition group overflow-hidden">
+                    <div class="aspect-video w-full overflow-hidden">
+                        <img 
+                            src="{{ asset('images/projects/' . $project['image']) }}" 
+                            alt="{{ $project['title'] }}"
+                            class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                        >
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 group-hover:text-green-600 transition mb-3">
+                            {{ $project['title'] }}
+                        </h3>
+                        <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                            {{ $project['description'] }}
+                        </p>
+                        <a href="#project-{{ $project['id'] }}" class="text-green-600 font-semibold text-sm hover:text-green-700">
+                            Learn more →
+                        </a>
+                    </div>
                 </div>
             @endforeach
         </div>
@@ -57,10 +65,14 @@
         @foreach ($projects as $index => $project)
             <div id="project-{{ $project['id'] }}" class="scroll-mt-24 mb-16 pb-16 {{ $index !== count($projects) - 1 ? 'border-b' : '' }}">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-                    {{-- Image/Icon --}}
+                    {{-- Image --}}
                     <div class="{{ $index % 2 === 1 ? 'order-2' : '' }}">
-                        <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-12 flex items-center justify-center min-h-[300px]">
-                            <div class="text-9xl opacity-80">{{ $project['icon'] }}</div>
+                        <div class="rounded-2xl overflow-hidden shadow-lg">
+                            <img 
+                                src="{{ asset('images/projects/' . $project['image']) }}" 
+                                alt="{{ $project['title'] }}"
+                                class="w-full h-full object-cover"
+                            >
                         </div>
                     </div>
 

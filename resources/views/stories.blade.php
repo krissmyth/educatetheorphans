@@ -26,83 +26,25 @@
     <div class="mx-auto max-w-6xl px-4">
         <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
 
-            <!-- Story 1 -->
-            <article class="border rounded-lg overflow-hidden hover:shadow-lg transition">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" alt="Livingstone Njeru" class="h-48 w-full object-cover object-top">
-                <div class="p-6">
-                    <p class="text-sm font-semibold text-blue-600 mb-2">Featured Story</p>
-                    <h3 class="text-lg font-bold">Livingstone Njeru: From Sponsored Child to Director</h3>
-                    <p class="mt-3 text-sm text-gray-600 leading-relaxed">
-                        Livingstone started as a sponsored child and rose through Educate the Orphans' programmes to become our Kenya Director. His journey showcases how education and community support create leaders who give back.
-                    </p>
-                    <p class="mt-4 text-xs text-gray-500">"Education opened doors I never thought possible."</p>
-                </div>
-            </article>
-
-            <!-- Story 2 -->
-            <article class="border rounded-lg overflow-hidden hover:shadow-lg transition">
-                <img src="https://images.unsplash.com/photo-1579154204601-01d2cc9134c4?auto=format&fit=crop&w=600&q=80" alt="Makena N Gilugu" class="h-48 w-full object-cover object-top">
-                <div class="p-6">
-                    <p class="text-sm font-semibold text-green-600 mb-2">Professional Achievement</p>
-                    <h3 class="text-lg font-bold">Makena N Gilugu: Now an Accountant</h3>
-                    <p class="mt-3 text-sm text-gray-600 leading-relaxed">
-                        With sponsorship from A+P McKenna, Makena received the education and support needed to pursue her dreams. Today she works as an accountant with a Kenyan bank, serving her community.
-                    </p>
-                    <p class="mt-4 text-xs text-gray-500">"My sponsor believed in my potential when I couldn't see it myself."</p>
-                </div>
-            </article>
-
-            <!-- Story 3 -->
-            <article class="border rounded-lg overflow-hidden hover:shadow-lg transition">
-                <img src="https://images.unsplash.com/photo-1576091160629-112173faf246?auto=format&fit=crop&w=600&q=80" alt="Muthuuri Kabea" class="h-48 w-full object-cover object-top">
-                <div class="p-6">
-                    <p class="text-sm font-semibold text-purple-600 mb-2">Overcoming Adversity</p>
-                    <h3 class="text-lg font-bold">Muthuuri Kabea: From Loss to Healing Professions</h3>
-                    <p class="mt-3 text-sm text-gray-600 leading-relaxed">
-                        Despite losing his father at a young age, Muthuuri persevered through Educate the Orphans' support. Thanks to T. Kelly's sponsorship, he became a radiographer at Chogoria Hospital, helping others heal.
-                    </p>
-                    <p class="mt-4 text-xs text-gray-500">"Pain became my purpose to serve others."</p>
-                </div>
-            </article>
-
-            <!-- Story 4 -->
-            <article class="border rounded-lg overflow-hidden hover:shadow-lg transition">
-                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=600&q=80" alt="Mukembi Karegi" class="h-48 w-full object-cover object-top">
-                <div class="p-6">
-                    <p class="text-sm font-semibold text-orange-600 mb-2">Financial Security</p>
-                    <h3 class="text-lg font-bold">Mukembi Karegi: Rising in Banking</h3>
-                    <p class="mt-3 text-sm text-gray-600 leading-relaxed">
-                        With W. Taylor's sponsorship, Mukembi gained the education necessary to pursue a career in finance. He now works as a banker with one of Kenya's national banks in Nairobi.
-                    </p>
-                    <p class="mt-4 text-xs text-gray-500">"I'm building a secure future for my family."</p>
-                </div>
-            </article>
-
-            <!-- Story 5 -->
-            <article class="border rounded-lg overflow-hidden hover:shadow-lg transition">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" alt="Pastor and Teacher" class="h-48 w-full object-cover object-top">
-                <div class="p-6">
-                    <p class="text-sm font-semibold text-indigo-600 mb-2">Community Leaders</p>
-                    <h3 class="text-lg font-bold">Sponsored Children Becoming Spiritual Leaders</h3>
-                    <p class="mt-3 text-sm text-gray-600 leading-relaxed">
-                        Many former Educate the Orphans students have answered the call to ministry. They now serve as pastors, church leaders, and spiritual counselors, bringing hope and faith to their communities.
-                    </p>
-                    <p class="mt-4 text-xs text-gray-500">"Education gave me the tools to serve my faith and community."</p>
-                </div>
-            </article>
-
-            <!-- Story 6 -->
-            <article class="border rounded-lg overflow-hidden hover:shadow-lg transition">
-                <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80" alt="Sponsor Reunion" class="h-48 w-full object-cover object-top">
-                <div class="p-6">
-                    <p class="text-sm font-semibold text-red-600 mb-2">Sponsor Impact</p>
-                    <h3 class="text-lg font-bold">Living Proof: A Sponsor Meets Her Impact</h3>
-                    <p class="mt-3 text-sm text-gray-600 leading-relaxed">
-                        When sponsors visit Kenya, they witness firsthand the transformation their investment makes. Former sponsored children, now professionals, warmly greet their sponsors—a profound moment showing education's lasting legacy.
-                    </p>
-                    <p class="mt-4 text-xs text-gray-500">"This is truly a miracle, all thanks to our sponsors."</p>
-                </div>
-            </article>
+            @foreach ($stories as $story)
+                <article class="border rounded-lg overflow-hidden hover:shadow-lg transition group">
+                    <div class="aspect-[4/3] overflow-hidden">
+                        <img 
+                            src="{{ asset('images/stories/' . $story['image']) }}" 
+                            alt="{{ $story['title'] }}"
+                            class="h-full w-full object-cover object-top group-hover:scale-105 transition duration-300"
+                        >
+                    </div>
+                    <div class="p-6">
+                        <p class="text-sm font-semibold text-{{ $story['category_color'] }}-600 mb-2">{{ $story['category'] }}</p>
+                        <h3 class="text-lg font-bold">{{ $story['title'] }}</h3>
+                        <p class="mt-3 text-sm text-gray-600 leading-relaxed">
+                            {{ $story['description'] }}
+                        </p>
+                        <p class="mt-4 text-xs text-gray-500 italic">"{{ $story['quote'] }}"</p>
+                    </div>
+                </article>
+            @endforeach
 
         </div>
     </div>
