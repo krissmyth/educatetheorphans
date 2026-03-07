@@ -2,6 +2,7 @@
 
 @push('scripts')
 <script src="https://js.stripe.com/v3/"></script>
+<script src="https://www.paypal.com/sdk/js?client-id={{ $paypalClientId }}&currency=GBP&intent=capture"></script>
 @endpush
 
 @section('content')
@@ -114,6 +115,8 @@
                         <div class="mt-4 flex items-center justify-center gap-4 opacity-60">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png" alt="Visa" class="h-5 grayscale">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/200px-Mastercard-logo.svg.png" alt="Mastercard" class="h-5 grayscale">
+                            <span class="text-gray-400">•</span>
+                            <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-small.png" alt="PayPal" class="h-5 grayscale">
                         </div>
                     </div>
                 </div>
@@ -154,6 +157,26 @@
                             </div>
 
                             <div x-show="!success">
+                                {{-- Payment Gateway Selector --}}
+                                <div class="grid grid-cols-2 gap-3 mb-6 border-2 border-gray-300 rounded overflow-hidden">
+                                    <button
+                                        type="button"
+                                        @click="paymentGateway = 'stripe'"
+                                        :class="paymentGateway === 'stripe' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700'"
+                                        class="py-3 px-4 font-bold text-sm uppercase border-r-2 border-gray-300 transition-colors"
+                                    >
+                                        💳 Stripe
+                                    </button>
+                                    <button
+                                        type="button"
+                                        @click="paymentGateway = 'paypal'"
+                                        :class="paymentGateway === 'paypal' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700'"
+                                        class="py-3 px-4 font-bold text-sm uppercase transition-colors"
+                                    >
+                                        🅿️ PayPal
+                                    </button>
+                                </div>
+
                                 {{-- Gift Aid Checkbox --}}
                                 <div class="bg-green-50 border-2 border-green-200 rounded-lg p-4">
                                     <label class="flex items-start gap-3 cursor-pointer">
@@ -247,27 +270,43 @@
                                     </div>
                                 </div>
 
-                                {{-- Card Details --}}
-                                <div>
-                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Card Details *</label>
-                                    <div id="card-element" class="py-3 px-4 border-2 border-gray-300 rounded"></div>
-                                    <div id="card-errors" class="text-red-600 text-sm mt-2" x-text="cardError"></div>
+                                {{-- Stripe Payment Section --}}
+                                <div x-show="paymentGateway === 'stripe'">
+                                    {{-- Card Details --}}
+                                    <div>
+                                        <label class="block text-sm font-semibold text-gray-700 mb-2">Card Details *</label>
+                                        <div id="card-element" class="py-3 px-4 border-2 border-gray-300 rounded"></div>
+                                        <div id="card-errors" class="text-red-600 text-sm mt-2" x-text="cardError"></div>
+                                    </div>
+
+                                    {{-- Process Payment Button (Stripe) --}}
+                                    <button
+                                        type="button"
+                                        @click="processStripePayment()"
+                                        :disabled="processing"
+                                        class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-6 rounded transition-colors text-lg uppercase tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
+                                    >
+                                        <span x-show="!processing">💳 Complete Donation</span>
+                                        <span x-show="processing">Processing...</span>
+                                    </button>
+
+                                    <p class="text-xs text-gray-500 text-center">
+                                        🔒 Your payment is secure and encrypted by Stripe
+                                    </p>
                                 </div>
 
-                                {{-- Process Payment Button --}}
-                                <button
-                                    type="button"
-                                    @click="processPayment()"
-                                    :disabled="processing"
-                                    class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-6 rounded transition-colors text-lg uppercase tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
-                                >
-                                    <span x-show="!processing">Complete Donation</span>
-                                    <span x-show="processing">Processing...</span>
-                                </button>
+                                {{-- PayPal Payment Section --}}
+                                <div x-show="paymentGateway === 'paypal'">
+                                    <div id="paypal-container" class="mb-4"></div>
+                                    
+                                    <p x-show="!paypalButtonsInitialized" class="text-center text-gray-600 py-4">
+                                        Initializing PayPal...
+                                    </p>
 
-                                <p class="text-xs text-gray-500 text-center">
-                                    🔒 Your payment is secure and encrypted
-                                </p>
+                                    <p class="text-xs text-gray-500 text-center">
+                                        🔒 Your payment is secure and encrypted by PayPal
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -379,7 +418,7 @@
                 🤝 Donate Now
             </a>
             <p class="text-sm text-gray-500 mt-3">
-                Secure payment processed by Stripe
+                Secure payment processed by Stripe or PayPal
             </p>
         </div>
 
@@ -405,7 +444,7 @@
                 <div class="text-5xl mb-4">💳</div>
                 <h3 class="text-xl font-bold text-gray-900 mb-3">Secure Payments</h3>
                 <p class="text-gray-600">
-                    All payments are processed securely through Stripe with bank-level encryption.
+                    All payments are processed securely through Stripe or PayPal with bank-level encryption.
                 </p>
             </div>
 
@@ -514,6 +553,10 @@ function donationWidget() {
         impactText: '',
         donorEmail: '',
         giftAidEnabled: false,
+        paymentGateway: 'stripe',
+        paypalButtonsInitialized: false,
+        paypalInitializing: false,
+        paypalButtonsInstance: null,
         giftAid: {
             title: '',
             firstName: '',
@@ -539,28 +582,55 @@ function donationWidget() {
             this.$watch('showPaymentModal', (value) => {
                 if (value === true) {
                     this.$nextTick(() => {
-                        if (!cardElement) {
-                            cardElement = elements.create('card', {
-                                style: {
-                                    base: {
-                                        fontSize: '16px',
-                                        color: '#374151',
-                                        '::placeholder': {
-                                            color: '#9CA3AF',
+                        if (this.paymentGateway === 'stripe') {
+                            if (!cardElement) {
+                                cardElement = elements.create('card', {
+                                    style: {
+                                        base: {
+                                            fontSize: '16px',
+                                            color: '#374151',
+                                            '::placeholder': {
+                                                color: '#9CA3AF',
+                                            },
                                         },
                                     },
-                                },
-                            });
-                            cardElement.mount('#card-element');
-                            
-                            cardElement.on('change', (event) => {
-                                if (event.error) {
-                                    this.cardError = event.error.message;
-                                } else {
-                                    this.cardError = '';
-                                }
-                            });
+                                });
+                                cardElement.mount('#card-element');
+                                
+                                cardElement.on('change', (event) => {
+                                    if (event.error) {
+                                        this.cardError = event.error.message;
+                                    } else {
+                                        this.cardError = '';
+                                    }
+                                });
+                            }
+                        } else if (this.paymentGateway === 'paypal' && !this.paypalButtonsInitialized) {
+                            this.initializePayPalButtons();
                         }
+                    });
+                } else {
+                    this.paypalButtonsInitialized = false;
+                    this.paypalInitializing = false;
+
+                    if (this.paypalButtonsInstance && typeof this.paypalButtonsInstance.close === 'function') {
+                        this.paypalButtonsInstance.close();
+                    }
+
+                    this.paypalButtonsInstance = null;
+
+                    const container = document.getElementById('paypal-container');
+                    if (container) {
+                        container.innerHTML = '';
+                    }
+                }
+            });
+
+            // Watch for payment gateway changes
+            this.$watch('paymentGateway', (value) => {
+                if (value === 'paypal' && !this.paypalButtonsInitialized && this.showPaymentModal) {
+                    this.$nextTick(() => {
+                        this.initializePayPalButtons();
                     });
                 }
             });
@@ -588,7 +658,148 @@ function donationWidget() {
             }
         },
 
-        async processPayment() {
+        initializePayPalButtons() {
+            if (this.paypalButtonsInitialized || this.paypalInitializing) {
+                return;
+            }
+
+            if (typeof paypal === 'undefined' || !paypal.Buttons) {
+                return;
+            }
+
+            const container = document.getElementById('paypal-container');
+            if (!container) {
+                return;
+            }
+
+            this.paypalInitializing = true;
+            container.innerHTML = '';
+
+            if (this.paypalButtonsInstance && typeof this.paypalButtonsInstance.close === 'function') {
+                this.paypalButtonsInstance.close();
+            }
+
+            const self = this;
+
+            this.paypalButtonsInstance = paypal.Buttons({
+                createOrder: async (data, actions) => {
+                    try {
+                        if (!self.donorEmail || self.amount < 1) {
+                            throw new Error('Please enter a valid email and donation amount before paying with PayPal.');
+                        }
+
+                        const response = await fetch('/paypal/create-order', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json',
+                                'X-Requested-With': 'XMLHttpRequest',
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                            },
+                            body: JSON.stringify({
+                                amount: self.amount,
+                                frequency: self.frequency === 'monthly' ? 'monthly' : 'one-time',
+                                donor_email: self.donorEmail,
+                                gift_aid: self.giftAidEnabled,
+                                gift_aid_title: self.giftAidEnabled ? self.giftAid.title : null,
+                                gift_aid_first_name: self.giftAidEnabled ? self.giftAid.firstName : null,
+                                gift_aid_last_name: self.giftAidEnabled ? self.giftAid.lastName : null,
+                                gift_aid_address_line1: self.giftAidEnabled ? self.giftAid.addressLine1 : null,
+                                gift_aid_address_line2: self.giftAidEnabled ? self.giftAid.addressLine2 : null,
+                                gift_aid_city: self.giftAidEnabled ? self.giftAid.city : null,
+                                gift_aid_postcode: self.giftAidEnabled ? self.giftAid.postcode : null,
+                                aggregated_donations: self.giftAidEnabled ? self.giftAid.aggregatedDonations : null,
+                                sponsored_event: self.giftAidEnabled ? self.giftAid.sponsoredEvent : false
+                            })
+                        });
+
+                        const raw = await response.text();
+                        let payload = {};
+
+                        if (raw) {
+                            try {
+                                payload = JSON.parse(raw);
+                            } catch (e) {
+                                throw new Error('Server returned an invalid response while creating PayPal order.');
+                            }
+                        }
+
+                        if (!response.ok) {
+                            throw new Error(payload.error || 'Failed to create PayPal order');
+                        }
+
+                        if (!payload.orderId) {
+                            throw new Error(payload.error || 'PayPal order ID was not returned by the server.');
+                        }
+
+                        return payload.orderId;
+                    } catch (error) {
+                        alert('Error: ' + error.message);
+                        throw error;
+                    }
+                },
+
+                onApprove: async (data, actions) => {
+                    try {
+                        self.processing = true;
+
+                        const response = await fetch('/paypal/capture-order', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json',
+                                'X-Requested-With': 'XMLHttpRequest',
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                            },
+                            body: JSON.stringify({
+                                paypal_order_id: data.orderID
+                            })
+                        });
+
+                        const raw = await response.text();
+                        let result = {};
+
+                        if (raw) {
+                            try {
+                                result = JSON.parse(raw);
+                            } catch (e) {
+                                throw new Error('Server returned an invalid response while capturing PayPal payment.');
+                            }
+                        }
+
+                        if (!response.ok) {
+                            throw new Error(result.error || 'Payment capture failed');
+                        }
+
+                        self.success = true;
+                        self.processing = false;
+                        self.resetForm();
+                    } catch (error) {
+                        alert('Error: ' + error.message);
+                        self.processing = false;
+                    }
+                },
+
+                onError: (error) => {
+                    alert('Payment failed: ' + error.message);
+                    self.processing = false;
+                }
+            });
+
+            this.paypalButtonsInstance.render('#paypal-container')
+                .then(() => {
+                    this.paypalButtonsInitialized = true;
+                })
+                .catch((error) => {
+                    console.error('PayPal render error:', error);
+                    alert('Unable to load PayPal buttons. Please refresh and try again.');
+                })
+                .finally(() => {
+                    this.paypalInitializing = false;
+                });
+        },
+
+        async processStripePayment() {
             // Validation
             if (!this.donorEmail || this.amount < 5) {
                 alert('Please enter your email and a donation amount of at least £5');

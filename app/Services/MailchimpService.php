@@ -3,12 +3,16 @@
 namespace App\Services;
 
 use MailchimpMarketing\ApiClient;
+use MailchimpMarketing\Api\CampaignsApi;
+use MailchimpMarketing\Api\ListsApi;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
 class MailchimpService
 {
     protected ApiClient $client;
+    protected CampaignsApi $campaignsApi;
+    protected ListsApi $listsApi;
     protected string $apiKey;
 
     public function __construct()
@@ -20,6 +24,9 @@ class MailchimpService
             'apiKey' => $this->apiKey,
             'server' => $this->getServerPrefix(),
         ]);
+
+        $this->campaignsApi = new CampaignsApi($this->client);
+        $this->listsApi = new ListsApi($this->client);
     }
 
     /**
@@ -42,7 +49,7 @@ class MailchimpService
         return Cache::remember($cacheKey, 86400, function () {
             try {
                 // Fetch 12 campaigns, sorted by send_time descending (newest first)
-                $response = $this->client->campaigns->list(
+                $response = $this->campaignsApi->list(
                     null,      // fields
                     null,      // exclude_fields
                     12,        // count
@@ -65,8 +72,8 @@ class MailchimpService
                     foreach ($response->campaigns as $campaign) {
                         $formatted = $this->formatCampaign($campaign);
 
-                        // Featured images are now loaded on-demand in detail view only
-                        // to improve list performance (prevents N+1 API calls)
+                        // Try to extract featured image from campaign
+                        $formatted['featured_image'] = $this->extractFeaturedImage($campaign->id);
 
                         $campaigns[] = $formatted;
                     }
@@ -89,7 +96,7 @@ class MailchimpService
 
         return Cache::remember($cacheKey, 86400, function () use ($id) {
             try {
-                $campaign = $this->client->campaigns->get($id);
+                $campaign = $this->campaignsApi->get($id);
                 return $this->formatCampaign($campaign);
             } catch (\Exception $e) {
                 Log::error('Mailchimp API error getting campaign ' . $id . ': ' . $e->getMessage());
@@ -107,7 +114,7 @@ class MailchimpService
 
         return Cache::remember($cacheKey, 86400, function () use ($id) {
             try {
-                $content = $this->client->campaigns->getContent($id);
+                $content = $this->campaignsApi->getContent($id);
                 return $content->html ?? null;
             } catch (\Exception $e) {
                 Log::error('Mailchimp API error getting campaign content ' . $id . ': ' . $e->getMessage());
@@ -160,7 +167,7 @@ class MailchimpService
             $cacheKey = 'mailchimp.campaign.images.' . $campaignId;
 
             return Cache::remember($cacheKey, 86400, function () use ($campaignId) {
-                $content = $this->client->campaigns->getContent($campaignId);
+                $content = $this->campaignsApi->getContent($campaignId);
 
                 if (!isset($content->html) || empty($content->html)) {
                     return null;
@@ -218,7 +225,7 @@ class MailchimpService
 
             Log::info('Mailchimp subscription attempt', ['email' => $email, 'data' => $data]);
 
-            $this->client->lists->addListMember($listId, $data);
+            $this->listsApi->addListMember($listId, $data);
             Log::info('Mailchimp subscription success', ['email' => $email]);
 
             return [
@@ -246,7 +253,7 @@ class MailchimpService
                     try {
                         Log::info('Attempting to re-add forgotten email with subscribed status', ['email' => $email]);
                         $data['status'] = 'subscribed';
-                        $this->client->lists->addListMember($listId, $data);
+                        $this->listsApi->addListMember($listId, $data);
                         Log::info('Successfully re-added forgotten email', ['email' => $email]);
                         return [
                             'success' => true,

@@ -7,6 +7,7 @@ use App\Http\Controllers\StoriesController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\StripeController;
+use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\DonationController as AdminDonationController;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,16 @@ Route::post('/subscribe', [NewsController::class, 'subscribe'])->name('newslette
 Route::post('/stripe/create-payment-intent', [StripeController::class, 'createPaymentIntent'])->name('stripe.create-intent');
 Route::post('/stripe/payment-success', [StripeController::class, 'handleSuccess'])->name('stripe.success');
 Route::post('/stripe/webhook', [StripeController::class, 'webhook'])->name('stripe.webhook');
+
+// PayPal payment routes
+Route::post('/paypal/create-order', [PaypalController::class, 'createOrder'])
+    ->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class])
+    ->name('paypal.create-order');
+Route::post('/paypal/capture-order', [PaypalController::class, 'captureOrder'])
+    ->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class])
+    ->name('paypal.capture-order');
+Route::get('/paypal/return', [PaypalController::class, 'handleReturn'])->name('paypal.return');
+Route::get('/paypal/cancel', [PaypalController::class, 'handleCancel'])->name('paypal.cancel');
 
 // Admin routes for donation management
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {

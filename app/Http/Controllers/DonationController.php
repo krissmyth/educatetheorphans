@@ -75,6 +75,7 @@ class DonationController extends Controller
         $charityUrl = config('services.justgiving.charity_url');
         $widgetType = config('services.justgiving.widget_type', 'embed');
         $stripeKey = config('services.stripe.key');
+        $paypalClientId = config('services.paypal.client_id');
 
         return view('donate', [
             'charitySlug' => $charitySlug,
@@ -82,6 +83,7 @@ class DonationController extends Controller
             'widgetType' => $widgetType,
             'justgivingUrl' => $charityUrl,
             'stripeKey' => $stripeKey,
+            'paypalClientId' => $paypalClientId,
         ]);
     }
 }
