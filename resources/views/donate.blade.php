@@ -720,20 +720,25 @@ function donationWidget() {
                             try {
                                 payload = JSON.parse(raw);
                             } catch (e) {
+                                console.error('PayPal order creation - JSON parse error:', e, raw);
                                 throw new Error('Server returned an invalid response while creating PayPal order.');
                             }
                         }
 
                         if (!response.ok) {
+                            console.error('PayPal order creation failed:', payload);
                             throw new Error(payload.error || 'Failed to create PayPal order');
                         }
 
                         if (!payload.orderId) {
+                            console.error('PayPal order creation - No order ID:', payload);
                             throw new Error(payload.error || 'PayPal order ID was not returned by the server.');
                         }
 
+                        console.log('PayPal order created successfully:', payload.orderId);
                         return payload.orderId;
                     } catch (error) {
+                        console.error('PayPal createOrder error:', error);
                         alert('Error: ' + error.message);
                         throw error;
                     }
@@ -763,25 +768,30 @@ function donationWidget() {
                             try {
                                 result = JSON.parse(raw);
                             } catch (e) {
+                                console.error('PayPal capture - JSON parse error:', e, raw);
                                 throw new Error('Server returned an invalid response while capturing PayPal payment.');
                             }
                         }
 
                         if (!response.ok) {
+                            console.error('PayPal capture failed:', result);
                             throw new Error(result.error || 'Payment capture failed');
                         }
 
+                        console.log('PayPal payment captured successfully');
                         self.success = true;
                         self.processing = false;
                         self.resetForm();
                     } catch (error) {
+                        console.error('PayPal capture error:', error);
                         alert('Error: ' + error.message);
                         self.processing = false;
                     }
                 },
 
                 onError: (error) => {
-                    alert('Payment failed: ' + error.message);
+                    console.error('PayPal button error:', error);
+                    alert('Payment failed: ' + (error.message || 'An unknown error occurred'));
                     self.processing = false;
                 }
             });

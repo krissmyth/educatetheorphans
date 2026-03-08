@@ -33,10 +33,8 @@ Route::post('/stripe/webhook', [StripeController::class, 'webhook'])->name('stri
 
 // PayPal payment routes
 Route::post('/paypal/create-order', [PaypalController::class, 'createOrder'])
-    ->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class])
     ->name('paypal.create-order');
 Route::post('/paypal/capture-order', [PaypalController::class, 'captureOrder'])
-    ->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class])
     ->name('paypal.capture-order');
 Route::get('/paypal/return', [PaypalController::class, 'handleReturn'])->name('paypal.return');
 Route::get('/paypal/cancel', [PaypalController::class, 'handleCancel'])->name('paypal.cancel');

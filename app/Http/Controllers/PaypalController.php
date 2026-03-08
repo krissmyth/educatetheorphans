@@ -34,7 +34,11 @@ class PaypalController extends Controller
             ]);
 
         if (! $response->successful()) {
-            throw new \RuntimeException('Unable to authenticate with PayPal.');
+            \Log::error('PayPal authentication failed', [
+                'status' => $response->status(),
+                'body' => $response->body()
+            ]);
+            throw new \RuntimeException('Unable to authenticate with PayPal. Please check your credentials.');
         }
 
         $accessToken = $response->json('access_token');
@@ -74,6 +78,11 @@ class PaypalController extends Controller
             ]);
 
         if (! $response->successful()) {
+            \Log::error('PayPal order creation failed', [
+                'status' => $response->status(),
+                'body' => $response->json(),
+                'donation_id' => $donation->id
+            ]);
             $message = $response->json('message')
                 ?? $response->json('details.0.description')
                 ?? 'Failed to create PayPal order.';
@@ -148,6 +157,10 @@ class PaypalController extends Controller
                 'donationId' => $donation->id,
             ]);
         } catch (\Throwable $e) {
+            \Log::error('PayPal order creation exception', [
+                'message' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
             return response()->json([
                 'error' => $e->getMessage()
             ], 500);
@@ -191,6 +204,11 @@ class PaypalController extends Controller
             }
 
             if (! $response->successful()) {
+                \Log::error('PayPal capture failed', [
+                    'status' => $response->status(),
+                    'body' => $response->json(),
+                    'order_id' => $validated['paypal_order_id']
+                ]);
                 return response()->json([
                     'error' => $response->json('message')
                         ?? $response->json('details.0.description')
@@ -202,6 +220,11 @@ class PaypalController extends Controller
                 'error' => 'Payment could not be completed'
             ], 400);
         } catch (\Throwable $e) {
+            \Log::error('PayPal capture exception', [
+                'message' => $e->getMessage(),
+                'order_id' => $validated['paypal_order_id'] ?? 'unknown',
+                'trace' => $e->getTraceAsString()
+            ]);
             return response()->json([
                 'error' => $e->getMessage()
             ], 500);
