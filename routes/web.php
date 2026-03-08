@@ -42,6 +42,7 @@ Route::get('/paypal/cancel', [PaypalController::class, 'handleCancel'])->name('p
 // Admin routes for donation management
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
     Route::get('/donations', [AdminDonationController::class, 'index'])->name('donations.index');
+    Route::delete('/donations', [AdminDonationController::class, 'bulkDestroy'])->name('donations.bulk-destroy');
     Route::get('/donations/{donation}', [AdminDonationController::class, 'show'])->name('donations.show');
     Route::get('/donations/export/gift-aid', [AdminDonationController::class, 'exportGiftAid'])->name('donations.export-gift-aid');
 });

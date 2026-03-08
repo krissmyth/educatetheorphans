@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
@@ -40,7 +41,7 @@ class ContactController extends Controller
 
             return back()->with('success', 'Thank you! Your message has been sent successfully. We\'ll be in touch within 48 hours.');
         } catch (\Exception $e) {
-            \Log::error('Contact form email error: ' . $e->getMessage());
+            Log::error('Contact form email error: ' . $e->getMessage());
             return back()->with('error', 'Sorry, there was an issue sending your message. Please try again or email us directly at info@educatetheorphans.org')->withInput();
         }
     }

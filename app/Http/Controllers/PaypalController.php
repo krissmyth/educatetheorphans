@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Donation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class PaypalController extends Controller
 {
@@ -34,7 +35,7 @@ class PaypalController extends Controller
             ]);
 
         if (! $response->successful()) {
-            \Log::error('PayPal authentication failed', [
+            Log::error('PayPal authentication failed', [
                 'status' => $response->status(),
                 'body' => $response->body()
             ]);
@@ -52,33 +53,42 @@ class PaypalController extends Controller
 
     private function createRemoteOrder(string $accessToken, Donation $donation, float $amount): string
     {
-        $response = Http::acceptJson()
-            ->withToken($accessToken)
-            ->post($this->getPayPalBaseUrl() . '/v2/checkout/orders', [
-                'intent' => 'CAPTURE',
-                'purchase_units' => [
-                    [
-                        'reference_id' => (string) $donation->id,
-                        'custom_id' => (string) $donation->id,
-                        'description' => 'Donation to Educate the Orphans',
-                        'amount' => [
-                            'currency_code' => $donation->currency,
-                            'value' => number_format($amount, 2, '.', ''),
-                        ],
+        $orderData = [
+            'intent' => 'CAPTURE',
+            'purchase_units' => [
+                [
+                    'reference_id' => (string) $donation->id,
+                    'custom_id' => (string) $donation->id,
+                    'description' => 'Donation to Educate the Orphans',
+                    'amount' => [
+                        'currency_code' => $donation->currency,
+                        'value' => number_format($amount, 2, '.', ''),
                     ],
                 ],
-                'application_context' => [
-                    'brand_name' => 'Educate the Orphans',
-                    'locale' => 'en-GB',
-                    'user_action' => 'PAY_NOW',
-                    'shipping_preference' => 'NO_SHIPPING',
-                    'return_url' => route('paypal.return'),
-                    'cancel_url' => route('paypal.cancel'),
+            ],
+            'payment_source' => [
+                'paypal' => [
+                    'experience_context' => [
+                        'payment_method_preference' => 'IMMEDIATE_PAYMENT_REQUIRED',
+                        'brand_name' => 'Educate the Orphans',
+                        'locale' => 'en-GB',
+                        'landing_page' => 'LOGIN',
+                        'shipping_preference' => 'NO_SHIPPING',
+                        'user_action' => 'PAY_NOW',
+                        'return_url' => route('paypal.return'),
+                        'cancel_url' => route('paypal.cancel'),
+                    ],
+                    'email_address' => $donation->donor_email,
                 ],
-            ]);
+            ],
+        ];
+
+        $response = Http::acceptJson()
+            ->withToken($accessToken)
+            ->post($this->getPayPalBaseUrl() . '/v2/checkout/orders', $orderData);
 
         if (! $response->successful()) {
-            \Log::error('PayPal order creation failed', [
+            Log::error('PayPal order creation failed', [
                 'status' => $response->status(),
                 'body' => $response->json(),
                 'donation_id' => $donation->id
@@ -157,7 +167,7 @@ class PaypalController extends Controller
                 'donationId' => $donation->id,
             ]);
         } catch (\Throwable $e) {
-            \Log::error('PayPal order creation exception', [
+            Log::error('PayPal order creation exception', [
                 'message' => $e->getMessage(),
                 'trace' => $e->getTraceAsString()
             ]);
@@ -204,7 +214,7 @@ class PaypalController extends Controller
             }
 
             if (! $response->successful()) {
-                \Log::error('PayPal capture failed', [
+                Log::error('PayPal capture failed', [
                     'status' => $response->status(),
                     'body' => $response->json(),
                     'order_id' => $validated['paypal_order_id']
@@ -220,7 +230,7 @@ class PaypalController extends Controller
                 'error' => 'Payment could not be completed'
             ], 400);
         } catch (\Throwable $e) {
-            \Log::error('PayPal capture exception', [
+            Log::error('PayPal capture exception', [
                 'message' => $e->getMessage(),
                 'order_id' => $validated['paypal_order_id'] ?? 'unknown',
                 'trace' => $e->getTraceAsString()
