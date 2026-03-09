@@ -30,8 +30,8 @@
                 <div class="text-3xl mb-4">✉️</div>
                 <h3 class="text-xl font-bold text-gray-900 mb-2">Email</h3>
                 <p class="text-gray-600 text-sm mb-2">
-                    <a href="mailto:info@educatetheorphans.org" class="font-semibold text-gray-900 hover:text-green-600">
-                        info@educatetheorphans.org
+                    <a href="mailto:info@educatetheorphans.com" class="font-semibold text-gray-900 hover:text-green-600">
+                        info@educatetheorphans.com
                     </a>
                 </p>
                 <p class="text-xs text-gray-500">We reply within 48 hours</p>

@@ -34,15 +34,36 @@ class ContactController extends Controller
         // Send the email
         try {
             Mail::html($emailContent, function ($message) use ($validated) {
-                $message->to('eto-ministries@outlook.com')
-                    ->from($validated['email'], $validated['name'])
+                $message->to('info@educatetheorphans.com')
+                    ->replyTo($validated['email'], $validated['name'])
                     ->subject('New Contact Form: ' . $validated['subject']);
             });
 
             return back()->with('success', 'Thank you! Your message has been sent successfully. We\'ll be in touch within 48 hours.');
         } catch (\Exception $e) {
-            Log::error('Contact form email error: ' . $e->getMessage());
-            return back()->with('error', 'Sorry, there was an issue sending your message. Please try again or email us directly at info@educatetheorphans.org')->withInput();
+            $errorMessage = $e->getMessage();
+
+            Log::error('Contact form email error: ' . $errorMessage);
+
+            try {
+                Mail::mailer('log')->html($emailContent, function ($message) use ($validated) {
+                    $message->to('info@educatetheorphans.com')
+                        ->replyTo($validated['email'], $validated['name'])
+                        ->subject('New Contact Form (Fallback Logged): ' . $validated['subject']);
+                });
+
+                Log::warning('Contact form message captured using log mailer fallback.');
+
+                return back()->with('success', 'Thanks! We received your message and will follow up soon while we resolve a temporary email delivery issue.');
+            } catch (\Exception $fallbackException) {
+                Log::error('Contact form fallback logging error: ' . $fallbackException->getMessage());
+            }
+
+            if (str_contains($errorMessage, 'SmtpClientAuthentication is disabled')) {
+                return back()->with('error', 'Our contact form is temporarily unavailable. Please email us directly at info@educatetheorphans.com and we will respond as soon as possible.')->withInput();
+            }
+
+            return back()->with('error', 'Sorry, there was an issue sending your message. Please try again or email us directly at info@educatetheorphans.com')->withInput();
         }
     }
 }

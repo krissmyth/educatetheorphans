@@ -539,7 +539,7 @@
             <div class="rounded-2xl border p-8 bg-white">
                 <h3 class="font-bold text-lg text-gray-900 mb-3">Can I donate in another way?</h3>
                 <p class="text-gray-700">
-                    Yes! You can contact us directly at <a href="mailto:info@educatetheorphans.org" class="text-green-600 font-semibold hover:underline">info@educatetheorphans.org</a> to discuss other giving options such as bank transfers, corporate donations, or grants.
+                    Yes! You can contact us directly at <a href="mailto:info@educatetheorphans.com" class="text-green-600 font-semibold hover:underline">info@educatetheorphans.com</a> to discuss other giving options such as bank transfers, corporate donations, or grants.
                 </p>
             </div>
         </div>
