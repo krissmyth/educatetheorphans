@@ -1,30 +1,15 @@
 # PayPal Integration Setup Guide
 
-This guide covers the PayPal integration that has been added to the donation system alongside the existing Stripe integration.
+This guide covers the PayPal integration used on the donations page, alongside JustGiving.
 
-## What's Been Implemented
+## What's Implemented
 
-- **PayPal Payment Controller** - Handles PayPal order creation, capture, and returns
-- **Database Migration** - Adds PayPal-specific fields to donations table
-- **Donation Model Updates** - Includes PayPal fields in fillable array
-- **Routes** - New routes for PayPal order creation and webhook handling
-- **Payment Gateway Toggle** - UI allows users to choose between Stripe and PayPal
-- **PayPal Buttons** - Beautiful PayPal payment buttons integrated into checkout modal
-- **Full Gift Aid Support** - Works with both payment methods
+- **PayPal Payment Controller** - Handles PayPal order creation, capture, and return/cancel callbacks
+- **Donation Flow Integration** - Donation modal supports PayPal and JustGiving options
+- **Gift Aid Support** - Gift Aid fields are captured and stored with donation records
+- **Admin Visibility** - Donations are tracked in the admin donation list
 
-## Installation Steps
-
-### 1. Install PayPal SDK
-
-Run Composer update to install the PayPal Checkout SDK:
-
-```bash
-composer install
-```
-
-The `paypal/checkout-sdk-php` package will be installed automatically.
-
-### 2. Environment Configuration
+## Environment Configuration
 
 Add the following to your `.env` file:
 
@@ -32,156 +17,78 @@ Add the following to your `.env` file:
 # PayPal Configuration
 PAYPAL_CLIENT_ID=your_paypal_client_id_here
 PAYPAL_CLIENT_SECRET=your_paypal_client_secret_here
-PAYPAL_MODE=sandbox  # Use 'sandbox' for testing, 'production' for live
+PAYPAL_MODE=sandbox
 PAYPAL_CURRENCY=GBP
 ```
 
-### 3. Get PayPal Credentials
+## Get PayPal Credentials
 
-1. Go to [PayPal Developer Dashboard](https://developer.paypal.com)
-2. Create an application or use an existing one
-3. Copy your Client ID and Client Secret
-4. For Sandbox testing, use sandbox credentials
-5. For Production, use live credentials
+1. Open [PayPal Developer Dashboard](https://developer.paypal.com)
+2. Create or select an app
+3. Copy **Client ID** and **Client Secret**
+4. Use sandbox credentials for testing
+5. Use live credentials in production
 
-### 4. Run Database Migration
+## Return URLs
 
-```bash
-php artisan migrate
-```
+Configure these in your PayPal app settings:
 
-This adds the following fields to the donations table:
+- Success: `https://yourdomain.com/paypal/return`
+- Cancel: `https://yourdomain.com/paypal/cancel`
 
-- `paypal_order_id`
-- `paypal_transaction_id`
-- `payment_gateway` (tracks which provider was used)
-- `aggregated_donations`
-- `sponsored_event`
+## User Flow
 
-### 5. Update PayPal Settings
+1. User opens `/donate`
+2. User chooses amount and frequency
+3. User opens payment modal
+4. User selects **PayPal** or **JustGiving**
+5. If **PayPal**: user completes payment through PayPal Buttons
+6. If **JustGiving**: user is redirected to JustGiving donation page
 
-In your PayPal app settings, configure the return URLs:
+## Key Files
 
-**Return URL (Success):**
+- `app/Http/Controllers/PaypalController.php`
+- `app/Http/Controllers/DonationController.php`
+- `routes/web.php`
+- `resources/views/donate.blade.php`
 
-```
-https://yourdomain.com/paypal/return
-```
+## Testing Checklist
 
-**Cancel URL:**
-
-```
-https://yourdomain.com/paypal/cancel
-```
-
-## How It Works
-
-### User Flow
-
-1. User visits `/donate` page
-2. Selects donation amount and frequency
-3. Opens payment modal
-4. **Selects payment method** - Either "Stripe" or "PayPal"
-5. For Stripe: Enters card details and completes payment
-6. For PayPal: Clicks PayPal button and completes payment on PayPal's platform
-7. Returns to site and sees success message
-
-### Payment Processing
-
-**Stripe Flow:**
-
-- Create payment intent on server
-- Confirm payment with Stripe.js
-- Webhook validates payment
-- Donation marked as completed
-
-**PayPal Flow:**
-
-- Create order on server
-- User redirected to PayPal
-- User approves payment on PayPal
-- Returned to success URL
-- Server captures order
-- Donation marked as completed
-
-## File Changes Summary
-
-### New Files
-
-- `app/Http/Controllers/PaypalController.php` - PayPal payment handling
-- `database/migrations/2026_03_07_000000_add_paypal_fields_to_donations.php` - Database migration
-
-### Modified Files
-
-- `config/services.php` - Added PayPal configuration
-- `app/Models/Donation.php` - Updated fillable array with PayPal fields
-- `routes/web.php` - Added PayPal routes
-- `app/Http/Controllers/DonationController.php` - Pass PayPal client ID to view
-- `resources/views/donate.blade.php` - Added PayPal payment option and buttons
-- `composer.json` - Added PayPal SDK dependency
-
-## Testing
-
-### Sandbox Testing
-
-1. Use sandbox credentials from PayPal Developer Dashboard
-2. Create test buyer and seller accounts
-3. Test the full donation flow with different amounts
-4. Verify donations appear in your admin panel
-
-### Test Payments
-
-Use PayPal's sandbox test cards:
-
-- **Success:** Use your sandbox buyer account
-
-## Security Notes
-
-- All payment data is transmitted securely
-- Stripe uses tokenization - no card data stored on your servers
-- PayPal handles all payment processing securely
-- Donation records store only payment references, not sensitive data
-- Always use HTTPS in production
-- Keep API keys secure in environment variables
+1. Set `PAYPAL_MODE=sandbox`
+2. Use sandbox buyer account
+3. Create and capture PayPal donation
+4. Confirm donation record is stored in admin area
+5. Test JustGiving redirect path from donation modal
 
 ## Troubleshooting
 
-### PayPal Buttons Not Appearing
+### PayPal button not visible
 
-- Verify `PAYPAL_CLIENT_ID` is set in `.env`
-- Check browser console for JavaScript errors
-- Ensure PayPal SDK script is loading: `https://www.paypal.com/sdk/js`
+- Confirm `PAYPAL_CLIENT_ID` exists in `.env`
+- Confirm PayPal SDK script loads in browser
+- Check browser console for JS errors
 
-### Payment Fails
+### Capture fails
 
-- Check PayPal app is in correct mode (sandbox vs production)
-- Verify return URLs are configured in PayPal dashboard
-- Check donation amount meets minimum (£1)
-- View Laravel logs for error details
+- Confirm mode (sandbox/production) matches your credentials
+- Confirm return/cancel URLs are configured
+- Check Laravel logs for PayPal API response details
 
-### Donations Not Recording
+### Donation not recorded
 
-- Check database migration ran: `php artisan migrate`
-- Verify webhook routes are accessible
-- Review donation record in database
+- Confirm migrations are applied
+- Confirm PayPal order creation route and capture route are reachable
+- Check app logs for validation/API errors
 
-## Admin Features
+## Security Notes
 
-Donations are tracked in `/admin/donations` with filters for:
+- Payment details are handled by PayPal/JustGiving, not your server
+- App stores payment references only
+- Use HTTPS in production
+- Keep all API credentials in environment variables only
 
-- Payment gateway (Stripe/PayPal)
-- Status (pending/completed/failed)
-- Amount and frequency
-- Gift Aid eligibility
+## References
 
-## Support
-
-For PayPal integration issues:
-
-- [PayPal Documentation](https://developer.paypal.com/docs)
-- [PayPal Support](https://www.paypal.com/en/smarthelp/contact-us)
-
-For Stripe issues:
-
-- [Stripe Documentation](https://stripe.com/docs)
-- [Stripe Support](https://support.stripe.com)
+- [PayPal API Docs](https://developer.paypal.com/docs)
+- [PayPal Help](https://www.paypal.com/en/smarthelp/contact-us)
+- [JustGiving Developer Portal](https://www.justgiving.com/developer)

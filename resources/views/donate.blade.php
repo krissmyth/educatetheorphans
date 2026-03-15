@@ -1,7 +1,6 @@
 @extends('layouts.public')
 
 @push('scripts')
-<script src="https://js.stripe.com/v3/"></script>
 <script src="https://www.paypal.com/sdk/js?client-id={{ $paypalClientId }}&currency=GBP&intent=capture"></script>
 @endpush
 
@@ -113,9 +112,8 @@
 
                         {{-- Payment Methods --}}
                         <div class="mt-4 flex items-center justify-center gap-6 opacity-90">
-                            <img src="{{ asset('images/visa-logo.svg') }}" alt="Visa" class="h-7 object-contain">
-                            <img src="{{ asset('images/mastercard-logo.svg') }}" alt="Mastercard" class="h-7 object-contain">
                             <img src="{{ asset('images/paypal-logo.svg') }}" alt="PayPal" class="h-7 object-contain">
+                            <span class="text-sm font-semibold text-gray-600">JustGiving</span>
                         </div>
                     </div>
                 </div>
@@ -160,26 +158,19 @@
                                 <div class="grid grid-cols-2 gap-0 mb-6 border-2 border-gray-300 rounded overflow-hidden">
                                     <button
                                         type="button"
-                                        @click="paymentGateway = 'stripe'"
-                                        :class="paymentGateway === 'stripe' ? 'bg-blue-600 text-white border-blue-600' : 'bg-gray-100 text-gray-700 border-gray-300'"
+                                        @click="paymentGateway = 'paypal'"
+                                        :class="paymentGateway === 'paypal' ? 'bg-blue-600 text-white border-blue-600' : 'bg-gray-100 text-gray-700 border-gray-300'"
                                         class="py-3 px-4 font-semibold text-sm flex items-center justify-center gap-2 border-r-2 transition-colors"
                                     >
-                                        <svg class="h-5 w-auto" viewBox="0 0 60 25" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M59.64 14.28h-8.06c.19 1.93 1.6 2.55 3.2 2.55 1.64 0 2.96-.37 4.05-.95v3.32a8.33 8.33 0 0 1-4.56 1.1c-4.01 0-6.83-2.5-6.83-7.48 0-4.19 2.39-7.52 6.3-7.52 3.92 0 5.96 3.28 5.96 7.5 0 .4-.04 1.26-.06 1.48zm-5.92-5.62c-1.03 0-2.17.73-2.17 2.58h4.25c0-1.85-1.07-2.58-2.08-2.58zM40.95 20.3c-1.44 0-2.32-.6-2.9-1.04l-.02 4.63-4.12.87V5.57h3.76l.08 1.02a4.7 4.7 0 0 1 3.23-1.29c2.9 0 5.62 2.6 5.62 7.4 0 5.23-2.7 7.6-5.65 7.6zM40 8.95c-.95 0-1.54.34-1.97.81l.02 6.12c.4.44.98.78 1.95.78 1.52 0 2.54-1.65 2.54-3.87 0-2.15-1.04-3.84-2.54-3.84zM28.24 5.57h4.13v14.44h-4.13V5.57zm0-4.7L32.37 0v3.36l-4.13.88V.88zm-4.32 9.35v9.79H19.8V5.57h3.7l.12 1.22c1-1.77 3.07-1.41 3.62-1.22v3.79c-.52-.17-2.29-.43-3.32.86zm-8.55 4.72c0 2.43 2.6 1.68 3.12 1.46v3.36c-.55.3-1.54.54-2.89.54a4.15 4.15 0 0 1-4.27-4.24l.01-13.17 4.02-.86v3.54h3.14V9.1h-3.13v5.85zm-4.91.7c0 2.97-2.31 4.66-5.73 4.66a11.2 11.2 0 0 1-4.46-.93v-3.93c1.38.75 3.1 1.31 4.46 1.31.92 0 1.53-.24 1.53-1C6.26 13.77 0 14.51 0 9.95 0 7.04 2.28 5.3 5.62 5.3c1.36 0 2.72.2 4.09.75v3.88a9.23 9.23 0 0 0-4.1-1.06c-.86 0-1.44.25-1.44.9 0 1.85 6.29.97 6.29 5.88z"/>
-                                        </svg>
+                                        PayPal
                                     </button>
                                     <button
                                         type="button"
-                                        @click="paymentGateway = 'paypal'"
-                                        :class="paymentGateway === 'paypal' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700'"
+                                        @click="paymentGateway = 'justgiving'"
+                                        :class="paymentGateway === 'justgiving' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700'"
                                         class="py-3 px-4 font-semibold text-sm flex items-center justify-center gap-2 transition-colors"
                                     >
-                                        <svg class="h-5 w-auto" viewBox="0 0 124 33" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M46.211 6.749h-6.839a.95.95 0 0 0-.939.802l-2.766 17.537a.57.57 0 0 0 .564.658h3.265a.95.95 0 0 0 .939-.803l.746-4.73a.95.95 0 0 1 .938-.803h2.165c4.505 0 7.105-2.18 7.784-6.5.306-1.89.013-3.375-.872-4.415-.972-1.142-2.696-1.746-4.985-1.746zM47 13.154c-.374 2.454-2.249 2.454-4.062 2.454h-1.032l.724-4.583a.57.57 0 0 1 .563-.481h.473c1.235 0 2.4 0 3.002.704.359.42.469 1.044.332 1.906zM66.654 13.075h-3.275a.57.57 0 0 0-.563.481l-.145.916-.229-.332c-.709-1.029-2.29-1.373-3.868-1.373-3.619 0-6.71 2.741-7.312 6.586-.313 1.918.132 3.752 1.22 5.031.998 1.176 2.426 1.666 4.125 1.666 2.916 0 4.533-1.875 4.533-1.875l-.146.91a.57.57 0 0 0 .562.66h2.95a.95.95 0 0 0 .939-.803l1.77-11.209a.568.568 0 0 0-.561-.658zm-4.565 6.374c-.316 1.871-1.801 3.127-3.695 3.127-.951 0-1.711-.305-2.199-.883-.484-.574-.668-1.391-.514-2.301.295-1.855 1.805-3.152 3.67-3.152.93 0 1.686.309 2.184.892.499.589.697 1.411.554 2.317zM84.096 13.075h-3.291a.954.954 0 0 0-.787.417l-4.539 6.686-1.924-6.425a.953.953 0 0 0-.912-.678h-3.234a.57.57 0 0 0-.541.754l3.625 10.638-3.408 4.811a.57.57 0 0 0 .465.9h3.287a.949.949 0 0 0 .781-.408l10.946-15.8a.57.57 0 0 0-.468-.895z"/>
-                                            <path d="M94.992 6.749h-6.84a.95.95 0 0 0-.938.802l-2.766 17.537a.569.569 0 0 0 .562.658h3.51a.665.665 0 0 0 .656-.562l.785-4.971a.95.95 0 0 1 .938-.803h2.164c4.506 0 7.105-2.18 7.785-6.5.307-1.89.012-3.375-.873-4.415-.971-1.142-2.694-1.746-4.983-1.746zm.789 6.405c-.373 2.454-2.248 2.454-4.062 2.454h-1.031l.725-4.583a.568.568 0 0 1 .562-.481h.473c1.234 0 2.4 0 3.002.704.359.42.468 1.044.331 1.906zM115.434 13.075h-3.273a.567.567 0 0 0-.562.481l-.145.916-.23-.332c-.709-1.029-2.289-1.373-3.867-1.373-3.619 0-6.709 2.741-7.311 6.586-.312 1.918.131 3.752 1.219 5.031 1 1.176 2.426 1.666 4.125 1.666 2.916 0 4.533-1.875 4.533-1.875l-.146.91a.57.57 0 0 0 .564.66h2.949a.95.95 0 0 0 .938-.803l1.771-11.209a.571.571 0 0 0-.565-.658zm-4.565 6.374c-.314 1.871-1.801 3.127-3.695 3.127-.949 0-1.711-.305-2.199-.883-.484-.574-.666-1.391-.514-2.301.297-1.855 1.805-3.152 3.67-3.152.93 0 1.686.309 2.184.892.501.589.699 1.411.554 2.317zM119.295 7.23l-2.807 17.858a.569.569 0 0 0 .562.658h2.822c.469 0 .867-.34.938-.803l2.768-17.536a.57.57 0 0 0-.562-.659h-3.16a.571.571 0 0 0-.561.482z"/>
-                                            <path d="M7.266 29.154l.523-3.322-1.165-.027H1.061L4.927 1.292a.316.316 0 0 1 .314-.268h9.38c3.114 0 5.263.648 6.385 1.927.526.6.861 1.227 1.023 1.917.17.724.173 1.589.007 2.644l-.012.077v.676l.526.298a3.69 3.69 0 0 1 1.065.812c.45.513.741 1.165.864 1.938.127.795.085 1.741-.123 2.812-.24 1.232-.628 2.305-1.152 3.183a6.547 6.547 0 0 1-1.825 2c-.696.494-1.523.869-2.458 1.109-.906.236-1.939.355-3.072.355h-.73c-.522 0-1.029.188-1.427.525a2.21 2.21 0 0 0-.744 1.328l-.055.299-.924 5.855-.042.215c-.011.068-.03.102-.058.125a.155.155 0 0 1-.096.035H7.266z"/>
-                                            <path d="M23.048 7.667c-.028.179-.06.362-.096.55-1.237 6.351-5.469 8.545-10.874 8.545H9.326c-.661 0-1.218.48-1.321 1.132L6.596 26.83l-.399 2.533a.704.704 0 0 0 .695.814h4.881c.578 0 1.069-.42 1.16-.99l.048-.248.919-5.832.059-.32c.09-.572.582-.992 1.16-.992h.73c4.729 0 8.431-1.92 9.513-7.476.452-2.321.218-4.259-.978-5.622a4.667 4.667 0 0 0-1.336-1.03z"/>
-                                        </svg>
+                                        JustGiving
                                     </button>
                                 </div>
 
@@ -276,31 +267,6 @@
                                     </div>
                                 </div>
 
-                                {{-- Stripe Payment Section --}}
-                                <div x-show="paymentGateway === 'stripe'">
-                                    {{-- Card Details --}}
-                                    <div>
-                                        <label class="block text-sm font-semibold text-gray-700 mb-2">Card Details *</label>
-                                        <div id="card-element" class="py-3 px-4 border-2 border-gray-300 rounded"></div>
-                                        <div id="card-errors" class="text-red-600 text-sm mt-2" x-text="cardError"></div>
-                                    </div>
-
-                                    {{-- Process Payment Button (Stripe) --}}
-                                    <button
-                                        type="button"
-                                        @click="processStripePayment()"
-                                        :disabled="processing"
-                                        class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-6 rounded transition-colors text-lg uppercase tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
-                                    >
-                                        <span x-show="!processing">💳 Complete Donation</span>
-                                        <span x-show="processing">Processing...</span>
-                                    </button>
-
-                                    <p class="text-xs text-gray-500 text-center">
-                                        🔒 Your payment is secure and encrypted by Stripe
-                                    </p>
-                                </div>
-
                                 {{-- PayPal Payment Section --}}
                                 <div x-show="paymentGateway === 'paypal'">
                                     <div id="paypal-container" class="mb-4"></div>
@@ -311,6 +277,41 @@
 
                                     <p class="text-xs text-gray-500 text-center">
                                         🔒 Your payment is secure and encrypted by PayPal
+                                    </p>
+                                </div>
+
+                                {{-- JustGiving Payment Section --}}
+                                <div x-show="paymentGateway === 'justgiving'" class="space-y-4">
+                                    <p class="text-sm text-gray-700">
+                                        Continue to JustGiving to complete your donation securely.
+                                    </p>
+
+                                    @if(!empty($justgivingLinkId))
+                                        <div class="flex justify-center">
+                                            <script src="https://www.justgiving.com/widgets/scripts/widget.js"
+                                                data-version="2"
+                                                data-widgetType="donateButton"
+                                                data-linkType="givingCheckout"
+                                                data-donateButtonType="justgivingSmall"
+                                                data-linkId="{{ $justgivingLinkId }}"
+                                                data-marketCode="GB"
+                                                data-showPaymentLogos="true"
+                                                data-popupCheckout="true"
+                                                type="text/javascript"></script>
+                                        </div>
+                                    @else
+                                        <a
+                                            href="{{ $justgivingUrl }}"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="w-full inline-flex items-center justify-center bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-6 rounded transition-colors text-lg uppercase tracking-wide"
+                                        >
+                                            Continue with JustGiving
+                                        </a>
+                                    @endif
+
+                                    <p class="text-xs text-gray-500 text-center">
+                                        🔒 Your payment will be processed securely on JustGiving
                                     </p>
                                 </div>
                             </div>
@@ -424,7 +425,7 @@
                 🤝 Donate Now
             </a>
             <p class="text-sm text-gray-500 mt-3">
-                Secure payment processed by Stripe or PayPal
+                Secure payment processed by PayPal or JustGiving
             </p>
         </div>
 
@@ -450,7 +451,7 @@
                 <div class="text-5xl mb-4">💳</div>
                 <h3 class="text-xl font-bold text-gray-900 mb-3">Secure Payments</h3>
                 <p class="text-gray-600">
-                    All payments are processed securely through Stripe or PayPal with bank-level encryption.
+                    All payments are processed securely through PayPal or JustGiving with bank-level encryption.
                 </p>
             </div>
 
@@ -547,11 +548,6 @@
 </section>
 
 <script>
-// Initialize Stripe
-const stripe = Stripe('{{ $stripeKey }}');
-const elements = stripe.elements();
-let cardElement;
-
 function donationWidget() {
     return {
         amount: 10,
@@ -559,7 +555,7 @@ function donationWidget() {
         impactText: '',
         donorEmail: '',
         giftAidEnabled: false,
-        paymentGateway: 'stripe',
+        paymentGateway: 'paypal',
         paypalButtonsInitialized: false,
         paypalInitializing: false,
         paypalButtonsInstance: null,
@@ -576,7 +572,6 @@ function donationWidget() {
         },
         processing: false,
         success: false,
-        cardError: '',
         showPaymentModal: false,
 
         init() {
@@ -584,34 +579,11 @@ function donationWidget() {
             this.$watch('amount', () => this.updateImpact());
             this.$watch('frequency', () => this.updateImpact());
             
-            // Initialize Stripe Card Element when modal is shown
+            // Initialize selected payment method when modal is shown
             this.$watch('showPaymentModal', (value) => {
                 if (value === true) {
                     this.$nextTick(() => {
-                        if (this.paymentGateway === 'stripe') {
-                            if (!cardElement) {
-                                cardElement = elements.create('card', {
-                                    style: {
-                                        base: {
-                                            fontSize: '16px',
-                                            color: '#374151',
-                                            '::placeholder': {
-                                                color: '#9CA3AF',
-                                            },
-                                        },
-                                    },
-                                });
-                                cardElement.mount('#card-element');
-                                
-                                cardElement.on('change', (event) => {
-                                    if (event.error) {
-                                        this.cardError = event.error.message;
-                                    } else {
-                                        this.cardError = '';
-                                    }
-                                });
-                            }
-                        } else if (this.paymentGateway === 'paypal' && !this.paypalButtonsInitialized) {
+                        if (this.paymentGateway === 'paypal' && !this.paypalButtonsInitialized) {
                             this.initializePayPalButtons();
                         }
                     });
@@ -815,92 +787,6 @@ function donationWidget() {
                 });
         },
 
-        async processStripePayment() {
-            // Validation
-            if (!this.donorEmail || this.amount < 5) {
-                alert('Please enter your email and a donation amount of at least £5');
-                return;
-            }
-
-            if (this.giftAidEnabled) {
-                if (!this.giftAid.title || !this.giftAid.firstName || !this.giftAid.lastName || 
-                    !this.giftAid.addressLine1 || !this.giftAid.city || !this.giftAid.postcode) {
-                    alert('Please complete all Gift Aid fields');
-                    return;
-                }
-            }
-
-            this.processing = true;
-            this.cardError = '';
-
-            try {
-                // Create Payment Intent
-                const response = await fetch('/stripe/create-payment-intent', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                    },
-                    body: JSON.stringify({
-                        amount: this.amount,
-                        frequency: this.frequency === 'monthly' ? 'monthly' : 'one-time',
-                        payment_method: 'card',
-                        donor_email: this.donorEmail,
-                        gift_aid: this.giftAidEnabled,
-                        gift_aid_title: this.giftAidEnabled ? this.giftAid.title : null,
-                        gift_aid_first_name: this.giftAidEnabled ? this.giftAid.firstName : null,
-                        gift_aid_last_name: this.giftAidEnabled ? this.giftAid.lastName : null,
-                        gift_aid_address_line1: this.giftAidEnabled ? this.giftAid.addressLine1 : null,
-                        gift_aid_address_line2: this.giftAidEnabled ? this.giftAid.addressLine2 : null,
-                        gift_aid_city: this.giftAidEnabled ? this.giftAid.city : null,
-                        gift_aid_postcode: this.giftAidEnabled ? this.giftAid.postcode : null,
-                        aggregated_donations: this.giftAidEnabled ? this.giftAid.aggregatedDonations : null,
-                        sponsored_event: this.giftAidEnabled ? this.giftAid.sponsoredEvent : false
-                    })
-                });
-
-                const data = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(data.error || 'Payment failed');
-                }
-
-                // Confirm the payment with Stripe
-                const { error, paymentIntent } = await stripe.confirmCardPayment(data.clientSecret, {
-                    payment_method: {
-                        card: cardElement,
-                        billing_details: {
-                            email: this.donorEmail,
-                        },
-                    },
-                });
-
-                if (error) {
-                    this.cardError = error.message;
-                    this.processing = false;
-                } else if (paymentIntent.status === 'succeeded') {
-                    // Payment succeeded
-                    await fetch('/stripe/payment-success', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                        },
-                        body: JSON.stringify({
-                            payment_intent_id: paymentIntent.id
-                        })
-                    });
-
-                    this.success = true;
-                    this.processing = false;
-                    this.resetForm();
-                }
-            } catch (error) {
-                this.cardError = error.message;
-                this.processing = false;
-            }
-        },
-
         resetForm() {
             this.donorEmail = '';
             this.giftAid = {
@@ -914,10 +800,6 @@ function donationWidget() {
                 aggregatedDonations: '',
                 sponsoredEvent: false
             };
-            this.cardError = '';
-            if (cardElement) {
-                cardElement.clear();
-            }
             
             // Close modal after a delay to show success message
             setTimeout(() => {

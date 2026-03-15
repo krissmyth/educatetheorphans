@@ -6,7 +6,6 @@ use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\StoriesController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DonationController;
-use App\Http\Controllers\StripeController;
 use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\DonationController as AdminDonationController;
@@ -25,11 +24,6 @@ Route::get('/api/campaign-data', [DonationController::class, 'getCampaignData'])
 
 // Newsletter subscription
 Route::post('/subscribe', [NewsController::class, 'subscribe'])->name('newsletter.subscribe');
-
-// Stripe payment routes
-Route::post('/stripe/create-payment-intent', [StripeController::class, 'createPaymentIntent'])->name('stripe.create-intent');
-Route::post('/stripe/payment-success', [StripeController::class, 'handleSuccess'])->name('stripe.success');
-Route::post('/stripe/webhook', [StripeController::class, 'webhook'])->name('stripe.webhook');
 
 // PayPal payment routes
 Route::post('/paypal/create-order', [PaypalController::class, 'createOrder'])
