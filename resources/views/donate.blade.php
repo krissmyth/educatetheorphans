@@ -1,9 +1,5 @@
 @extends('layouts.public')
 
-@push('scripts')
-<script src="https://www.paypal.com/sdk/js?client-id={{ $paypalClientId }}&currency=GBP&intent=capture"></script>
-@endpush
-
 @section('content')
 
 {{-- HERO WITH DONATION WIDGET --}}
@@ -112,7 +108,6 @@
 
                         {{-- Payment Methods --}}
                         <div class="mt-4 flex items-center justify-center gap-6 opacity-90">
-                            <img src="{{ asset('images/paypal-logo.svg') }}" alt="PayPal" class="h-7 object-contain">
                             <span class="text-sm font-semibold text-gray-600">JustGiving</span>
                         </div>
                     </div>
@@ -154,26 +149,6 @@
                             </div>
 
                             <div x-show="!success">
-                                {{-- Payment Gateway Selector --}}
-                                <div class="grid grid-cols-2 gap-0 mb-6 border-2 border-gray-300 rounded overflow-hidden">
-                                    <button
-                                        type="button"
-                                        @click="paymentGateway = 'paypal'"
-                                        :class="paymentGateway === 'paypal' ? 'bg-blue-600 text-white border-blue-600' : 'bg-gray-100 text-gray-700 border-gray-300'"
-                                        class="py-3 px-4 font-semibold text-sm flex items-center justify-center gap-2 border-r-2 transition-colors"
-                                    >
-                                        PayPal
-                                    </button>
-                                    <button
-                                        type="button"
-                                        @click="paymentGateway = 'justgiving'"
-                                        :class="paymentGateway === 'justgiving' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700'"
-                                        class="py-3 px-4 font-semibold text-sm flex items-center justify-center gap-2 transition-colors"
-                                    >
-                                        JustGiving
-                                    </button>
-                                </div>
-
                                 {{-- Gift Aid Checkbox --}}
                                 <div class="bg-green-50 border-2 border-green-200 rounded-lg p-4">
                                     <label class="flex items-start gap-3 cursor-pointer">
@@ -267,21 +242,8 @@
                                     </div>
                                 </div>
 
-                                {{-- PayPal Payment Section --}}
-                                <div x-show="paymentGateway === 'paypal'">
-                                    <div id="paypal-container" class="mb-4"></div>
-                                    
-                                    <p x-show="!paypalButtonsInitialized" class="text-center text-gray-600 py-4">
-                                        Initializing PayPal...
-                                    </p>
-
-                                    <p class="text-xs text-gray-500 text-center">
-                                        🔒 Your payment is secure and encrypted by PayPal
-                                    </p>
-                                </div>
-
                                 {{-- JustGiving Payment Section --}}
-                                <div x-show="paymentGateway === 'justgiving'" class="space-y-4">
+                                <div class="space-y-4">
                                     <p class="text-sm text-gray-700">
                                         Continue to JustGiving to complete your donation securely.
                                     </p>
@@ -425,7 +387,7 @@
                 🤝 Donate Now
             </a>
             <p class="text-sm text-gray-500 mt-3">
-                Secure payment processed by PayPal or JustGiving
+                Secure payment processed by JustGiving
             </p>
         </div>
 
@@ -451,7 +413,7 @@
                 <div class="text-5xl mb-4">💳</div>
                 <h3 class="text-xl font-bold text-gray-900 mb-3">Secure Payments</h3>
                 <p class="text-gray-600">
-                    All payments are processed securely through PayPal or JustGiving with bank-level encryption.
+                    All payments are processed securely through JustGiving with bank-level encryption.
                 </p>
             </div>
 
@@ -555,10 +517,6 @@ function donationWidget() {
         impactText: '',
         donorEmail: '',
         giftAidEnabled: false,
-        paymentGateway: 'paypal',
-        paypalButtonsInitialized: false,
-        paypalInitializing: false,
-        paypalButtonsInstance: null,
         giftAid: {
             title: '',
             firstName: '',
@@ -578,40 +536,6 @@ function donationWidget() {
             this.updateImpact();
             this.$watch('amount', () => this.updateImpact());
             this.$watch('frequency', () => this.updateImpact());
-            
-            // Initialize selected payment method when modal is shown
-            this.$watch('showPaymentModal', (value) => {
-                if (value === true) {
-                    this.$nextTick(() => {
-                        if (this.paymentGateway === 'paypal' && !this.paypalButtonsInitialized) {
-                            this.initializePayPalButtons();
-                        }
-                    });
-                } else {
-                    this.paypalButtonsInitialized = false;
-                    this.paypalInitializing = false;
-
-                    if (this.paypalButtonsInstance && typeof this.paypalButtonsInstance.close === 'function') {
-                        this.paypalButtonsInstance.close();
-                    }
-
-                    this.paypalButtonsInstance = null;
-
-                    const container = document.getElementById('paypal-container');
-                    if (container) {
-                        container.innerHTML = '';
-                    }
-                }
-            });
-
-            // Watch for payment gateway changes
-            this.$watch('paymentGateway', (value) => {
-                if (value === 'paypal' && !this.paypalButtonsInitialized && this.showPaymentModal) {
-                    this.$nextTick(() => {
-                        this.initializePayPalButtons();
-                    });
-                }
-            });
         },
 
         updateImpact() {
@@ -634,157 +558,6 @@ function donationWidget() {
                     this.impactText = `Your donation could help provide school books and materials`;
                 }
             }
-        },
-
-        initializePayPalButtons() {
-            if (this.paypalButtonsInitialized || this.paypalInitializing) {
-                return;
-            }
-
-            if (typeof paypal === 'undefined' || !paypal.Buttons) {
-                return;
-            }
-
-            const container = document.getElementById('paypal-container');
-            if (!container) {
-                return;
-            }
-
-            this.paypalInitializing = true;
-            container.innerHTML = '';
-
-            if (this.paypalButtonsInstance && typeof this.paypalButtonsInstance.close === 'function') {
-                this.paypalButtonsInstance.close();
-            }
-
-            const self = this;
-
-            this.paypalButtonsInstance = paypal.Buttons({
-                createOrder: async (data, actions) => {
-                    try {
-                        if (!self.donorEmail || self.amount < 1) {
-                            throw new Error('Please enter a valid email and donation amount before paying with PayPal.');
-                        }
-
-                        const response = await fetch('/paypal/create-order', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Accept': 'application/json',
-                                'X-Requested-With': 'XMLHttpRequest',
-                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                            },
-                            body: JSON.stringify({
-                                amount: self.amount,
-                                frequency: self.frequency === 'monthly' ? 'monthly' : 'one-time',
-                                donor_email: self.donorEmail,
-                                gift_aid: self.giftAidEnabled,
-                                gift_aid_title: self.giftAidEnabled ? self.giftAid.title : null,
-                                gift_aid_first_name: self.giftAidEnabled ? self.giftAid.firstName : null,
-                                gift_aid_last_name: self.giftAidEnabled ? self.giftAid.lastName : null,
-                                gift_aid_address_line1: self.giftAidEnabled ? self.giftAid.addressLine1 : null,
-                                gift_aid_address_line2: self.giftAidEnabled ? self.giftAid.addressLine2 : null,
-                                gift_aid_city: self.giftAidEnabled ? self.giftAid.city : null,
-                                gift_aid_postcode: self.giftAidEnabled ? self.giftAid.postcode : null,
-                                aggregated_donations: self.giftAidEnabled ? self.giftAid.aggregatedDonations : null,
-                                sponsored_event: self.giftAidEnabled ? self.giftAid.sponsoredEvent : false
-                            })
-                        });
-
-                        const raw = await response.text();
-                        let payload = {};
-
-                        if (raw) {
-                            try {
-                                payload = JSON.parse(raw);
-                            } catch (e) {
-                                console.error('PayPal order creation - JSON parse error:', e, raw);
-                                throw new Error('Server returned an invalid response while creating PayPal order.');
-                            }
-                        }
-
-                        if (!response.ok) {
-                            console.error('PayPal order creation failed:', payload);
-                            throw new Error(payload.error || 'Failed to create PayPal order');
-                        }
-
-                        if (!payload.orderId) {
-                            console.error('PayPal order creation - No order ID:', payload);
-                            throw new Error(payload.error || 'PayPal order ID was not returned by the server.');
-                        }
-
-                        console.log('PayPal order created successfully:', payload.orderId);
-                        return payload.orderId;
-                    } catch (error) {
-                        console.error('PayPal createOrder error:', error);
-                        alert('Error: ' + error.message);
-                        throw error;
-                    }
-                },
-
-                onApprove: async (data, actions) => {
-                    try {
-                        self.processing = true;
-
-                        const response = await fetch('/paypal/capture-order', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Accept': 'application/json',
-                                'X-Requested-With': 'XMLHttpRequest',
-                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                            },
-                            body: JSON.stringify({
-                                paypal_order_id: data.orderID
-                            })
-                        });
-
-                        const raw = await response.text();
-                        let result = {};
-
-                        if (raw) {
-                            try {
-                                result = JSON.parse(raw);
-                            } catch (e) {
-                                console.error('PayPal capture - JSON parse error:', e, raw);
-                                throw new Error('Server returned an invalid response while capturing PayPal payment.');
-                            }
-                        }
-
-                        if (!response.ok) {
-                            console.error('PayPal capture failed:', result);
-                            throw new Error(result.error || 'Payment capture failed');
-                        }
-
-                        console.log('PayPal payment captured successfully');
-                        self.success = true;
-                        self.processing = false;
-                        self.resetForm();
-                    } catch (error) {
-                        console.error('PayPal capture error:', error);
-                        alert('Error: ' + error.message);
-                        self.processing = false;
-                    }
-                },
-
-                onError: (error) => {
-                    console.error('PayPal button error:', error);
-                    alert('Payment failed: ' + (error.message || 'An unknown error occurred'));
-                    self.processing = false;
-                }
-            });
-
-            this.paypalButtonsInstance.render('#paypal-container')
-                .then(() => {
-                    this.paypalButtonsInitialized = true;
-                })
-                .catch((error) => {
-                    console.error('PayPal render error:', error);
-                    alert('Unable to load PayPal buttons. Please refresh and try again.');
-                })
-                .finally(() => {
-                    this.paypalInitializing = false;
-                });
         },
 
         resetForm() {
