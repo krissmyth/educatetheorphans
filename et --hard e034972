@@ -1,0 +1,25 @@
+[33me165432[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mdev[m[33m, [m[1;31morigin/dev[m[33m)[m Updating donation page with justgiving
+[33mbf09ce1[m Updating donation page with justgiving
+[33m6b2a2bb[m Updating contact page
+[33mfd4f4ec[m Updating donation page set to live
+[33meb99d27[m Updating donation page set to live
+[33mb4bee5d[m Updating donation page
+[33me034972[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m Updating images
+[33m9f3ae3a[m Updating images
+[33m2b61203[m Updating Home page
+[33m997f9f1[m Updating Home page
+[33m1295462[m Updating Home page
+[33m4973538[m Changes to Donate page and added login page
+[33m8e6db76[m Describe your change
+[33mf817047[m Add donation confirmation modal with gift aid option
+[33mebecb8d[m Fix donation slider button functionality and order
+[33mbd38ca6[m Redesign donation slider to match Save the Children style
+[33md662878[m Enhance donation slider with tangible item breakdown
+[33m4551648[m Add interactive donation slider to donation page
+[33m53a80a7[m Redesign donation page with impact-focused cards
+[33mbc39cbf[m Change currency from USD to GBP on donate page
+[33m710d4c3[m Convert site spelling to UK English
+[33mad346fe[m Add 'Ways to Connect' section to contact page
+[33md075b1a[m Implement contact form functionality and redesign contact page
+[33m6f0e551[m 2026_02_17
+[33mc9b7e32[m Initial Laravel site setup
