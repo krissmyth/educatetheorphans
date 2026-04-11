@@ -28,79 +28,92 @@
 <section class="py-16">
     <div class="mx-auto max-w-6xl px-4">
         <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-            <!-- Sponsor a Child -->
+            <!-- Support Our Work -->
             <div class="border rounded-2xl p-8 hover:shadow-lg transition">
-                <h3 class="text-2xl font-bold">Sponsor a Child</h3>
+                <h3 class="text-2xl font-bold">Support Our Work</h3>
                 <p class="mt-3 text-gray-700 leading-relaxed">
-                    Provide education, food, and care for a specific child. Build a direct relationship with meaningful updates and photos.
+                    Your donation goes directly to the children and families we serve. Every gift — however large or small — makes a real difference.
                 </p>
                 <ul class="mt-4 space-y-2 text-sm text-gray-600">
                     <li class="flex gap-2">
                         <span class="text-green-600 font-bold">✓</span>
-                        <span>Monthly email updates</span>
+                        <span>100% reaches those in need</span>
                     </li>
                     <li class="flex gap-2">
                         <span class="text-green-600 font-bold">✓</span>
-                        <span>Photos and progress reports</span>
+                        <span>No child is ever turned away</span>
                     </li>
                     <li class="flex gap-2">
                         <span class="text-green-600 font-bold">✓</span>
-                        <span>Direct impact on one child's future</span>
+                        <span>All UK staff are volunteers</span>
                     </li>
                 </ul>
-                <a href="{{ route('donate') }}" class="mt-6 inline-block bg-green-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-700">
-                    Sponsor Now
-                </a>
+                <div class="mt-6 text-center">
+                    <a href="{{ route('donate') }}" class="inline-block bg-green-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-700">
+                        Donate Now
+                    </a>
+                </div>
             </div>
 
-            <!-- Make a Donation -->
+            <!-- Pray -->
             <div class="border rounded-2xl p-8 hover:shadow-lg transition">
-                <h3 class="text-2xl font-bold">Make a Donation</h3>
+                <h3 class="text-2xl font-bold">Pray for Our Work</h3>
                 <p class="mt-3 text-gray-700 leading-relaxed">
-                    Give a one-time gift or set up monthly giving. Every donation directly funds our programmes and services.
+                    Prayer is at the heart of everything we do. Join us in lifting up the children, families, teachers, and communities we serve in Kenya.
                 </p>
                 <ul class="mt-4 space-y-2 text-sm text-gray-600">
                     <li class="flex gap-2">
                         <span class="text-green-600 font-bold">✓</span>
-                        <span>100% goes to programmes</span>
+                        <span>Pray for the children in our care</span>
                     </li>
                     <li class="flex gap-2">
                         <span class="text-green-600 font-bold">✓</span>
-                        <span>Flexible donation options</span>
+                        <span>Pray for our teachers and staff</span>
                     </li>
                     <li class="flex gap-2">
                         <span class="text-green-600 font-bold">✓</span>
-                        <span>Tax receipts provided</span>
+                        <span>Pray for the families and communities</span>
                     </li>
                 </ul>
-                <a href="{{ route('donate') }}" class="mt-6 inline-block bg-green-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-700">
-                    Donate
-                </a>
+                <div class="mt-6 flex flex-col items-center gap-2">
+                    <img
+                        src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Fchat.whatsapp.com%2FDGiYTyGNo1CBfaEaBtTYRT%3Fmode%3Dgi_t"
+                        alt="Scan to join ETO Prayer WhatsApp Group"
+                        class="rounded-lg border p-1"
+                        width="160" height="160"
+                    >
+                    <p class="text-xs text-gray-500">Scan with your phone camera to join</p>
+                    <a href="https://chat.whatsapp.com/DGiYTyGNo1CBfaEaBtTYRT?mode=gi_t" target="_blank" rel="noopener" class="text-sm font-semibold text-green-600 hover:underline">
+                        Or tap here to join →
+                    </a>
+                </div>
             </div>
 
-            <!-- Volunteer & Partner -->
+            <!-- Invite Us -->
             <div class="border rounded-2xl p-8 hover:shadow-lg transition">
-                <h3 class="text-2xl font-bold">Volunteer & Partner</h3>
+                <h3 class="text-2xl font-bold">Invite Us to Speak</h3>
                 <p class="mt-3 text-gray-700 leading-relaxed">
-                    Use your skills, time, and passion. Partner with us for short-term projects or long-term involvement.
+                    Would you like someone from Educate the Orphans to speak at your church, school, or event? We would love to share what God is doing in Kenya.
                 </p>
                 <ul class="mt-4 space-y-2 text-sm text-gray-600">
                     <li class="flex gap-2">
                         <span class="text-green-600 font-bold">✓</span>
-                        <span>In-country and remote opportunities</span>
+                        <span>Church services and mission events</span>
                     </li>
                     <li class="flex gap-2">
                         <span class="text-green-600 font-bold">✓</span>
-                        <span>Skills-based partnerships</span>
+                        <span>Schools and youth groups</span>
                     </li>
                     <li class="flex gap-2">
                         <span class="text-green-600 font-bold">✓</span>
-                        <span>Corporate team projects</span>
+                        <span>Fundraising and awareness events</span>
                     </li>
                 </ul>
-                <a href="{{ route('contact') }}" class="mt-6 inline-block bg-green-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-700">
-                    Contact Us
-                </a>
+                <div class="mt-6 text-center">
+                    <a href="{{ route('contact') }}" class="inline-block bg-green-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-700">
+                        Get in Touch
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -112,19 +125,19 @@
         <h2 class="text-3xl font-bold mb-10">Monthly Giving Levels</h2>
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             <div class="rounded-lg border p-6 bg-white">
-                <p class="font-semibold text-lg">$25</p>
-                <p class="mt-2 text-sm text-gray-600">Provides school supplies for a child</p>
+                <p class="font-semibold text-lg text-amber-500">£5</p>
+                <p class="mt-2 text-sm text-gray-600">Feeds a child for one week</p>
             </div>
             <div class="rounded-lg border p-6 bg-white">
-                <p class="font-semibold text-lg">$50</p>
-                <p class="mt-2 text-sm text-gray-600">Supplies nutritious meals for a family</p>
+                <p class="font-semibold text-lg text-amber-500">£20</p>
+                <p class="mt-2 text-sm text-gray-600">Covers a month of schooling</p>
             </div>
             <div class="rounded-lg border p-6 bg-white">
-                <p class="font-semibold text-lg">$100</p>
-                <p class="mt-2 text-sm text-gray-600">Provides monthly education support</p>
+                <p class="font-semibold text-lg text-amber-500">£50</p>
+                <p class="mt-2 text-sm text-gray-600">Supports a family for a month</p>
             </div>
             <div class="rounded-lg border p-6 bg-white">
-                <p class="font-semibold text-lg">$250+</p>
+                <p class="font-semibold text-lg text-amber-500">£100+</p>
                 <p class="mt-2 text-sm text-gray-600">Supports community programmes</p>
             </div>
         </div>
@@ -167,7 +180,7 @@
         </p>
         <div class="mt-8 flex flex-wrap gap-3 justify-center">
             <a href="{{ route('donate') }}" class="rounded-lg bg-green-600 text-white px-6 py-3 font-semibold hover:bg-green-700">
-                Donate or Sponsor
+                Donate Now
             </a>
             <a href="{{ route('contact') }}" class="rounded-lg border px-6 py-3 font-semibold hover:bg-gray-100">
                 Contact Us

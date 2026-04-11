@@ -37,6 +37,10 @@
                     data-popupCheckout="true"
                     type="text/javascript"></script>
                 <p class="text-xs text-gray-500">🔒 Secure checkout — no need to leave this page</p>
+                <div class="mt-1 bg-amber-50 border border-amber-200 rounded-lg px-4 py-2 text-center">
+                    <p class="text-xs font-semibold text-amber-800">🇬🇧 UK taxpayer?</p>
+                    <p class="text-xs text-amber-700 mt-0.5">Your donation is worth <strong>25% more</strong> at no extra cost through Gift Aid</p>
+                </div>
             </div>
         </div>
     </div>
@@ -101,7 +105,7 @@
 
                 {{-- Amount Display --}}
                 <div class="text-right">
-                    <div class="text-6xl font-bold text-green-600 leading-none mb-1">
+                    <div class="text-6xl font-bold text-amber-500 leading-none mb-1">
                         £<span x-text="amount"></span>
                     </div>
                     <p class="text-xs text-gray-600 font-semibold">

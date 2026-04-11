@@ -24,58 +24,90 @@
     </div>
 </section>
 
-{{-- STORIES GRID --}}
+{{-- STORY CARDS — click to jump to full story below --}}
 <section class="py-16">
     <div class="mx-auto max-w-6xl px-4">
-
-        {{-- Featured video story (first story) --}}
-        @if(isset($stories[0]['youtube_id']))
-            @php $featured = $stories[0]; $gridStories = array_slice($stories, 1); @endphp
-            <article class="mb-10 border rounded-xl overflow-hidden hover:shadow-lg transition">
-                <div class="aspect-video w-full">
-                    <iframe
-                        class="w-full h-full"
-                        src="https://www.youtube.com/embed/{{ $featured['youtube_id'] }}"
-                        title="{{ $featured['title'] }}"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                <div class="p-6">
-                    <p class="text-sm font-semibold text-teal-600 mb-2">{{ $featured['category'] }}</p>
-                    <h2 class="text-2xl font-bold">{{ $featured['title'] }}</h2>
-                    <p class="mt-3 text-gray-600 leading-relaxed">{{ $featured['description'] }}</p>
-                    <p class="mt-4 text-sm text-gray-500 italic">"{{ $featured['quote'] }}"</p>
-                </div>
-            </article>
-        @else
-            @php $gridStories = $stories; @endphp
-        @endif
-
-        {{-- Remaining stories --}}
         <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            @foreach ($gridStories as $story)
-                <article class="border rounded-lg overflow-hidden hover:shadow-lg transition group">
-                    <div class="aspect-[4/3] overflow-hidden">
-                        <img
-                            src="{{ asset('images/stories/' . $story['image']) }}"
-                            alt="{{ $story['title'] }}"
-                            class="h-full w-full object-cover object-top group-hover:scale-105 transition duration-300"
-                        >
+            @foreach ($stories as $story)
+                <a href="#story-{{ $story['id'] }}" class="block border rounded-lg overflow-hidden hover:shadow-lg transition group">
+                    <div class="aspect-[4/3] overflow-hidden relative">
+                        @if(isset($story['youtube_id']))
+                            <img
+                                src="https://img.youtube.com/vi/{{ $story['youtube_id'] }}/hqdefault.jpg"
+                                alt="{{ $story['title'] }}"
+                                class="h-full w-full object-cover group-hover:scale-105 transition duration-300"
+                            >
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="bg-black/50 rounded-full p-4 group-hover:bg-black/70 transition">
+                                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </div>
+                            </div>
+                        @else
+                            <img
+                                src="{{ asset('images/stories/' . $story['image']) }}"
+                                alt="{{ $story['title'] }}"
+                                class="h-full w-full object-cover object-top group-hover:scale-105 transition duration-300"
+                            >
+                        @endif
                     </div>
                     <div class="p-6">
                         <p class="text-sm font-semibold text-{{ $story['category_color'] }}-600 mb-2">{{ $story['category'] }}</p>
-                        <h3 class="text-lg font-bold">{{ $story['title'] }}</h3>
-                        <p class="mt-3 text-sm text-gray-600 leading-relaxed">
-                            {{ $story['description'] }}
+                        <h3 class="text-lg font-bold group-hover:text-green-600 transition">{{ $story['title'] }}</h3>
+                        <p class="mt-3 text-sm text-gray-600 leading-relaxed">{{ $story['description'] }}</p>
+                        <p class="mt-4 text-sm font-semibold text-green-600">
+                            {{ isset($story['youtube_id']) ? 'Watch story →' : 'Read story →' }}
                         </p>
-                        <p class="mt-4 text-xs text-gray-500 italic">"{{ $story['quote'] }}"</p>
                     </div>
-                </article>
+                </a>
             @endforeach
         </div>
+    </div>
+</section>
 
+{{-- INDIVIDUAL STORY SECTIONS --}}
+<section class="py-16 bg-gray-50 border-t">
+    <div class="mx-auto max-w-6xl px-4">
+        @foreach ($stories as $index => $story)
+            <div id="story-{{ $story['id'] }}" class="scroll-mt-24 {{ $index !== 0 ? 'mt-16 pt-16 border-t' : '' }}">
+
+                @if(isset($story['youtube_id']))
+                    {{-- Video story --}}
+                    <p class="text-sm font-semibold text-teal-600 mb-2">{{ $story['category'] }}</p>
+                    <h2 class="text-3xl font-bold mb-6">{{ $story['title'] }}</h2>
+                    <div class="aspect-video w-full rounded-xl overflow-hidden shadow-md">
+                        <iframe
+                            class="w-full h-full"
+                            src="https://www.youtube.com/embed/{{ $story['youtube_id'] }}"
+                            title="{{ $story['title'] }}"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <p class="mt-6 text-gray-700 leading-relaxed text-lg">{{ $story['description'] }}</p>
+                    <p class="mt-4 text-gray-500 italic border-l-4 border-teal-500 pl-4">"{{ $story['quote'] }}"</p>
+
+                @else
+                    {{-- Image story --}}
+                    <div class="grid md:grid-cols-2 gap-10 items-center">
+                        <div class="{{ $index % 2 === 0 ? 'md:order-2' : '' }}">
+                            <img
+                                src="{{ asset('images/stories/' . $story['image']) }}"
+                                alt="{{ $story['title'] }}"
+                                class="w-full rounded-xl shadow-md object-cover"
+                            >
+                        </div>
+                        <div class="{{ $index % 2 === 0 ? 'md:order-1' : '' }}">
+                            <p class="text-sm font-semibold text-{{ $story['category_color'] }}-600 mb-2">{{ $story['category'] }}</p>
+                            <h2 class="text-3xl font-bold">{{ $story['title'] }}</h2>
+                            <p class="mt-4 text-gray-700 leading-relaxed">{{ $story['description'] }}</p>
+                            <p class="mt-6 text-gray-600 italic border-l-4 border-green-600 pl-4">"{{ $story['quote'] }}"</p>
+                        </div>
+                    </div>
+                @endif
+
+            </div>
+        @endforeach
     </div>
 </section>
 
@@ -112,7 +144,7 @@
         </p>
         <div class="mt-8 flex flex-wrap gap-3 justify-center">
             <a href="{{ route('get-involved') }}" class="rounded-lg bg-green-600 text-white px-6 py-3 font-semibold hover:bg-green-700">
-                Sponsor a Child
+                Get Involved
             </a>
             <a href="{{ route('donate') }}" class="rounded-lg border px-6 py-3 font-semibold hover:bg-gray-100">
                 Make a Donation

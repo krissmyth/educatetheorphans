@@ -7,6 +7,9 @@
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     <title>@yield('title', 'Educate the Orphans')</title>
     <meta name="description" content="@yield('meta_description', 'Educate the Orphans is a Christian charity feeding, clothing and educating orphaned and needy children in Tharaka, Kenya.')">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>[x-cloak]{display:none!important}</style>
@@ -73,7 +76,7 @@
         <a href="{{ route('contact') }}" class="block {{ $navRoute === 'contact' ? 'font-semibold text-green-600' : '' }}">Contact</a>
 
         <a href="{{ route('donate') }}"
-           class="block bg-green-600 text-white px-4 py-2 rounded-lg text-center font-semibold">
+           class="block bg-green-600 text-white px-4 py-2 rounded-lg text-center font-semibold hover:bg-green-700">
            Donate
         </a>
     </div>

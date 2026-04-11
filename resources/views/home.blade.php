@@ -67,6 +67,60 @@
     </div>
 </section>
 
+{{-- DONATION IMPACT STRIP --}}
+<section class="bg-green-700 text-white py-4">
+    <div class="mx-auto max-w-6xl px-4">
+        <div class="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-sm text-center">
+            <span class="font-semibold text-amber-300 uppercase tracking-wide text-xs">Your donation goes directly to:</span>
+            <div class="flex items-center gap-1.5">
+                <span class="text-amber-400 font-bold">£5</span>
+                <span class="text-green-100">feeds a child for one week</span>
+            </div>
+            <span class="hidden sm:block text-green-500">·</span>
+            <div class="flex items-center gap-1.5">
+                <span class="text-amber-400 font-bold">£20</span>
+                <span class="text-green-100">covers a month of schooling</span>
+            </div>
+            <span class="hidden sm:block text-green-500">·</span>
+            <div class="flex items-center gap-1.5">
+                <span class="text-amber-400 font-bold">£50</span>
+                <span class="text-green-100">supports a family for a month</span>
+            </div>
+            <span class="hidden sm:block text-green-500">·</span>
+            <a href="{{ route('donate') }}" class="font-semibold text-amber-400 hover:text-amber-300 transition">
+                Donate now →
+            </a>
+        </div>
+    </div>
+</section>
+
+{{-- STATS STRIP --}}
+<section class="bg-gray-50 border-b py-4">
+    <div class="mx-auto max-w-6xl px-4">
+        <div class="flex flex-wrap justify-center items-center gap-x-8 gap-y-2 text-sm text-center text-gray-700">
+            <div class="flex items-center gap-2">
+                <span class="font-bold text-gray-900">Since 1990</span>
+                <span>serving Kenya's Tharaka region</span>
+            </div>
+            <span class="hidden sm:block text-gray-300">|</span>
+            <div class="flex items-center gap-2">
+                <span class="font-bold text-gray-900">3,000+</span>
+                <span>children supported</span>
+            </div>
+            <span class="hidden sm:block text-gray-300">|</span>
+            <div class="flex items-center gap-2">
+                <span class="font-bold text-gray-900">7 schools</span>
+                <span>across the region</span>
+            </div>
+            <span class="hidden sm:block text-gray-300">|</span>
+            <div class="flex items-center gap-2">
+                <span class="font-bold text-gray-900">60,000+</span>
+                <span>people with clean water</span>
+            </div>
+        </div>
+    </div>
+</section>
+
 {{-- MISSION --}}
 <section class="py-16">
     <div class="mx-auto max-w-6xl px-4 grid gap-10 md:grid-cols-2 md:items-center">
@@ -250,56 +304,35 @@
                 <p class="mt-4 text-gray-700">Our emails help you stay connected to the difference your prayers and support are making in the lives of vulnerable children and the communities we serve, with regular updates on our projects, encouraging testimonies, and specific prayer requests so you can continue to stand with us in this mission.</p>
             </div>
 
-            <!-- Right side: Mailchimp Embed Form -->
+            <!-- Right side: Subscribe Form -->
             <div class="flex-1">
-                <div id="mc_embed_shell">
-                    <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
-                    <style type="text/css">
-                        #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width: 100%;}
-                        #mc-embedded-subscribe {
-                            background-color: black !important;
-                            color: white !important;
-                            padding: 0.75rem 1.25rem !important;
-                            border-radius: 0.5rem !important;
-                            font-weight: 600 !important;
-                            font-size: 1rem !important;
-                            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
-                            transition: background-color 0.2s !important;
-                            border: none !important;
-                            cursor: pointer !important;
-                            min-height: auto !important;
-                            height: auto !important;
-                            line-height: 1.5 !important;
-                        }
-                        #mc-embedded-subscribe:hover {
-                            background-color: #1f2937 !important;
-                        }
-                    </style>
-                    <div id="mc_embed_signup">
-                        <form action="https://eto-ministries.us20.list-manage.com/subscribe/post?u=4e19ab77a2020248a46932b37&amp;id=1010eefcd1&amp;f_id=004e5eeef0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
-                            <div id="mc_embed_signup_scroll">
-                                <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
-                                <div class="mc-field-group"><label for="mce-FNAME">First Name <span class="asterisk">*</span></label><input type="text" name="FNAME" class="required text" id="mce-FNAME" value="" required=""></div><div class="mc-field-group"><label for="mce-LNAME">Last Name <span class="asterisk">*</span></label><input type="text" name="LNAME" class="required text" id="mce-LNAME" value="" required=""></div><div class="mc-field-group"><label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label><input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required="" value=""></div>
-                                <div id="mce-responses" class="clear foot">
-                                    <div class="response" id="mce-error-response" style="display: none;"></div>
-                                    <div class="response" id="mce-success-response" style="display: none;"></div>
-                                </div>
-                                <div aria-hidden="true" style="position: absolute; left: -5000px;">
-                                    <input type="text" name="b_4e19ab77a2020248a46932b37_1010eefcd1" tabindex="-1" value="">
-                                </div>
-                                <div class="optionalParent">
-                                    <div class="clear foot">
-                                        <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Subscribe">
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+                <form action="https://eto-ministries.us20.list-manage.com/subscribe/post?u=4e19ab77a2020248a46932b37&amp;id=1010eefcd1&amp;f_id=004e5eeef0" method="post" target="_blank" class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="mce-FNAME" class="block text-sm font-medium text-gray-700 mb-1">First Name <span class="text-red-500">*</span></label>
+                            <input type="text" name="FNAME" id="mce-FNAME" required
+                                class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+                        </div>
+                        <div>
+                            <label for="mce-LNAME" class="block text-sm font-medium text-gray-700 mb-1">Last Name <span class="text-red-500">*</span></label>
+                            <input type="text" name="LNAME" id="mce-LNAME" required
+                                class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+                        </div>
                     </div>
-                    <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
-                    <script type="text/javascript">
-                        (function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';}(jQuery));var $mcj = jQuery.noConflict(true);
-                    </script>
-                </div>
+                    <div>
+                        <label for="mce-EMAIL" class="block text-sm font-medium text-gray-700 mb-1">Email Address <span class="text-red-500">*</span></label>
+                        <input type="email" name="EMAIL" id="mce-EMAIL" required
+                            class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    {{-- Mailchimp honeypot (spam protection) --}}
+                    <div aria-hidden="true" style="position: absolute; left: -5000px;">
+                        <input type="text" name="b_4e19ab77a2020248a46932b37_1010eefcd1" tabindex="-1" value="">
+                    </div>
+                    <button type="submit"
+                        class="rounded-lg bg-green-600 text-white px-6 py-2.5 font-semibold hover:bg-green-700 transition">
+                        Subscribe
+                    </button>
+                </form>
             </div>
         </div>
     </div>
