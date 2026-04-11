@@ -1,5 +1,8 @@
 @extends('layouts.public')
 
+@section('title', 'News & Updates - Educate the Orphans')
+@section('meta_description', 'Stay up to date with the latest news, prayer requests, and project updates from Educate the Orphans and their work in Tharaka, Kenya.')
+
 @section('content')
 
 {{-- HERO --}}
@@ -9,7 +12,7 @@
         class="h-[560px] w-full object-cover"
         alt="News and Updates"
     >
-    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="absolute inset-0 bg-black/35"></div>
 
     <div class="absolute inset-0">
         <div class="mx-auto max-w-6xl px-4 h-full flex items-center">

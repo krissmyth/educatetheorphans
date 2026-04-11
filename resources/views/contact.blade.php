@@ -1,5 +1,8 @@
 @extends('layouts.public')
 
+@section('title', 'Contact Us - Educate the Orphans')
+@section('meta_description', 'Get in touch with Educate the Orphans. Ask about child sponsorship, donations, speaking engagements, volunteering, or partnership opportunities.')
+
 @section('content')
 
 {{-- HERO --}}
@@ -9,7 +12,7 @@
         class="h-[560px] w-full object-cover"
         alt="Contact Us"
     >
-    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="absolute inset-0 bg-black/35"></div>
 
     <div class="absolute inset-0">
         <div class="mx-auto max-w-6xl px-4 h-full flex items-center">
@@ -187,7 +190,7 @@
                         required
                         class="w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-600 @error('subject') border-red-500 @enderror"
                     >
-                        <option value="">Select a topic...</option>
+                        <option value="" disabled selected>Select a topic...</option>
                         <option value="Child Sponsorship" @selected(old('subject') === 'Child Sponsorship')>Child Sponsorship</option>
                         <option value="Make a Donation" @selected(old('subject') === 'Make a Donation')>Make a Donation</option>
                         <option value="Speaking Request" @selected(old('subject') === 'Speaking Request')>Speaking Request</option>

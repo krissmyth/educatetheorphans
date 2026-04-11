@@ -5,14 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
-    <title>{{ $title ?? 'Educate the Orphans' }}</title>
+    <title>@yield('title', 'Educate the Orphans')</title>
+    <meta name="description" content="@yield('meta_description', 'Educate the Orphans is a Christian charity feeding, clothing and educating orphaned and needy children in Tharaka, Kenya.')">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>[x-cloak]{display:none!important}</style>
     @stack('scripts')
 </head>
 <body class="min-h-screen bg-white text-gray-900">
 
-<header 
+<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:bg-green-600 focus:px-4 focus:py-2 focus:text-white focus:font-semibold">
+    Skip to main content
+</a>
+
+<header
     x-data="{ open: false }" 
     class="sticky top-0 z-50 border-b bg-white"
 >
@@ -26,12 +32,13 @@
         </a>
 
         <!-- Desktop Nav -->
-        <nav class="hidden md:flex items-center gap-6">
-            <a href="{{ route('about') }}">About</a>
-            <a href="{{ route('projects') }}">Projects</a>
-            <a href="{{ route('stories') }}">Stories</a>
-            <a href="{{ route('news') }}">News</a>
-            <a href="{{ route('contact') }}">Contact</a>
+        <nav class="hidden md:flex items-center gap-6" aria-label="Main navigation">
+            @php $navRoute = request()->route()->getName(); @endphp
+            <a href="{{ route('about') }}" class="{{ $navRoute === 'about' ? 'font-semibold border-b-2 border-green-600' : 'hover:text-green-600' }} transition">About</a>
+            <a href="{{ route('projects') }}" class="{{ $navRoute === 'projects' ? 'font-semibold border-b-2 border-green-600' : 'hover:text-green-600' }} transition">Projects</a>
+            <a href="{{ route('stories') }}" class="{{ $navRoute === 'stories' ? 'font-semibold border-b-2 border-green-600' : 'hover:text-green-600' }} transition">Stories</a>
+            <a href="{{ route('news') }}" class="{{ $navRoute === 'news' ? 'font-semibold border-b-2 border-green-600' : 'hover:text-green-600' }} transition">News</a>
+            <a href="{{ route('contact') }}" class="{{ $navRoute === 'contact' ? 'font-semibold border-b-2 border-green-600' : 'hover:text-green-600' }} transition">Contact</a>
 
             <a href="{{ route('donate') }}"
                class="bg-green-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-700">
@@ -53,16 +60,17 @@
     <!-- Mobile Menu -->
     <div
         x-cloak
-		x-show="open"
-		@click.outside="open = false"
+        x-show="open"
+        @click.outside="open = false"
         x-transition
         class="md:hidden px-4 pb-4 space-y-3"
+        aria-label="Mobile navigation"
     >
-        <a href="{{ route('about') }}" class="block">About</a>
-        <a href="{{ route('projects') }}" class="block">Projects</a>
-        <a href="{{ route('stories') }}" class="block">Stories</a>
-        <a href="{{ route('news') }}" class="block">News</a>
-        <a href="{{ route('contact') }}" class="block">Contact</a>
+        <a href="{{ route('about') }}" class="block {{ $navRoute === 'about' ? 'font-semibold text-green-600' : '' }}">About</a>
+        <a href="{{ route('projects') }}" class="block {{ $navRoute === 'projects' ? 'font-semibold text-green-600' : '' }}">Projects</a>
+        <a href="{{ route('stories') }}" class="block {{ $navRoute === 'stories' ? 'font-semibold text-green-600' : '' }}">Stories</a>
+        <a href="{{ route('news') }}" class="block {{ $navRoute === 'news' ? 'font-semibold text-green-600' : '' }}">News</a>
+        <a href="{{ route('contact') }}" class="block {{ $navRoute === 'contact' ? 'font-semibold text-green-600' : '' }}">Contact</a>
 
         <a href="{{ route('donate') }}"
            class="block bg-green-600 text-white px-4 py-2 rounded-lg text-center font-semibold">
@@ -72,7 +80,7 @@
 </header>
 
 
-<main>
+<main id="main-content">
     @yield('content')
 </main>
 

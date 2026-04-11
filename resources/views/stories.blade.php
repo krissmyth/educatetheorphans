@@ -1,5 +1,8 @@
 @extends('layouts.public')
 
+@section('title', 'Stories - Educate the Orphans')
+@section('meta_description', 'Read inspiring stories of children whose lives have been transformed through education and support from Educate the Orphans in Tharaka, Kenya.')
+
 @section('content')
 
 {{-- HERO --}}
@@ -9,7 +12,7 @@
         class="h-[560px] w-full object-cover"
         alt="Stories of Change"
     >
-    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="absolute inset-0 bg-black/35"></div>
 
     <div class="absolute inset-0">
         <div class="mx-auto max-w-6xl px-4 h-full flex items-center">

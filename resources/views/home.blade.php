@@ -1,5 +1,8 @@
 @extends('layouts.public')
 
+@section('title', 'Educate the Orphans — Transforming Lives Through Education in Kenya')
+@section('meta_description', 'Educate the Orphans is a Christian charity feeding, clothing and educating orphaned and needy children in Tharaka, Kenya. 100% of donations go directly to our work.')
+
 @section('content')
 
 {{-- HERO --}}
@@ -15,18 +18,19 @@
             alt="Education and community"
         >
         
-        <!-- Video Element (initially hidden) -->
+        <!-- Video Element (initially hidden, loaded lazily) -->
         <video
             id="heroVideo"
             class="absolute inset-0 h-[560px] w-full object-cover hidden"
-            autoplay
             muted
+            preload="none"
+            poster="{{ asset('images/home.jpg') }}"
         >
-            <source src="{{ asset('images/home_video.mp4') }}" type="video/mp4">
+            <source data-src="{{ asset('images/home_video.mp4') }}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
-    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="absolute inset-0 bg-black/35"></div>
 
     <div class="absolute inset-0">
         <div class="mx-auto max-w-6xl px-4 h-full flex items-center">
@@ -252,7 +256,7 @@
                 <div id="mc_embed_shell">
                     <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
                     <style type="text/css">
-                        #mc_embed_signup{background:#fff; false;clear:left; font:14px Helvetica,Arial,sans-serif; width: 100%;}
+                        #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width: 100%;}
                         #mc-embedded-subscribe {
                             background-color: black !important;
                             color: white !important;
@@ -306,15 +310,35 @@
 document.addEventListener('DOMContentLoaded', function() {
     const heroImage = document.getElementById('heroImage');
     const heroVideo = document.getElementById('heroVideo');
-    
-    // After 4 seconds, show video and hide image
-    setTimeout(function() {
-        heroImage.classList.add('hidden');
-        heroVideo.classList.remove('hidden');
-        heroVideo.play();
-    }, 4000);
-    
-    // When video ends, hide video and show image again
+    const videoSource = heroVideo.querySelector('source[data-src]');
+
+    function loadAndPlayVideo() {
+        // Set the real src so the browser starts loading the video
+        if (videoSource.src !== videoSource.dataset.src) {
+            videoSource.src = videoSource.dataset.src;
+            heroVideo.load();
+        }
+
+        heroVideo.addEventListener('canplay', function onCanPlay() {
+            heroVideo.removeEventListener('canplay', onCanPlay);
+            heroImage.classList.add('hidden');
+            heroVideo.classList.remove('hidden');
+            heroVideo.play();
+        }, { once: true });
+    }
+
+    // Defer video load until browser is idle (or fall back to 4s timeout)
+    function scheduleVideoLoad() {
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(loadAndPlayVideo, { timeout: 4000 });
+        } else {
+            setTimeout(loadAndPlayVideo, 4000);
+        }
+    }
+
+    scheduleVideoLoad();
+
+    // When video ends, show image again
     heroVideo.addEventListener('ended', function() {
         heroVideo.classList.add('hidden');
         heroImage.classList.remove('hidden');

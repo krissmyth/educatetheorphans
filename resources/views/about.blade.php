@@ -1,6 +1,7 @@
 @extends('layouts.public')
 
 @section('title', 'About Us - Educate the Orphans')
+@section('meta_description', 'Learn about Educate the Orphans — a Christian charity working since 1990 to feed, clothe and educate orphaned and needy children across 7 schools in Tharaka, Kenya.')
 
 @section('content')
 
@@ -11,7 +12,7 @@
         class="h-[560px] w-full object-cover"
         alt="About Educate the Orphans"
     >
-    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="absolute inset-0 bg-black/35"></div>
 
     <div class="absolute inset-0">
         <div class="mx-auto max-w-6xl px-4 h-full flex items-center">
@@ -86,35 +87,38 @@
 {{-- SUCCESS STORIES LIST --}}
 <section class="py-16 bg-gray-50">
     <div class="mx-auto max-w-6xl px-4">
-        <h2 class="text-3xl font-bold mb-6 text-center">Success Stories</h2>
-        <p class="text-gray-700 leading-relaxed text-center max-w-2xl mx-auto">
-            The true measure of our success is visible in the lives of those we've helped. Many former beneficiaries of Educate the Orphans are now fully employed in meaningful roles, including:
+        <h2 class="text-3xl font-bold mb-4 text-center">Success Stories</h2>
+        <p class="text-gray-700 leading-relaxed text-center max-w-2xl mx-auto mb-10">
+            The true measure of our success is visible in the lives of those we've helped. Many former beneficiaries of Educate the Orphans are now fully employed in meaningful roles:
         </p>
-        <ul class="mt-8 space-y-3 text-gray-800 max-w-2xl mx-auto">
-            <li class="flex items-start gap-3">
-                <span class="mt-1 h-2 w-2 rounded-full bg-black"></span>
-                Teachers educating the next generation
-            </li>
-            <li class="flex items-start gap-3">
-                <span class="mt-1 h-2 w-2 rounded-full bg-black"></span>
-                Pastors serving their communities
-            </li>
-            <li class="flex items-start gap-3">
-                <span class="mt-1 h-2 w-2 rounded-full bg-black"></span>
-                Government officials at county and national levels
-            </li>
-            <li class="flex items-start gap-3">
-                <span class="mt-1 h-2 w-2 rounded-full bg-black"></span>
-                Clergy members in their churches
-            </li>
-            <li class="flex items-start gap-3">
-                <span class="mt-1 h-2 w-2 rounded-full bg-black"></span>
-                Professionals working with Kenya's presidential office
-            </li>
-        </ul>
-        <p class="mt-6 text-gray-700 text-center max-w-2xl mx-auto">
-            These individuals represent the lasting impact of education and support on children's futures.
-        </p>
+
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="rounded-2xl border bg-white p-6 hover:shadow-md transition">
+                <div class="text-3xl mb-3">📖</div>
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Teachers</h3>
+                <p class="text-gray-600 text-sm">Former beneficiaries now educating the next generation in Kenyan schools and communities.</p>
+            </div>
+            <div class="rounded-2xl border bg-white p-6 hover:shadow-md transition">
+                <div class="text-3xl mb-3">⛪</div>
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Pastors & Clergy</h3>
+                <p class="text-gray-600 text-sm">Spiritual leaders serving their churches and communities across the Tharaka region.</p>
+            </div>
+            <div class="rounded-2xl border bg-white p-6 hover:shadow-md transition">
+                <div class="text-3xl mb-3">🏛️</div>
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Government Officials</h3>
+                <p class="text-gray-600 text-sm">Individuals serving at county and national government levels, shaping policy in Kenya.</p>
+            </div>
+            <div class="rounded-2xl border bg-white p-6 hover:shadow-md transition">
+                <div class="text-3xl mb-3">🌟</div>
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Presidential Office</h3>
+                <p class="text-gray-600 text-sm">Professionals who have risen to work directly with Kenya's presidential office.</p>
+            </div>
+            <div class="rounded-2xl border bg-white p-6 hover:shadow-md transition col-span-full sm:col-span-1 lg:col-span-2">
+                <div class="text-3xl mb-3">💬</div>
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Lasting Impact</h3>
+                <p class="text-gray-600 text-sm">These individuals represent the power of education to break cycles of poverty — not just for themselves, but for their own families and future generations.</p>
+            </div>
+        </div>
     </div>
 </section>
 
