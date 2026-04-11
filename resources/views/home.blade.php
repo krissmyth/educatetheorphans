@@ -30,7 +30,7 @@
             Your browser does not support the video tag.
         </video>
     </div>
-    <div class="absolute inset-0 bg-black/35"></div>
+    <div class="absolute inset-0 bg-black/15"></div>
 
     <div class="absolute inset-0">
         <div class="mx-auto max-w-6xl px-4 h-full flex items-center">
