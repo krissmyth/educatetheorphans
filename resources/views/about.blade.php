@@ -12,13 +12,13 @@
         class="h-[560px] w-full object-cover"
         alt="About Educate the Orphans"
     >
-    <div class="absolute inset-0 bg-black/10"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
 
     <div class="absolute inset-0">
-        <div class="mx-auto max-w-6xl px-4 h-full flex items-center">
+        <div class="mx-auto max-w-6xl px-4 h-full flex items-end pb-12">
             <div class="max-w-2xl text-white">
                 <h1 class="text-5xl font-bold leading-tight">About Educate the Orphans</h1>
-                <p class="mt-5 text-lg text-gray-200">Transforming Lives Through Education and Care</p>
+                <p class="mt-4 text-lg text-gray-200">Transforming Lives Through Education and Care</p>
             </div>
         </div>
     </div>
@@ -30,10 +30,13 @@
         <div>
             <h2 class="text-3xl font-bold">Our Mission</h2>
             <p class="mt-4 text-gray-700 leading-relaxed">
-                Educate the Orphans is a small, Christian charity working in Kenya to support orphaned and needy children. Our mission is simple yet profound: to feed, clothe, and educate destitute children, with a strong emphasis on education.
+                Educate the Orphans is a Christian charity based in Kenya, committed to supporting orphaned and vulnerable children.
             </p>
             <p class="mt-4 text-gray-700 leading-relaxed">
-                Rather than operating a traditional orphanage, we partner with extended families to care for children while providing the financial support needed to ensure they receive proper nutrition, clothing, and quality education.
+                Our mission is to demonstrate the love of Jesus through practical action. We do this by providing children with essential needs such as food, clothing, and access to education. We have also established two rescue centres that offer safe shelter for children who have escaped human trafficking, child marriage, and abuse.
+            </p>
+            <p class="mt-4 text-gray-700 leading-relaxed">
+                Alongside this, we partner with extended families, enabling children to be cared for within their communities while providing the financial support needed to ensure they receive proper nutrition, adequate clothing, and a quality education.
             </p>
         </div>
 
@@ -78,7 +81,7 @@
             </div>
             <div class="rounded-2xl border p-6">
                 <p class="text-4xl font-bold">3,000+ Children</p>
-                <p class="mt-2 text-gray-600">Currently supported and receiving care and education</p>
+                <p class="mt-2 text-gray-600">Currently receiving an education in our schools</p>
             </div>
         </div>
     </div>
@@ -111,7 +114,7 @@
             <div class="rounded-2xl border bg-white p-6 hover:shadow-md transition">
                 <div class="text-3xl mb-3">🌟</div>
                 <h3 class="font-bold text-lg text-gray-900 mb-2">Presidential Office</h3>
-                <p class="text-gray-600 text-sm">Professionals who have risen to work directly with Kenya's presidential office.</p>
+                <p class="text-gray-600 text-sm">Some students have risen to work directly with Kenya's presidential office.</p>
             </div>
             <div class="rounded-2xl border bg-white p-6 hover:shadow-md transition col-span-full sm:col-span-1 lg:col-span-2">
                 <div class="text-3xl mb-3">💬</div>
@@ -126,16 +129,11 @@
 <section class="py-16">
     <div class="mx-auto max-w-6xl px-4">
         <h2 class="text-3xl font-bold mb-6">How We're Registered</h2>
-        <p class="text-gray-700 leading-relaxed">
-            Educate the Orphans is a registered charity with legitimacy and accountability across multiple regions:
+        <p class="text-gray-700 leading-relaxed max-w-3xl">
+            Educate the Orphans is a registered charity in the United Kingdom, overseen by the Charity Commission for Northern Ireland (Charity no. 102736).
         </p>
-        <ul class="mt-4 list-disc list-inside text-gray-700 space-y-2">
-            <li><strong>UK Registration:</strong> Registered UK Charity</li>
-            <li><strong>Ireland Registration:</strong> Registered Irish Charity</li>
-            <li><strong>Kenya Registration:</strong> Registered in Kenya (Charity no. 102736 in Northern Ireland)</li>
-        </ul>
-        <p class="mt-4 text-gray-700">
-            Our registration ensures transparency, accountability, and trust in how we manage resources and serve our community.
+        <p class="mt-4 text-gray-700 leading-relaxed max-w-3xl">
+            Our registration ensures full transparency and accountability in how we manage resources — so you can give with confidence, knowing your support is in safe hands.
         </p>
     </div>
 </section>
@@ -144,26 +142,30 @@
 <section class="py-16 bg-gray-50">
     <div class="mx-auto max-w-6xl px-4">
         <h2 class="text-3xl font-bold mb-6">How You Can Help</h2>
-        <p class="text-gray-700 leading-relaxed">
-            Your support makes a direct, measurable difference in children's lives. We offer several ways to get involved:
-        </p>
-        <div class="mt-8 grid gap-6 md:grid-cols-2">
-            <div>
-                <h4 class="text-xl font-semibold">Child Sponsorship</h4>
-                <p class="mt-2 text-gray-700 leading-relaxed">
-                    Sponsor a child and provide ongoing support for their education, nutrition, and care. We encourage direct communication with the children you support.
+        <div class="flex flex-col lg:flex-row lg:items-start lg:gap-12">
+            <div class="flex-1">
+                <p class="text-gray-700 leading-relaxed">
+                    We no longer operate individual child sponsorship. With so many children in need, we could never turn a child away simply because no sponsor had been found for them. Donations given for a specific project are used exactly for that purpose, while general donations are shared across all the children in our care — ensuring no child is left behind.
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    We trust that God will provide exactly what is needed, and He never lets us down. Your generosity, however large or small, is part of that provision — and it makes a real difference to every child we serve.
                 </p>
             </div>
-            <div>
-                <h4 class="text-xl font-semibold">Donations</h4>
-                <p class="mt-2 text-gray-700 leading-relaxed">
-                    Make a one-time or recurring donation to support our programmes and reach more children in need.
-                </p>
+            <div class="mt-6 lg:mt-0 flex flex-col items-start gap-2 shrink-0">
+                <p class="font-semibold text-gray-900">Support our work in Kenya</p>
+                <script src="https://www.justgiving.com/widgets/scripts/widget.js"
+                    data-version="2"
+                    data-widgetType="donateButton"
+                    data-linkType="givingCheckout"
+                    data-donateButtonType="justgivingSmall"
+                    data-linkId="if1ko20cql"
+                    data-marketCode="GB"
+                    data-showPaymentLogos="true"
+                    data-popupCheckout="true"
+                    type="text/javascript"></script>
+                <p class="text-xs text-gray-500">🔒 Secure checkout — no need to leave this page</p>
             </div>
         </div>
-        <p class="mt-8 text-center">
-            <a href="https://justgiving.com/educatetheorphans/donate" class="rounded-lg bg-black px-6 py-3 text-white font-semibold hover:bg-gray-800" target="_blank">Make a Donation</a>
-        </p>
     </div>
 </section>
 

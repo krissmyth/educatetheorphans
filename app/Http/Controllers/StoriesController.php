@@ -13,6 +13,15 @@ class StoriesController extends Controller
     {
         $stories = [
             [
+                'id' => 'purity-kathomi',
+                'title' => "Purity Kathomi's Story",
+                'category' => 'Featured Story',
+                'category_color' => 'teal',
+                'description' => 'Watch Purity share her own story — how Educate the Orphans gave her access to education and transformed her life in Tharaka, Kenya.',
+                'quote' => 'Education changed everything for me.',
+                'youtube_id' => 'i58iM1sJktI'
+            ],
+            [
                 'id' => 'livingstone-njeru',
                 'title' => 'Livingstone Njeru: From Sponsored Child to Director',
                 'category' => 'Featured Story',

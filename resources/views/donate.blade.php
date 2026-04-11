@@ -12,20 +12,20 @@
         class="h-[560px] w-full object-cover"
         alt="Donate"
     >
-    <div class="absolute inset-0 bg-black/35"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
 
     <div class="absolute inset-0">
-        <div class="mx-auto max-w-6xl px-4 h-full flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div class="mx-auto max-w-6xl px-4 h-full flex flex-col lg:flex-row items-end justify-between gap-8 pb-12">
             {{-- Left: Text --}}
-            <div class="text-white text-center lg:text-left max-w-xl">
+            <div class="text-white max-w-xl">
                 <h1 class="text-4xl lg:text-5xl font-bold leading-tight">Make a Donation</h1>
-                <p class="mt-5 text-base lg:text-lg text-gray-200">Your generosity directly helps vulnerable children and families in Kenya access education, food, water, and care.</p>
+                <p class="mt-4 text-base lg:text-lg text-gray-200">Your generosity directly helps vulnerable children and families in Kenya access education, food, water, and care.</p>
                 <p class="mt-3 text-sm text-gray-300">Every penny goes directly to our work. All UK staff are volunteers.</p>
             </div>
 
             {{-- Right: JustGiving Button --}}
-            <div id="jg-donate-button" class="bg-white rounded-2xl shadow-2xl px-10 py-8 flex flex-col items-center gap-3 shrink-0">
-                <p class="font-bold text-gray-900 text-lg">Support our work in Kenya</p>
+            <div id="jg-donate-button" class="bg-white rounded-2xl shadow-2xl px-8 py-6 flex flex-col items-center gap-3 shrink-0">
+                <p class="font-bold text-gray-900">Support our work in Kenya</p>
                 <script src="https://www.justgiving.com/widgets/scripts/widget.js"
                     data-version="2"
                     data-widgetType="donateButton"

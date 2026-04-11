@@ -12,13 +12,13 @@
         class="h-[560px] w-full object-cover"
         alt="Get Involved"
     >
-    <div class="absolute inset-0 bg-black/15"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
 
     <div class="absolute inset-0">
-        <div class="mx-auto max-w-6xl px-4 h-full flex items-center">
+        <div class="mx-auto max-w-6xl px-4 h-full flex items-end pb-12">
             <div class="max-w-2xl text-white">
                 <h1 class="text-5xl font-bold leading-tight">Get Involved</h1>
-                <p class="mt-5 text-lg text-gray-200">Join us in transforming lives through education, care, and community support.</p>
+                <p class="mt-4 text-lg text-gray-200">Join us in transforming lives through education, care, and community support.</p>
             </div>
         </div>
     </div>

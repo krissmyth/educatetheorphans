@@ -12,13 +12,13 @@
         class="h-[560px] w-full object-cover"
         alt="Contact Us"
     >
-    <div class="absolute inset-0 bg-black/15"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
 
     <div class="absolute inset-0">
-        <div class="mx-auto max-w-6xl px-4 h-full flex items-center">
+        <div class="mx-auto max-w-6xl px-4 h-full flex items-end pb-12">
             <div class="max-w-2xl text-white">
                 <h1 class="text-5xl font-bold leading-tight">Get In Touch</h1>
-                <p class="mt-5 text-lg text-gray-200">We'd love to hear from you. Reach out with any questions, partnership ideas, or to learn more about our work.</p>
+                <p class="mt-4 text-lg text-gray-200">We'd love to hear from you. Reach out with any questions, partnership ideas, or to learn more about our work.</p>
             </div>
         </div>
     </div>
@@ -290,17 +290,23 @@
 {{-- CTA SECTION --}}
 <section class="py-16 bg-gradient-to-r from-green-600 to-emerald-600">
     <div class="mx-auto max-w-6xl px-4 text-center text-white">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Make a Difference?</h2>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Support Our Work in Kenya</h2>
         <p class="text-lg text-green-50 max-w-2xl mx-auto mb-8">
-            Whether you want to sponsor a child, make a donation, or partner with us, we're here to help. Let's work together to transform lives.
+            Your generosity makes a direct difference to the children and families we serve. Every donation — however large or small — goes straight to those who need it most.
         </p>
-        <div class="flex flex-wrap gap-4 justify-center">
-            <a href="https://justgiving.com/educatetheorphans/donate" target="_blank" class="rounded-lg bg-white text-green-600 px-8 py-3 font-semibold hover:bg-gray-100 transition">
-                Donate Now
-            </a>
-            <a href="{{ route('home') }}#get-involved" class="rounded-lg border-2 border-white text-white px-8 py-3 font-semibold hover:bg-white/10 transition">
-                Get Involved
-            </a>
+        <div class="flex flex-col items-center gap-3">
+            <p class="font-semibold text-white">Donate securely below</p>
+            <script src="https://www.justgiving.com/widgets/scripts/widget.js"
+                data-version="2"
+                data-widgetType="donateButton"
+                data-linkType="givingCheckout"
+                data-donateButtonType="justgivingSmall"
+                data-linkId="if1ko20cql"
+                data-marketCode="GB"
+                data-showPaymentLogos="true"
+                data-popupCheckout="true"
+                type="text/javascript"></script>
+            <p class="text-xs text-green-100">🔒 Secure checkout — no need to leave this page</p>
         </div>
     </div>
 </section>

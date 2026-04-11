@@ -85,7 +85,7 @@
 </main>
 
 <footer class="border-t mt-20">
-    <div class="mx-auto max-w-6xl px-4 py-10 grid gap-8 md:grid-cols-2">
+    <div class="mx-auto max-w-6xl px-4 py-10 grid gap-8 md:grid-cols-3">
         <div class="text-center">
             <p class="font-semibold">Educate the Orphans</p>
             <p class="text-sm text-gray-600 mt-2">
@@ -95,11 +95,16 @@
             </p>
         </div>
 
+        {{-- Cross --}}
+        <div class="text-center flex flex-col items-center justify-center">
+            <span class="text-5xl text-gray-400">✝</span>
+            <p class="text-sm text-gray-500 italic mt-3">Serving and following the commands of Jesus</p>
+        </div>
+
         <div class="text-center">
             <p class="font-semibold">Contact & Follow</p>
             <p class="text-sm text-gray-600 mt-2">
-                Email: info@educatetheorphans.com<br>
-                Location: Tharaka, Kenya
+                Email: info@educatetheorphans.com
             </p>
             <div class="flex gap-4 mt-4 justify-center">
                 <a href="https://www.facebook.com/EducatetheOrphans" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-600 transition" title="Follow us on Facebook">

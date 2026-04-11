@@ -12,13 +12,13 @@
         class="h-[560px] w-full object-cover"
         alt="News and Updates"
     >
-    <div class="absolute inset-0 bg-black/15"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/65 via-black/20 to-transparent"></div>
 
     <div class="absolute inset-0">
-        <div class="mx-auto max-w-6xl px-4 h-full flex items-center">
+        <div class="mx-auto max-w-6xl px-4 h-full flex items-start pt-12">
             <div class="max-w-2xl text-white">
                 <h1 class="text-5xl font-bold leading-tight">News & Updates</h1>
-                <p class="mt-5 text-lg text-gray-200">Stay informed about our latest initiatives, stories, and impact updates from the field.</p>
+                <p class="mt-4 text-lg text-gray-200">Stay informed about our latest initiatives, stories, and impact updates from the field.</p>
             </div>
         </div>
     </div>

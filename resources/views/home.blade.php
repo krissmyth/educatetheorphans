@@ -30,12 +30,12 @@
             Your browser does not support the video tag.
         </video>
     </div>
-    <div class="absolute inset-0 bg-black/15"></div>
+    <div class="absolute inset-0 bg-black/20"></div>
 
     <div class="absolute inset-0">
         <div class="mx-auto max-w-6xl px-4 h-full flex items-center">
             <div class="max-w-2xl text-white">
-                <p class="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-sm">
+                <p class="inline-flex items-center rounded-full bg-white/15 px-3 py-1 text-sm">
                     Serving needy and orphaned children in Tharaka, Kenya
                 </p>
 
@@ -196,10 +196,9 @@
         <div class="rounded-2xl border bg-white p-8">
             <p class="text-sm font-semibold text-gray-500">Featured Story</p>
             <blockquote class="mt-4 text-lg leading-relaxed">
-                "Because of Educate the Orphans' support, I was able to stay in school and pursue my education.
-                Today I’m building a different future for my family.”
+                "Because of Educate the Orphans' support, I was able to stay in school and pursue my education. Today I’m a teacher with ETO.  I thank God as I could not have achieved my dream without ETO."
             </blockquote>
-            <p class="mt-4 text-sm text-gray-600">— Example Graduate (replace with real story)</p>
+            <p class="mt-4 text-sm text-gray-600">— Purity Kathomi, Past Student & ETO Teacher</p>
         </div>
     </div>
 </section>

@@ -12,13 +12,13 @@
         class="h-[560px] w-full object-cover"
         alt="Stories of Change"
     >
-    <div class="absolute inset-0 bg-black/35"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/65 via-black/20 to-transparent"></div>
 
     <div class="absolute inset-0">
-        <div class="mx-auto max-w-6xl px-4 h-full flex items-center">
+        <div class="mx-auto max-w-6xl px-4 h-full flex items-start pt-12">
             <div class="max-w-2xl text-white">
                 <h1 class="text-5xl font-bold leading-tight">Lives Changed</h1>
-                <p class="mt-5 text-lg text-gray-200">Real stories of children and families transformed through education, care, and community support.</p>
+                <p class="mt-4 text-lg text-gray-200">Real stories of children and families transformed through education, care, and community support.</p>
             </div>
         </div>
     </div>
@@ -27,13 +27,39 @@
 {{-- STORIES GRID --}}
 <section class="py-16">
     <div class="mx-auto max-w-6xl px-4">
-        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
 
-            @foreach ($stories as $story)
+        {{-- Featured video story (first story) --}}
+        @if(isset($stories[0]['youtube_id']))
+            @php $featured = $stories[0]; $gridStories = array_slice($stories, 1); @endphp
+            <article class="mb-10 border rounded-xl overflow-hidden hover:shadow-lg transition">
+                <div class="aspect-video w-full">
+                    <iframe
+                        class="w-full h-full"
+                        src="https://www.youtube.com/embed/{{ $featured['youtube_id'] }}"
+                        title="{{ $featured['title'] }}"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="p-6">
+                    <p class="text-sm font-semibold text-teal-600 mb-2">{{ $featured['category'] }}</p>
+                    <h2 class="text-2xl font-bold">{{ $featured['title'] }}</h2>
+                    <p class="mt-3 text-gray-600 leading-relaxed">{{ $featured['description'] }}</p>
+                    <p class="mt-4 text-sm text-gray-500 italic">"{{ $featured['quote'] }}"</p>
+                </div>
+            </article>
+        @else
+            @php $gridStories = $stories; @endphp
+        @endif
+
+        {{-- Remaining stories --}}
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            @foreach ($gridStories as $story)
                 <article class="border rounded-lg overflow-hidden hover:shadow-lg transition group">
                     <div class="aspect-[4/3] overflow-hidden">
-                        <img 
-                            src="{{ asset('images/stories/' . $story['image']) }}" 
+                        <img
+                            src="{{ asset('images/stories/' . $story['image']) }}"
                             alt="{{ $story['title'] }}"
                             class="h-full w-full object-cover object-top group-hover:scale-105 transition duration-300"
                         >
@@ -48,8 +74,8 @@
                     </div>
                 </article>
             @endforeach
-
         </div>
+
     </div>
 </section>
 
@@ -67,7 +93,7 @@
                 <p class="mt-2 text-gray-700">University graduates from Educate the Orphans programmes</p>
             </div>
             <div class="text-center">
-                <p class="text-4xl font-bold text-purple-600">40,000+</p>
+                <p class="text-4xl font-bold text-purple-600">60,000+</p>
                 <p class="mt-2 text-gray-700">People accessing clean water</p>
             </div>
         </div>
