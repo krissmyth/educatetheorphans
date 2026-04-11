@@ -26,10 +26,6 @@
                class="block px-4 py-3 rounded-lg {{ request()->routeIs('dashboard') ? 'bg-green-600' : 'hover:bg-gray-800' }} transition-colors">
                 📊 Dashboard
             </a>
-            <a href="{{ route('admin.donations.index') }}" 
-               class="block px-4 py-3 rounded-lg {{ request()->routeIs('admin.donations.*') ? 'bg-green-600' : 'hover:bg-gray-800' }} transition-colors">
-                💰 Donations
-            </a>
             <a href="{{ route('profile.edit') }}" 
                class="block px-4 py-3 rounded-lg {{ request()->routeIs('profile.*') ? 'bg-green-600' : 'hover:bg-gray-800' }} transition-colors">
                 ⚙️ Profile Settings

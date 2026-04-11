@@ -7,7 +7,7 @@ use App\Http\Controllers\StoriesController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\Admin\DonationController as AdminDonationController;
+use App\Http\Controllers\Admin\NewsSyncController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home')->name('home');
@@ -24,20 +24,17 @@ Route::get('/api/campaign-data', [DonationController::class, 'getCampaignData'])
 // Newsletter subscription
 Route::post('/subscribe', [NewsController::class, 'subscribe'])->name('newsletter.subscribe');
 
-// Admin routes for donation management
-Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
-    Route::get('/donations', [AdminDonationController::class, 'index'])->name('donations.index');
-    Route::delete('/donations', [AdminDonationController::class, 'bulkDestroy'])->name('donations.bulk-destroy');
-    Route::get('/donations/{donation}', [AdminDonationController::class, 'show'])->name('donations.show');
-    Route::get('/donations/export/gift-aid', [AdminDonationController::class, 'exportGiftAid'])->name('donations.export-gift-aid');
-});
-
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
+// Admin routes
+Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
+    Route::post('/news/sync', [NewsSyncController::class, 'sync'])->name('news.sync');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

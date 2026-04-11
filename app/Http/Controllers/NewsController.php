@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NewsItem;
 use App\Services\MailchimpService;
 use Illuminate\View\View;
 
@@ -20,9 +21,9 @@ class NewsController extends Controller
     public function subscribe()
     {
         request()->validate([
-            'email' => 'required|email',
+            'email'     => 'required|email',
             'firstName' => 'required|string',
-            'lastName' => 'required|string',
+            'lastName'  => 'required|string',
         ]);
 
         $result = $this->mailchimp->subscribe(
@@ -32,56 +33,43 @@ class NewsController extends Controller
         );
 
         if ($result['success']) {
-            return response()->json([
-                'success' => true,
-                'message' => $result['message']
-            ]);
+            return response()->json(['success' => true,  'message' => $result['message']]);
         }
 
-        return response()->json([
-            'success' => false,
-            'message' => $result['message']
-        ], 422);
+        return response()->json(['success' => false, 'message' => $result['message']], 422);
     }
 
     /**
-     * Display the news listing page with latest campaigns
+     * Display the news listing page — reads from local database
      */
     public function index(): View
     {
-        $campaigns = $this->mailchimp->getCampaigns();
+        $items = NewsItem::published()
+            ->orderByDesc('sent_at')
+            ->get();
 
-        return view('news', [
-            'campaigns' => $campaigns,
-            'title' => 'News',
-        ]);
+        return view('news', ['items' => $items]);
     }
 
     /**
-     * Display a single campaign detail page
+     * Display a single news item — reads from local database
      */
     public function show(string $id): View
     {
-        $campaign = $this->mailchimp->getCampaign($id);
+        // Support both numeric DB id and mailchimp_id string
+        $item = is_numeric($id)
+            ? NewsItem::findOrFail($id)
+            : NewsItem::where('mailchimp_id', $id)->firstOrFail();
 
-        if (!$campaign) {
-            abort(404, 'Campaign not found');
-        }
-
-        $content = $this->mailchimp->getCampaignContent($id);
-
-        // Get all campaigns to show related items
-        $allCampaigns = $this->mailchimp->getCampaigns();
-        $relatedCampaigns = array_filter($allCampaigns, function ($c) use ($id) {
-            return $c['id'] !== $id;
-        });
-        $relatedCampaigns = array_slice($relatedCampaigns, 0, 3);
+        $related = NewsItem::published()
+            ->where('id', '!=', $item->id)
+            ->orderByDesc('sent_at')
+            ->limit(3)
+            ->get();
 
         return view('campaign-detail', [
-            'campaign' => $campaign,
-            'content' => $content,
-            'relatedCampaigns' => $relatedCampaigns,
-            'title' => $campaign['subject'],
+            'item'    => $item,
+            'related' => $related,
         ]);
     }
 }
