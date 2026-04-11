@@ -10,12 +10,13 @@ class Donation extends Model
     use HasFactory;
 
     protected $fillable = [
-        'stripe_payment_intent_id',
-        'stripe_customer_id',
+        'paypal_order_id',
+        'paypal_transaction_id',
         'amount',
         'currency',
         'frequency',
         'payment_method',
+        'payment_gateway',
         'status',
         'donor_email',
         'donor_name',

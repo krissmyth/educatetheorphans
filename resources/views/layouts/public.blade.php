@@ -90,7 +90,7 @@
         <div class="text-center">
             <p class="font-semibold">Contact & Follow</p>
             <p class="text-sm text-gray-600 mt-2">
-                Email: info@educatetheorphans.org<br>
+                Email: info@educatetheorphans.com<br>
                 Location: Tharaka, Kenya
             </p>
             <div class="flex gap-4 mt-4 justify-center">

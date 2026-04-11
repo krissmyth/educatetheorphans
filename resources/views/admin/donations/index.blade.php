@@ -4,6 +4,18 @@
 
 @section('content')
 
+@if(session('success'))
+    <div class="mb-6 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-green-800">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if($errors->any())
+    <div class="mb-6 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-red-800">
+        {{ $errors->first() }}
+    </div>
+@endif
+
 {{-- Statistics Cards --}}
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
     <div class="bg-white rounded-lg shadow p-6">
@@ -108,11 +120,38 @@
 </div>
 
 {{-- Donations Table --}}
-<div class="bg-white rounded-lg shadow overflow-hidden">
+<div class="bg-white rounded-lg shadow overflow-hidden" x-data="{ selectedDonationIds: [], pageDonationIds: @js($donations->pluck('id')->all()) }">
+    <form method="POST" action="{{ route('admin.donations.bulk-destroy') }}" @submit.prevent="if (selectedDonationIds.length && confirm('Delete selected donation(s)? This cannot be undone.')) { $el.submit(); }">
+        @csrf
+        @method('DELETE')
+
+        <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+            <p class="text-sm text-gray-600"><span x-text="selectedDonationIds.length"></span> selected</p>
+            <div class="flex items-center gap-3">
+                <button type="button" @click="selectedDonationIds = [...pageDonationIds]" class="text-sm text-blue-600 hover:text-blue-800 font-semibold">
+                    Select all on this page
+                </button>
+                <button type="button" @click="selectedDonationIds = []" class="text-sm text-gray-600 hover:text-gray-800 font-semibold">
+                    Clear selection
+                </button>
+                <button type="submit" :disabled="selectedDonationIds.length === 0" class="px-4 py-2 bg-red-600 hover:bg-red-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-lg font-semibold transition-colors">
+                    Delete selected
+                </button>
+            </div>
+        </div>
+
     <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
                 <tr>
+                    <th class="px-4 py-3 text-left">
+                        <input
+                            type="checkbox"
+                            @change="selectedDonationIds = $event.target.checked ? [...pageDonationIds] : []"
+                            :checked="pageDonationIds.length > 0 && selectedDonationIds.length === pageDonationIds.length"
+                            class="rounded border-gray-300 text-green-600 focus:ring-green-500"
+                        >
+                    </th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Donor</th>
@@ -126,6 +165,15 @@
             <tbody class="bg-white divide-y divide-gray-200">
                 @forelse($donations as $donation)
                     <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <input
+                                type="checkbox"
+                                name="donation_ids[]"
+                                value="{{ $donation->id }}"
+                                x-model="selectedDonationIds"
+                                class="rounded border-gray-300 text-green-600 focus:ring-green-500"
+                            >
+                        </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             #{{ $donation->id }}
                         </td>
@@ -175,7 +223,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="8" class="px-6 py-12 text-center text-gray-500">
+                        <td colspan="9" class="px-6 py-12 text-center text-gray-500">
                             No donations found matching your criteria.
                         </td>
                     </tr>
@@ -183,6 +231,7 @@
             </tbody>
         </table>
     </div>
+    </form>
 
     {{-- Pagination --}}
     @if($donations->hasPages())

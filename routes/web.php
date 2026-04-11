@@ -6,7 +6,6 @@ use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\StoriesController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DonationController;
-use App\Http\Controllers\StripeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\DonationController as AdminDonationController;
 use Illuminate\Support\Facades\Route;
@@ -25,14 +24,10 @@ Route::get('/api/campaign-data', [DonationController::class, 'getCampaignData'])
 // Newsletter subscription
 Route::post('/subscribe', [NewsController::class, 'subscribe'])->name('newsletter.subscribe');
 
-// Stripe payment routes
-Route::post('/stripe/create-payment-intent', [StripeController::class, 'createPaymentIntent'])->name('stripe.create-intent');
-Route::post('/stripe/payment-success', [StripeController::class, 'handleSuccess'])->name('stripe.success');
-Route::post('/stripe/webhook', [StripeController::class, 'webhook'])->name('stripe.webhook');
-
 // Admin routes for donation management
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
     Route::get('/donations', [AdminDonationController::class, 'index'])->name('donations.index');
+    Route::delete('/donations', [AdminDonationController::class, 'bulkDestroy'])->name('donations.bulk-destroy');
     Route::get('/donations/{donation}', [AdminDonationController::class, 'show'])->name('donations.show');
     Route::get('/donations/export/gift-aid', [AdminDonationController::class, 'exportGiftAid'])->name('donations.export-gift-aid');
 });

@@ -210,17 +210,22 @@
                 <h2 class="text-lg font-bold">Payment Details</h2>
             </div>
             <div class="p-6 space-y-3">
-                @if($donation->stripe_payment_intent_id)
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 mb-1">Payment Gateway</label>
+                    <div class="text-sm">{{ $donation->payment_gateway ? ucfirst($donation->payment_gateway) : 'Not set' }}</div>
+                </div>
+
+                @if($donation->paypal_order_id)
                     <div>
-                        <label class="block text-xs font-semibold text-gray-600 mb-1">Payment Intent ID</label>
-                        <div class="text-sm font-mono break-all">{{ $donation->stripe_payment_intent_id }}</div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">PayPal Order ID</label>
+                        <div class="text-sm font-mono break-all">{{ $donation->paypal_order_id }}</div>
                     </div>
                 @endif
 
-                @if($donation->stripe_customer_id)
+                @if($donation->paypal_transaction_id)
                     <div>
-                        <label class="block text-xs font-semibold text-gray-600 mb-1">Customer ID</label>
-                        <div class="text-sm font-mono break-all">{{ $donation->stripe_customer_id }}</div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">PayPal Transaction ID</label>
+                        <div class="text-sm font-mono break-all">{{ $donation->paypal_transaction_id }}</div>
                     </div>
                 @endif
 

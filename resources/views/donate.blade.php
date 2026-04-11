@@ -1,9 +1,5 @@
 @extends('layouts.public')
 
-@push('scripts')
-<script src="https://js.stripe.com/v3/"></script>
-@endpush
-
 @section('content')
 
 {{-- HERO WITH DONATION WIDGET --}}
@@ -111,9 +107,8 @@
                         </button>
 
                         {{-- Payment Methods --}}
-                        <div class="mt-4 flex items-center justify-center gap-4 opacity-60">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png" alt="Visa" class="h-5 grayscale">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/200px-Mastercard-logo.svg.png" alt="Mastercard" class="h-5 grayscale">
+                        <div class="mt-4 flex items-center justify-center gap-6 opacity-90">
+                            <span class="text-sm font-semibold text-gray-600">JustGiving</span>
                         </div>
                     </div>
                 </div>
@@ -247,27 +242,40 @@
                                     </div>
                                 </div>
 
-                                {{-- Card Details --}}
-                                <div>
-                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Card Details *</label>
-                                    <div id="card-element" class="py-3 px-4 border-2 border-gray-300 rounded"></div>
-                                    <div id="card-errors" class="text-red-600 text-sm mt-2" x-text="cardError"></div>
+                                {{-- JustGiving Payment Section --}}
+                                <div class="space-y-4">
+                                    <p class="text-sm text-gray-700">
+                                        Continue to JustGiving to complete your donation securely.
+                                    </p>
+
+                                    @if(!empty($justgivingLinkId))
+                                        <div class="flex justify-center">
+                                            <script src="https://www.justgiving.com/widgets/scripts/widget.js"
+                                                data-version="2"
+                                                data-widgetType="donateButton"
+                                                data-linkType="givingCheckout"
+                                                data-donateButtonType="justgivingSmall"
+                                                data-linkId="{{ $justgivingLinkId }}"
+                                                data-marketCode="GB"
+                                                data-showPaymentLogos="true"
+                                                data-popupCheckout="true"
+                                                type="text/javascript"></script>
+                                        </div>
+                                    @else
+                                        <a
+                                            href="{{ $justgivingUrl }}"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="w-full inline-flex items-center justify-center bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-6 rounded transition-colors text-lg uppercase tracking-wide"
+                                        >
+                                            Continue with JustGiving
+                                        </a>
+                                    @endif
+
+                                    <p class="text-xs text-gray-500 text-center">
+                                        🔒 Your payment will be processed securely on JustGiving
+                                    </p>
                                 </div>
-
-                                {{-- Process Payment Button --}}
-                                <button
-                                    type="button"
-                                    @click="processPayment()"
-                                    :disabled="processing"
-                                    class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-6 rounded transition-colors text-lg uppercase tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
-                                >
-                                    <span x-show="!processing">Complete Donation</span>
-                                    <span x-show="processing">Processing...</span>
-                                </button>
-
-                                <p class="text-xs text-gray-500 text-center">
-                                    🔒 Your payment is secure and encrypted
-                                </p>
                             </div>
                         </div>
                     </div>
@@ -379,7 +387,7 @@
                 🤝 Donate Now
             </a>
             <p class="text-sm text-gray-500 mt-3">
-                Secure payment processed by Stripe
+                Secure payment processed by JustGiving
             </p>
         </div>
 
@@ -405,7 +413,7 @@
                 <div class="text-5xl mb-4">💳</div>
                 <h3 class="text-xl font-bold text-gray-900 mb-3">Secure Payments</h3>
                 <p class="text-gray-600">
-                    All payments are processed securely through Stripe with bank-level encryption.
+                    All payments are processed securely through JustGiving with bank-level encryption.
                 </p>
             </div>
 
@@ -494,7 +502,7 @@
             <div class="rounded-2xl border p-8 bg-white">
                 <h3 class="font-bold text-lg text-gray-900 mb-3">Can I donate in another way?</h3>
                 <p class="text-gray-700">
-                    Yes! You can contact us directly at <a href="mailto:info@educatetheorphans.org" class="text-green-600 font-semibold hover:underline">info@educatetheorphans.org</a> to discuss other giving options such as bank transfers, corporate donations, or grants.
+                    Yes! You can contact us directly at <a href="mailto:info@educatetheorphans.com" class="text-green-600 font-semibold hover:underline">info@educatetheorphans.com</a> to discuss other giving options such as bank transfers, corporate donations, or grants.
                 </p>
             </div>
         </div>
@@ -502,11 +510,6 @@
 </section>
 
 <script>
-// Initialize Stripe
-const stripe = Stripe('{{ $stripeKey }}');
-const elements = stripe.elements();
-let cardElement;
-
 function donationWidget() {
     return {
         amount: 10,
@@ -527,43 +530,12 @@ function donationWidget() {
         },
         processing: false,
         success: false,
-        cardError: '',
         showPaymentModal: false,
 
         init() {
             this.updateImpact();
             this.$watch('amount', () => this.updateImpact());
             this.$watch('frequency', () => this.updateImpact());
-            
-            // Initialize Stripe Card Element when modal is shown
-            this.$watch('showPaymentModal', (value) => {
-                if (value === true) {
-                    this.$nextTick(() => {
-                        if (!cardElement) {
-                            cardElement = elements.create('card', {
-                                style: {
-                                    base: {
-                                        fontSize: '16px',
-                                        color: '#374151',
-                                        '::placeholder': {
-                                            color: '#9CA3AF',
-                                        },
-                                    },
-                                },
-                            });
-                            cardElement.mount('#card-element');
-                            
-                            cardElement.on('change', (event) => {
-                                if (event.error) {
-                                    this.cardError = event.error.message;
-                                } else {
-                                    this.cardError = '';
-                                }
-                            });
-                        }
-                    });
-                }
-            });
         },
 
         updateImpact() {
@@ -588,92 +560,6 @@ function donationWidget() {
             }
         },
 
-        async processPayment() {
-            // Validation
-            if (!this.donorEmail || this.amount < 5) {
-                alert('Please enter your email and a donation amount of at least £5');
-                return;
-            }
-
-            if (this.giftAidEnabled) {
-                if (!this.giftAid.title || !this.giftAid.firstName || !this.giftAid.lastName || 
-                    !this.giftAid.addressLine1 || !this.giftAid.city || !this.giftAid.postcode) {
-                    alert('Please complete all Gift Aid fields');
-                    return;
-                }
-            }
-
-            this.processing = true;
-            this.cardError = '';
-
-            try {
-                // Create Payment Intent
-                const response = await fetch('/stripe/create-payment-intent', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                    },
-                    body: JSON.stringify({
-                        amount: this.amount,
-                        frequency: this.frequency === 'monthly' ? 'monthly' : 'one-time',
-                        payment_method: 'card',
-                        donor_email: this.donorEmail,
-                        gift_aid: this.giftAidEnabled,
-                        gift_aid_title: this.giftAidEnabled ? this.giftAid.title : null,
-                        gift_aid_first_name: this.giftAidEnabled ? this.giftAid.firstName : null,
-                        gift_aid_last_name: this.giftAidEnabled ? this.giftAid.lastName : null,
-                        gift_aid_address_line1: this.giftAidEnabled ? this.giftAid.addressLine1 : null,
-                        gift_aid_address_line2: this.giftAidEnabled ? this.giftAid.addressLine2 : null,
-                        gift_aid_city: this.giftAidEnabled ? this.giftAid.city : null,
-                        gift_aid_postcode: this.giftAidEnabled ? this.giftAid.postcode : null,
-                        aggregated_donations: this.giftAidEnabled ? this.giftAid.aggregatedDonations : null,
-                        sponsored_event: this.giftAidEnabled ? this.giftAid.sponsoredEvent : false
-                    })
-                });
-
-                const data = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(data.error || 'Payment failed');
-                }
-
-                // Confirm the payment with Stripe
-                const { error, paymentIntent } = await stripe.confirmCardPayment(data.clientSecret, {
-                    payment_method: {
-                        card: cardElement,
-                        billing_details: {
-                            email: this.donorEmail,
-                        },
-                    },
-                });
-
-                if (error) {
-                    this.cardError = error.message;
-                    this.processing = false;
-                } else if (paymentIntent.status === 'succeeded') {
-                    // Payment succeeded
-                    await fetch('/stripe/payment-success', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                        },
-                        body: JSON.stringify({
-                            payment_intent_id: paymentIntent.id
-                        })
-                    });
-
-                    this.success = true;
-                    this.processing = false;
-                    this.resetForm();
-                }
-            } catch (error) {
-                this.cardError = error.message;
-                this.processing = false;
-            }
-        },
-
         resetForm() {
             this.donorEmail = '';
             this.giftAid = {
@@ -687,10 +573,6 @@ function donationWidget() {
                 aggregatedDonations: '',
                 sponsoredEvent: false
             };
-            this.cardError = '';
-            if (cardElement) {
-                cardElement.clear();
-            }
             
             // Close modal after a delay to show success message
             setTimeout(() => {

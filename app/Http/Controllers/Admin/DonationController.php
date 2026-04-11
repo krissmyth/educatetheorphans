@@ -83,6 +83,23 @@ class DonationController extends Controller
     }
 
     /**
+     * Delete selected donations from admin list
+     */
+    public function bulkDestroy(Request $request)
+    {
+        $validated = $request->validate([
+            'donation_ids' => ['required', 'array', 'min:1'],
+            'donation_ids.*' => ['integer', 'exists:donations,id'],
+        ]);
+
+        $deletedCount = Donation::whereIn('id', $validated['donation_ids'])->delete();
+
+        return redirect()
+            ->route('admin.donations.index')
+            ->with('success', $deletedCount . ' donation(s) deleted successfully.');
+    }
+
+    /**
      * Export Gift Aid donations to CSV for HMRC submission
      */
     public function exportGiftAid(Request $request)
