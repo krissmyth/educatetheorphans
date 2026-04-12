@@ -13,6 +13,11 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
+        // Honeypot check — bots fill in hidden fields, real users don't
+        if ($request->filled('website')) {
+            return back()->with('success', 'Thank you! Your message has been sent.');
+        }
+
         // Validate the form data
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -39,7 +44,7 @@ class ContactController extends Controller
                     ->subject('New Contact Form: ' . $validated['subject']);
             });
 
-            return back()->with('success', 'Thank you! Your message has been sent successfully. We\'ll be in touch within 48 hours.');
+            return back()->with('success', 'Thank you! Your message has been sent successfully. We\'ll be in touch as soon as we can.');
         } catch (\Exception $e) {
             $errorMessage = $e->getMessage();
 

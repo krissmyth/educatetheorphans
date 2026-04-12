@@ -30,7 +30,7 @@
         <div>
             <h2 class="text-3xl font-bold">Our Mission</h2>
             <p class="mt-4 text-gray-700 leading-relaxed">
-                Educate the Orphans is a Christian charity based in Kenya, committed to supporting orphaned and vulnerable children.
+                Educate the Orphans is a Christian charity operating in Kenya, committed to supporting orphaned and vulnerable children.
             </p>
             <p class="mt-4 text-gray-700 leading-relaxed">
                 Our mission is to demonstrate the love of Jesus through practical action. We do this by providing children with essential needs such as food, clothing, and access to education. We have also established two rescue centres that offer safe shelter for children who have escaped human trafficking, child marriage, and abuse.

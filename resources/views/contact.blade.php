@@ -59,24 +59,18 @@
                     <a href="https://www.facebook.com/EducatetheOrphans" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-600 transition">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                     </a>
-                    <a href="https://www.instagram.com/etoministries/" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-pink-600 transition">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12c0 6.627 5.373 12 12 12s12-5.373 12-12c0-6.627-5.373-12-12-12zm0 2.16c2.686 0 3.006.01 4.061.059 2.537.115 3.855 1.465 3.97 3.97.048 1.056.058 1.376.058 4.061 0 2.686-.01 3.006-.059 4.061-.115 2.504-1.434 3.855-3.97 3.97-1.056.048-1.376.058-4.061.058-2.686 0-3.006-.01-4.061-.059-2.504-.115-3.856-1.465-3.971-3.97-.047-1.056-.058-1.376-.058-4.061 0-2.686.01-3.006.059-4.061.115-2.504 1.465-3.855 3.97-3.97 1.056-.047 1.376-.058 4.061-.058zm0 3.68c-2.263 0-4.16 1.897-4.16 4.16s1.897 4.16 4.16 4.16 4.16-1.897 4.16-4.16-1.897-4.16-4.16-4.16zm0 6.86c-1.488 0-2.7-1.212-2.7-2.7s1.212-2.7 2.7-2.7 2.7 1.212 2.7 2.7-1.212 2.7-2.7 2.7zm5.338-7.44c-.53 0-.96.43-.96.96s.43.96.96.96.96-.43.96-.96-.43-.96-.96-.96z"/></svg>
-                    </a>
-                    <a href="https://x.com/EtoMinistries" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-400 transition">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417a9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
-                    </a>
-                    <a href="https://www.youtube.com/channel/UCwqCS6I8bGI16yf1iM0h7dw?view_as=subscriber" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-red-600 transition">
+<a href="https://www.youtube.com/channel/UCwqCS6I8bGI16yf1iM0h7dw?view_as=subscriber" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-red-600 transition">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                     </a>
                 </div>
             </div>
 
-            <!-- Response Time -->
+            <!-- Volunteer Run -->
             <div class="rounded-2xl border p-8 bg-white hover:shadow-lg transition">
-                <div class="text-3xl mb-4">⏱️</div>
-                <h3 class="text-xl font-bold text-gray-900 mb-2">Response Time</h3>
-                <p class="text-gray-600 text-sm font-semibold">48 hours</p>
-                <p class="text-xs text-gray-500 mt-2">We'll get back to you soon</p>
+                <div class="text-3xl mb-4">❤️</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Volunteer-Run</h3>
+                <p class="text-gray-600 text-sm">Our UK & Ireland team is entirely volunteer-run, giving their time for God's work.</p>
+                <p class="text-xs text-gray-500 mt-2">We'll respond as soon as we can</p>
             </div>
         </div>
     </div>
@@ -96,17 +90,29 @@
                 <div class="text-4xl mb-4">🎤</div>
                 <h3 class="text-xl font-bold text-gray-900 mb-3">Speaking Engagements</h3>
                 <p class="text-gray-700 mb-4">
-                    We'd be honoured to share about our work at your church, small group, school, or community organisation. Contact us to discuss available dates and topics.
+                    We'd be honoured to share about our work at your church, small group, school, or community organisation. Contact us to discuss available dates.
                 </p>
             </div>
 
-            <!-- Partnership Opportunities -->
+            <!-- Prayer Support -->
             <div class="rounded-2xl border p-8 bg-gray-50 hover:shadow-lg transition">
-                <div class="text-4xl mb-4">🤝</div>
-                <h3 class="text-xl font-bold text-gray-900 mb-3">Partnership Opportunities</h3>
+                <div class="text-4xl mb-4">🙏</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Prayer Support</h3>
                 <p class="text-gray-700 mb-4">
-                    Interested in corporate partnerships, grants, or unique collaboration ideas? We'd love to explore how we can work together to make an impact.
+                    Prayer is at the heart of everything we do. Join our WhatsApp prayer group to intercede for the children, families, and communities we serve in Kenya.
                 </p>
+                <div class="flex flex-col items-center gap-2">
+                    <img
+                        src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Fchat.whatsapp.com%2FDGiYTyGNo1CBfaEaBtTYRT%3Fmode%3Dgi_t"
+                        alt="Scan to join ETO Prayer WhatsApp Group"
+                        class="rounded-lg border p-1 bg-white"
+                        width="140" height="140"
+                    >
+                    <p class="text-xs text-gray-500">Scan to join our prayer WhatsApp group</p>
+                    <a href="https://chat.whatsapp.com/DGiYTyGNo1CBfaEaBtTYRT?mode=gi_t" target="_blank" rel="noopener" class="text-sm font-semibold text-green-600 hover:underline">
+                        Or tap here to join →
+                    </a>
+                </div>
             </div>
 
             <!-- Learn More -->
@@ -114,7 +120,10 @@
                 <div class="text-4xl mb-4">📚</div>
                 <h3 class="text-xl font-bold text-gray-900 mb-3">Learn More About Us</h3>
                 <p class="text-gray-700 mb-4">
-                    Want to know more about our programmes, impact, financial reports, or team? Get in touch—we're committed to transparency and happy to answer your questions.
+                    Want to know more about our programmes, impact, or team?
+                </p>
+                <p class="text-gray-700 mb-4">
+                    Get in touch — we're committed to transparency and happy to answer your questions.
                 </p>
             </div>
         </div>
@@ -146,6 +155,12 @@
         <div class="rounded-2xl border bg-white p-8 md:p-12">
             <form action="{{ route('contact.store') }}" method="POST" class="space-y-6">
                 @csrf
+
+                {{-- Honeypot — hidden from real users, bots fill it in --}}
+                <div aria-hidden="true" style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;">
+                    <label for="website">Leave this empty</label>
+                    <input type="text" name="website" id="website" tabindex="-1" autocomplete="off" value="">
+                </div>
 
                 <!-- Name -->
                 <div>
@@ -191,12 +206,12 @@
                         class="w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-600 @error('subject') border-red-500 @enderror"
                     >
                         <option value="" disabled selected>Select a topic...</option>
-                        <option value="Child Sponsorship" @selected(old('subject') === 'Child Sponsorship')>Child Sponsorship</option>
+                        <option value="Find Out More About Our Work" @selected(old('subject') === 'Find Out More About Our Work')>Find Out More About Our Work</option>
                         <option value="Make a Donation" @selected(old('subject') === 'Make a Donation')>Make a Donation</option>
+                        <option value="Fundraise for Us" @selected(old('subject') === 'Fundraise for Us')>Fundraise for Us</option>
                         <option value="Speaking Request" @selected(old('subject') === 'Speaking Request')>Speaking Request</option>
-                        <option value="Volunteer Opportunity" @selected(old('subject') === 'Volunteer Opportunity')>Volunteer Opportunity</option>
-                        <option value="Partnership/Business" @selected(old('subject') === 'Partnership/Business')>Partnership/Business</option>
                         <option value="Prayer Request" @selected(old('subject') === 'Prayer Request')>Prayer Request</option>
+<option value="General Enquiry" @selected(old('subject') === 'General Enquiry')>General Enquiry</option>
                         <option value="Other" @selected(old('subject') === 'Other')>Other</option>
                     </select>
                     @error('subject')
@@ -229,7 +244,7 @@
                 </button>
 
                 <p class="text-xs text-gray-600 text-center">
-                    We'll review your message and get back to you within 48 hours.
+                    We are a volunteer team — we'll review your message and get back to you as soon as we can.
                 </p>
             </form>
         </div>
@@ -243,44 +258,44 @@
 
         <div class="grid gap-6 md:grid-cols-2">
             <div class="rounded-2xl border p-8 bg-white hover:shadow-lg transition">
-                <h3 class="font-bold text-lg text-gray-900 mb-3">How can I sponsor a child?</h3>
-                <p class="text-gray-700">
-                    Contact us directly to get started. Our team will help match you with a child and explain the sponsorship programme in detail.
-                </p>
-            </div>
-
-            <div class="rounded-2xl border p-8 bg-white hover:shadow-lg transition">
                 <h3 class="font-bold text-lg text-gray-900 mb-3">Where does my donation go?</h3>
                 <p class="text-gray-700">
-                    100% of donations go directly to programmes and services. We maintain full transparency through regular financial reports.
+                    100% of donations go directly to programmes and services supporting children and communities in Tharaka, Kenya. We are committed to full transparency.
                 </p>
             </div>
 
             <div class="rounded-2xl border p-8 bg-white hover:shadow-lg transition">
-                <h3 class="font-bold text-lg text-gray-900 mb-3">Can I volunteer in Kenya?</h3>
+                <h3 class="font-bold text-lg text-gray-900 mb-3">How can I fundraise for ETO?</h3>
                 <p class="text-gray-700">
-                    Yes! We arrange volunteer opportunities based on your skills and timeline. We also offer remote volunteering options.
+                    Whether it's a sponsored event, a church collection, or a personal challenge, we'd love to support you. Get in touch and our volunteer team will help you get started.
                 </p>
             </div>
 
             <div class="rounded-2xl border p-8 bg-white hover:shadow-lg transition">
-                <h3 class="font-bold text-lg text-gray-900 mb-3">How can businesses partner with us?</h3>
+                <h3 class="font-bold text-lg text-gray-900 mb-3">Can I invite ETO to speak at my church or group?</h3>
                 <p class="text-gray-700">
-                    We welcome corporate partnerships and team projects. Email us to discuss opportunities tailored to your company.
+                    Yes — we'd be honoured to share about our work in Kenya. Contact us to discuss available dates and we'll do our best to come along.
                 </p>
             </div>
 
             <div class="rounded-2xl border p-8 bg-white hover:shadow-lg transition">
-                <h3 class="font-bold text-lg text-gray-900 mb-3">How often will I hear from my sponsored child?</h3>
+                <h3 class="font-bold text-lg text-gray-900 mb-3">How can I pray for the work in Kenya?</h3>
                 <p class="text-gray-700">
-                    You'll receive quarterly updates with photos and progress reports. We encourage direct communication with sponsored children.
+                    Prayer is at the heart of everything we do. You can join our WhatsApp prayer group by scanning the QR code above, or sign up to our newsletter to receive regular prayer updates.
                 </p>
             </div>
 
             <div class="rounded-2xl border p-8 bg-white hover:shadow-lg transition">
-                <h3 class="font-bold text-lg text-gray-900 mb-3">Is my donation tax-deductible?</h3>
+                <h3 class="font-bold text-lg text-gray-900 mb-3">Who runs Educate the Orphans?</h3>
                 <p class="text-gray-700">
-                    Yes! Educate the Orphans is a registered nonprofit. You'll receive a tax receipt for your donations.
+                    Our UK & Ireland team is entirely volunteer-run, giving their time for God's work. We also work closely with our Kenya Director, Livingstone Njeru, who himself was a sponsored child through ETO.
+                </p>
+            </div>
+
+            <div class="rounded-2xl border p-8 bg-white hover:shadow-lg transition">
+                <h3 class="font-bold text-lg text-gray-900 mb-3">Can UK taxpayers claim Gift Aid?</h3>
+                <p class="text-gray-700">
+                    Yes! If you're a UK taxpayer, your donation is worth 25% more at no extra cost to you through Gift Aid. This is handled automatically when you donate through JustGiving.
                 </p>
             </div>
         </div>
@@ -291,9 +306,19 @@
 <section class="py-16 bg-gradient-to-r from-green-600 to-emerald-600">
     <div class="mx-auto max-w-6xl px-4 text-center text-white">
         <h2 class="text-3xl md:text-4xl font-bold mb-4">Support Our Work in Kenya</h2>
-        <p class="text-lg text-green-50 max-w-2xl mx-auto mb-8">
+        <p class="text-lg text-green-50 max-w-2xl mx-auto mb-4">
             Your generosity makes a direct difference to the children and families we serve. Every donation — however large or small — goes straight to those who need it most.
         </p>
+        <div class="flex flex-wrap justify-center gap-6 max-w-2xl mx-auto mb-8 text-sm text-green-100">
+            <div class="flex items-center gap-2">
+                <span class="text-white font-bold text-lg">100%</span>
+                <span>of every donation goes directly to our work in Kenya</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span>❤️</span>
+                <span>Our entire UK & Ireland team give their time freely as volunteers</span>
+            </div>
+        </div>
         <div class="flex flex-col items-center gap-3">
             <p class="font-semibold text-white">Donate securely below</p>
             <script src="https://www.justgiving.com/widgets/scripts/widget.js"

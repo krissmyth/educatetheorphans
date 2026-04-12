@@ -21,13 +21,14 @@ Route::get('/donate', [DonationController::class, 'show'])->name('donate');
 Route::post('/donate/redirect', [DonationController::class, 'redirectToJustGiving'])->name('donate.redirect');
 Route::get('/api/campaign-data', [DonationController::class, 'getCampaignData'])->name('campaign.data');
 
-// Newsletter subscription
-Route::post('/subscribe', [NewsController::class, 'subscribe'])->name('newsletter.subscribe');
+// Newsletter subscription — max 3 attempts per 10 minutes per IP
+Route::post('/subscribe', [NewsController::class, 'subscribe'])->middleware('throttle:3,10')->name('newsletter.subscribe');
 
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+// Contact form — max 5 submissions per 10 minutes per IP
+Route::post('/contact', [ContactController::class, 'store'])->middleware('throttle:5,10')->name('contact.store');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 

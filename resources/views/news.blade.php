@@ -12,13 +12,51 @@
         class="h-[560px] w-full object-cover"
         alt="News and Updates"
     >
-    <div class="absolute inset-0 bg-gradient-to-b from-black/65 via-black/20 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-transparent"></div>
 
     <div class="absolute inset-0">
         <div class="mx-auto max-w-6xl px-4 h-full flex items-start pt-12">
-            <div class="max-w-2xl text-white">
-                <h1 class="text-5xl font-bold leading-tight">News & Updates</h1>
-                <p class="mt-4 text-lg text-gray-200">Stay informed about our latest initiatives, stories, and impact updates from the field.</p>
+            <div class="flex flex-col md:flex-row md:items-start gap-8 w-full">
+
+                {{-- Left: Title & description --}}
+                <div class="max-w-lg text-white">
+                    <h1 class="text-5xl font-bold leading-tight">News & Updates</h1>
+                    <p class="mt-4 text-lg text-gray-200">Stay informed about our latest initiatives, stories, and impact updates from the field.</p>
+                </div>
+
+                {{-- Right: Subscribe form --}}
+                <div class="md:ml-auto w-full md:max-w-sm bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
+                    <h2 class="text-lg font-bold text-white mb-1">Subscribe to Updates</h2>
+                    <p class="text-xs text-gray-300 mb-4">Subscribe to stay connected with us and up to date with all that God is doing through Educate the Orphans.</p>
+                    <form action="https://eto-ministries.us20.list-manage.com/subscribe/post?u=4e19ab77a2020248a46932b37&amp;id=1010eefcd1&amp;f_id=004e5eeef0" method="post" target="_blank" class="space-y-3">
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label for="news-FNAME" class="block text-xs font-medium text-gray-200 mb-1">First Name <span class="text-red-400">*</span></label>
+                                <input type="text" name="FNAME" id="news-FNAME" required
+                                    class="w-full rounded-lg border border-white/30 bg-white/20 text-white placeholder-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400">
+                            </div>
+                            <div>
+                                <label for="news-LNAME" class="block text-xs font-medium text-gray-200 mb-1">Last Name <span class="text-red-400">*</span></label>
+                                <input type="text" name="LNAME" id="news-LNAME" required
+                                    class="w-full rounded-lg border border-white/30 bg-white/20 text-white placeholder-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="news-EMAIL" class="block text-xs font-medium text-gray-200 mb-1">Email Address <span class="text-red-400">*</span></label>
+                            <input type="email" name="EMAIL" id="news-EMAIL" required
+                                class="w-full rounded-lg border border-white/30 bg-white/20 text-white placeholder-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400">
+                        </div>
+                        {{-- Mailchimp honeypot (spam protection) --}}
+                        <div aria-hidden="true" style="position: absolute; left: -5000px;">
+                            <input type="text" name="b_4e19ab77a2020248a46932b37_1010eefcd1" tabindex="-1" value="">
+                        </div>
+                        <button type="submit"
+                            class="w-full rounded-lg bg-green-600 text-white px-4 py-2.5 font-semibold hover:bg-green-700 transition text-sm">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+
             </div>
         </div>
     </div>

@@ -8,7 +8,7 @@
 {{-- HERO --}}
 <section class="relative">
     <img
-        src="https://images.unsplash.com/photo-1559027615-cd2628902d4a?auto=format&fit=crop&w=2000&q=80"
+        src="{{ asset('images/get-involved.jpg') }}"
         class="h-[560px] w-full object-cover"
         alt="Get Involved"
     >
@@ -45,7 +45,7 @@
                     </li>
                     <li class="flex gap-2">
                         <span class="text-green-600 font-bold">✓</span>
-                        <span>All UK staff are volunteers</span>
+                        <span>Our entire UK & Ireland team are volunteers</span>
                     </li>
                 </ul>
                 <div class="mt-6 text-center">
@@ -162,9 +162,13 @@
                 <p class="mt-3 text-gray-700">
                     Tell your friends and family about Educate the Orphans. Follow us on social media and share our updates to expand our community of supporters.
                 </p>
-                <div class="mt-4 flex gap-3">
-                    <a href="#" class="text-sm font-semibold text-blue-600 hover:underline">Facebook</a>
-                    <a href="#" class="text-sm font-semibold text-blue-600 hover:underline">Instagram</a>
+                <div class="mt-4 flex gap-4">
+                    <a href="https://www.facebook.com/EducatetheOrphans" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-600 transition" title="Facebook">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    </a>
+<a href="https://www.youtube.com/channel/UCwqCS6I8bGI16yf1iM0h7dw?view_as=subscriber" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-red-600 transition" title="YouTube">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    </a>
                 </div>
             </div>
         </div>

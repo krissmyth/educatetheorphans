@@ -60,7 +60,7 @@
 
                 <p class="mt-6 text-sm text-gray-300">
                     Every penny we receive goes directly to our work in Tharaka, Kenya.<br>
-                    All our UK staff are volunteers, ensuring that all donations support those most in need.
+                    Our entire UK & Ireland team are volunteers, ensuring that all donations support those most in need.
                 </p>
             </div>
         </div>
@@ -73,7 +73,7 @@
         <div class="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-sm text-center">
             <span class="font-semibold text-amber-300 uppercase tracking-wide text-xs">Your donation goes directly to:</span>
             <div class="flex items-center gap-1.5">
-                <span class="text-amber-400 font-bold">£5</span>
+                <span class="text-amber-400 font-bold">£10</span>
                 <span class="text-green-100">feeds a child for one week</span>
             </div>
             <span class="hidden sm:block text-green-500">·</span>
@@ -84,7 +84,7 @@
             <span class="hidden sm:block text-green-500">·</span>
             <div class="flex items-center gap-1.5">
                 <span class="text-amber-400 font-bold">£50</span>
-                <span class="text-green-100">supports a family for a month</span>
+                <span class="text-green-100">helps support a family for a month</span>
             </div>
             <span class="hidden sm:block text-green-500">·</span>
             <a href="{{ route('donate') }}" class="font-semibold text-amber-400 hover:text-amber-300 transition">
@@ -118,6 +118,16 @@
                 <span>people with clean water</span>
             </div>
         </div>
+    </div>
+</section>
+
+{{-- SCRIPTURE STRIP --}}
+<section class="bg-white border-b py-6">
+    <div class="mx-auto max-w-3xl px-4 text-center">
+        <p class="text-lg italic text-gray-700 leading-relaxed">
+            "Religion that God our Father accepts as pure and faultless is this: to look after orphans and widows in their distress."
+        </p>
+        <p class="mt-2 text-sm font-semibold text-green-700">James 1:27</p>
     </div>
 </section>
 

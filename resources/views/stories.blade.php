@@ -53,7 +53,7 @@
                     <div class="p-6">
                         <p class="text-sm font-semibold text-{{ $story['category_color'] }}-600 mb-2">{{ $story['category'] }}</p>
                         <h3 class="text-lg font-bold group-hover:text-green-600 transition">{{ $story['title'] }}</h3>
-                        <p class="mt-3 text-sm text-gray-600 leading-relaxed">{{ $story['description'] }}</p>
+                        <p class="mt-3 text-sm text-gray-600 leading-relaxed">{{ $story['card_description'] ?? $story['description'] }}</p>
                         <p class="mt-4 text-sm font-semibold text-green-600">
                             {{ isset($story['youtube_id']) ? 'Watch story →' : 'Read story →' }}
                         </p>
@@ -89,21 +89,54 @@
 
                 @else
                     {{-- Image story --}}
-                    <div class="grid md:grid-cols-2 gap-10 items-center">
-                        <div class="{{ $index % 2 === 0 ? 'md:order-2' : '' }}">
-                            <img
-                                src="{{ asset('images/stories/' . $story['image']) }}"
-                                alt="{{ $story['title'] }}"
-                                class="w-full rounded-xl shadow-md object-cover"
-                            >
+                    @if(isset($story['image_child']))
+                        {{-- Two-photo layout: child photo + job photo side by side, then text below --}}
+                        <p class="text-sm font-semibold text-{{ $story['category_color'] }}-600 mb-2">{{ $story['category'] }}</p>
+                        <h2 class="text-3xl font-bold mb-6">{{ $story['title'] }}</h2>
+                        <div class="grid md:grid-cols-2 gap-6 mb-8">
+                            <div class="flex flex-col items-center gap-2">
+                                <div class="w-full h-80 rounded-xl shadow-md overflow-hidden">
+                                    <img
+                                        src="{{ asset('images/stories/' . $story['image_child']) }}"
+                                        alt="{{ $story['title'] }} as a child"
+                                        class="w-full h-full object-cover object-top"
+                                    >
+                                </div>
+                                <p class="text-xs text-gray-500 italic">{{ $story['image_child_caption'] ?? 'As a child' }}</p>
+                            </div>
+                            <div class="flex flex-col items-center gap-2">
+                                <div class="w-full h-80 rounded-xl shadow-md overflow-hidden">
+                                    <img
+                                        src="{{ asset('images/stories/' . $story['image']) }}"
+                                        alt="{{ $story['title'] }} today"
+                                        class="w-full h-full object-cover object-top"
+                                    >
+                                </div>
+                                <p class="text-xs text-gray-500 italic">{{ $story['image_caption'] ?? 'Today' }}</p>
+                            </div>
                         </div>
-                        <div class="{{ $index % 2 === 0 ? 'md:order-1' : '' }}">
-                            <p class="text-sm font-semibold text-{{ $story['category_color'] }}-600 mb-2">{{ $story['category'] }}</p>
-                            <h2 class="text-3xl font-bold">{{ $story['title'] }}</h2>
-                            <p class="mt-4 text-gray-700 leading-relaxed">{{ $story['description'] }}</p>
-                            <p class="mt-6 text-gray-600 italic border-l-4 border-green-600 pl-4">"{{ $story['quote'] }}"</p>
+                        @foreach(explode("\n\n", $story['description']) as $paragraph)
+                            <p class="text-gray-700 leading-relaxed mb-4">{{ $paragraph }}</p>
+                        @endforeach
+                        <p class="mt-6 text-gray-600 italic border-l-4 border-green-600 pl-4">"{{ $story['quote'] }}"</p>
+                    @else
+                        {{-- Single image layout --}}
+                        <div class="grid md:grid-cols-2 gap-10 items-center">
+                            <div class="{{ $index % 2 === 0 ? 'md:order-2' : '' }}">
+                                <img
+                                    src="{{ asset('images/stories/' . $story['image']) }}"
+                                    alt="{{ $story['title'] }}"
+                                    class="w-full rounded-xl shadow-md object-cover"
+                                >
+                            </div>
+                            <div class="{{ $index % 2 === 0 ? 'md:order-1' : '' }}">
+                                <p class="text-sm font-semibold text-{{ $story['category_color'] }}-600 mb-2">{{ $story['category'] }}</p>
+                                <h2 class="text-3xl font-bold">{{ $story['title'] }}</h2>
+                                <p class="mt-4 text-gray-700 leading-relaxed">{{ $story['description'] }}</p>
+                                <p class="mt-6 text-gray-600 italic border-l-4 border-green-600 pl-4">"{{ $story['quote'] }}"</p>
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 @endif
 
             </div>
@@ -121,8 +154,8 @@
                 <p class="mt-2 text-gray-700">Children with changed futures</p>
             </div>
             <div class="text-center">
-                <p class="text-4xl font-bold text-blue-600">200+</p>
-                <p class="mt-2 text-gray-700">University graduates from Educate the Orphans programmes</p>
+                <p class="text-6xl font-bold text-blue-600">∞</p>
+                <p class="mt-2 text-gray-700">Many lives changed</p>
             </div>
             <div class="text-center">
                 <p class="text-4xl font-bold text-purple-600">60,000+</p>
