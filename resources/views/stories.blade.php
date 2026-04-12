@@ -77,7 +77,7 @@
                     <div class="aspect-video w-full rounded-xl overflow-hidden shadow-md">
                         <iframe
                             class="w-full h-full"
-                            src="https://www.youtube.com/embed/{{ $story['youtube_id'] }}"
+                            src="https://www.youtube-nocookie.com/embed/{{ $story['youtube_id'] }}"
                             title="{{ $story['title'] }}"
                             frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
