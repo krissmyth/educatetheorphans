@@ -19,10 +19,10 @@ class SecurityHeaders
         $response->headers->set('X-Content-Type-Options', 'nosniff');
 
         // Control referrer information sent with requests
-        $response->headers->set('Referrer-Policy', 'strict-origin-when-cross-origin');
+        $response->headers->set('Referrer-Policy', 'no-referrer-when-downgrade');
 
         // Disable browser features not needed by this site
-        $response->headers->set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), payment=()');
+        $response->headers->set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), payment=(), encrypted-media=*');
 
         // Content Security Policy — deferred until production deployment.
         // CSP requires browser dev tools to audit all resource sources before enabling.
