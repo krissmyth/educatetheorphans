@@ -9,7 +9,7 @@
 <section class="relative">
     <img
         src="{{ asset('images/Stories.jpg') }}"
-        class="h-[560px] w-full object-cover"
+        class="h-[320px] sm:h-[560px] w-full object-cover"
         alt="Stories of Change"
     >
     <div class="absolute inset-0 bg-gradient-to-b from-black/65 via-black/20 to-transparent"></div>
@@ -17,8 +17,8 @@
     <div class="absolute inset-0">
         <div class="mx-auto max-w-6xl px-4 h-full flex items-start pt-12">
             <div class="max-w-2xl text-white">
-                <h1 class="text-5xl font-bold leading-tight">Lives Changed</h1>
-                <p class="mt-4 text-lg text-gray-200">Real stories of children and families transformed through education, care, and community support.</p>
+                <h1 class="text-3xl sm:text-5xl font-bold leading-tight">Lives Changed</h1>
+                <p class="mt-3 text-base sm:text-lg text-gray-200">Real stories of children and families transformed through education, care, and community support.</p>
             </div>
         </div>
     </div>

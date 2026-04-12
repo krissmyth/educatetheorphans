@@ -9,19 +9,19 @@
 <section class="relative">
     {{-- If you want to use your own image:
          put it in public/images/hero.jpg and change src to: {{ asset('images/hero.jpg') }} --}}
-    <div class="relative h-[560px] w-full overflow-hidden">
+    <div class="relative h-[480px] sm:h-[560px] w-full overflow-hidden">
         <!-- Main Image -->
         <img
             id="heroImage"
             src="{{ asset('images/home.jpg') }}"
-            class="h-[560px] w-full object-cover"
+            class="h-[480px] sm:h-[560px] w-full object-cover"
             alt="Education and community"
         >
         
         <!-- Video Element (initially hidden, loaded lazily) -->
         <video
             id="heroVideo"
-            class="absolute inset-0 h-[560px] w-full object-cover hidden"
+            class="absolute inset-0 h-[480px] sm:h-[560px] w-full object-cover hidden"
             muted
             preload="none"
             poster="{{ asset('images/home.jpg') }}"
@@ -39,15 +39,15 @@
                     Serving needy and orphaned children in Tharaka, Kenya
                 </p>
 
-                <h1 class="mt-4 text-5xl font-bold leading-tight">
+                <h1 class="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
                     Transforming Children's Lives Through Education and Faith
                 </h1>
 
-                <p class="mt-5 text-lg text-gray-200">
+                <p class="mt-4 text-base sm:text-lg text-gray-200">
                     Our mission is to feed, clothe, and educate orphaned and needy children to give them hope and a future
                 </p>
 
-                <div class="mt-8 flex flex-wrap gap-3">
+                <div class="mt-6 flex flex-wrap gap-3">
                     <a href="{{ route('donate') }}"
                        class="rounded-lg bg-white px-6 py-3 font-semibold text-black hover:bg-gray-200">
                         Donate Now
@@ -58,7 +58,7 @@
                     </a>
                 </div>
 
-                <p class="mt-6 text-sm text-gray-300">
+                <p class="mt-4 text-sm text-gray-300 hidden sm:block">
                     Every penny we receive goes directly to our work in Tharaka, Kenya.<br>
                     Our entire UK & Ireland team are volunteers, ensuring that all donations support those most in need.
                 </p>
@@ -70,26 +70,28 @@
 {{-- DONATION IMPACT STRIP --}}
 <section class="bg-green-700 text-white py-4">
     <div class="mx-auto max-w-6xl px-4">
-        <div class="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-sm text-center">
+        <div class="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-x-6 gap-y-1 text-sm text-center">
             <span class="font-semibold text-amber-300 uppercase tracking-wide text-xs">Your donation goes directly to:</span>
-            <div class="flex items-center gap-1.5">
-                <span class="text-amber-400 font-bold">£10</span>
-                <span class="text-green-100">feeds a child for one week</span>
+            <div class="flex flex-wrap justify-center items-center gap-x-4 gap-y-1">
+                <div class="flex items-center gap-1.5">
+                    <span class="text-amber-400 font-bold">£10</span>
+                    <span class="text-green-100">feeds a child for one week</span>
+                </div>
+                <span class="hidden sm:block text-green-500">·</span>
+                <div class="flex items-center gap-1.5">
+                    <span class="text-amber-400 font-bold">£20</span>
+                    <span class="text-green-100">covers a month of schooling</span>
+                </div>
+                <span class="hidden sm:block text-green-500">·</span>
+                <div class="flex items-center gap-1.5">
+                    <span class="text-amber-400 font-bold">£50</span>
+                    <span class="text-green-100">helps support a family for a month</span>
+                </div>
+                <span class="hidden sm:block text-green-500">·</span>
+                <a href="{{ route('donate') }}" class="font-semibold text-amber-400 hover:text-amber-300 transition">
+                    Donate now →
+                </a>
             </div>
-            <span class="hidden sm:block text-green-500">·</span>
-            <div class="flex items-center gap-1.5">
-                <span class="text-amber-400 font-bold">£20</span>
-                <span class="text-green-100">covers a month of schooling</span>
-            </div>
-            <span class="hidden sm:block text-green-500">·</span>
-            <div class="flex items-center gap-1.5">
-                <span class="text-amber-400 font-bold">£50</span>
-                <span class="text-green-100">helps support a family for a month</span>
-            </div>
-            <span class="hidden sm:block text-green-500">·</span>
-            <a href="{{ route('donate') }}" class="font-semibold text-amber-400 hover:text-amber-300 transition">
-                Donate now →
-            </a>
         </div>
     </div>
 </section>
@@ -250,7 +252,7 @@
             <p class="mt-4 text-gray-700">
                 Stories show the real impact—children graduating, families supported, and communities strengthened.
             </p>
-            <div class="mt-7">
+            <div class="mt-7 flex justify-center md:justify-start">
                 <a href="{{ route('stories') }}" class="rounded-lg bg-black px-5 py-3 text-white font-semibold hover:bg-gray-800">
                     Read Stories
                 </a>

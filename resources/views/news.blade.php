@@ -9,7 +9,7 @@
 <section class="relative">
     <img
         src="{{ asset('images/News.jpg') }}"
-        class="h-[560px] w-full object-cover"
+        class="h-[620px] sm:h-[560px] w-full object-cover"
         alt="News and Updates"
     >
     <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-transparent"></div>
@@ -20,8 +20,8 @@
 
                 {{-- Left: Title & description --}}
                 <div class="max-w-lg text-white">
-                    <h1 class="text-5xl font-bold leading-tight">News & Updates</h1>
-                    <p class="mt-4 text-lg text-gray-200">Stay informed about our latest initiatives, stories, and impact updates from the field.</p>
+                    <h1 class="text-3xl sm:text-5xl font-bold leading-tight">News & Updates</h1>
+                    <p class="mt-3 text-base sm:text-lg text-gray-200">Stay informed about our latest initiatives, stories, and impact updates from the field.</p>
                 </div>
 
                 {{-- Right: Subscribe form --}}

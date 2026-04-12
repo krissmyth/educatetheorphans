@@ -9,7 +9,7 @@
 <section class="relative">
     <img
         src="{{ asset('images/about.jpg') }}"
-        class="h-[560px] w-full object-cover"
+        class="h-[320px] sm:h-[560px] w-full object-cover"
         alt="About Educate the Orphans"
     >
     <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
@@ -17,8 +17,8 @@
     <div class="absolute inset-0">
         <div class="mx-auto max-w-6xl px-4 h-full flex items-end pb-12">
             <div class="max-w-2xl text-white">
-                <h1 class="text-5xl font-bold leading-tight">About Educate the Orphans</h1>
-                <p class="mt-4 text-lg text-gray-200">Transforming Lives Through Education and Care</p>
+                <h1 class="text-3xl sm:text-5xl font-bold leading-tight">About Educate the Orphans</h1>
+                <p class="mt-3 text-base sm:text-lg text-gray-200">Transforming Lives Through Education and Care</p>
             </div>
         </div>
     </div>
@@ -151,7 +151,7 @@
                     We trust that God will provide exactly what is needed, and He never lets us down. Your generosity, however large or small, is part of that provision — and it makes a real difference to every child we serve.
                 </p>
             </div>
-            <div class="mt-6 lg:mt-0 flex flex-col items-start gap-2 shrink-0">
+            <div class="mt-6 lg:mt-0 flex flex-col items-center lg:items-start gap-2 shrink-0">
                 <p class="font-semibold text-gray-900">Support our work in Kenya</p>
                 <script src="https://www.justgiving.com/widgets/scripts/widget.js"
                     data-version="2"

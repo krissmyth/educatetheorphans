@@ -9,7 +9,7 @@
 <section class="relative">
     <img
         src="{{ asset('images/Donate.jpg') }}"
-        class="h-[560px] w-full object-cover"
+        class="h-[420px] sm:h-[560px] w-full object-cover"
         alt="Donate"
     >
     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
@@ -18,9 +18,9 @@
         <div class="mx-auto max-w-6xl px-4 h-full flex flex-col lg:flex-row items-end justify-between gap-8 pb-12">
             {{-- Left: Text --}}
             <div class="text-white max-w-xl">
-                <h1 class="text-4xl lg:text-5xl font-bold leading-tight">Make a Donation</h1>
-                <p class="mt-4 text-base lg:text-lg text-gray-200">Your generosity directly helps vulnerable children and families in Kenya access education, food, water, and care.</p>
-                <p class="mt-3 text-sm text-gray-300">Every penny goes directly to our work. Our entire UK & Ireland team are volunteers.</p>
+                <h1 class="text-2xl sm:text-4xl lg:text-5xl font-bold leading-tight">Make a Donation</h1>
+                <p class="mt-3 text-sm sm:text-base lg:text-lg text-gray-200">Your generosity directly helps vulnerable children and families in Kenya access education, food, water, and care.</p>
+                <p class="mt-2 text-xs sm:text-sm text-gray-300 hidden sm:block">Every penny goes directly to our work. Our entire UK & Ireland team are volunteers.</p>
             </div>
 
             {{-- Right: JustGiving Button --}}
@@ -49,28 +49,30 @@
 {{-- DONATION IMPACT STRIP --}}
 <section class="bg-green-700 text-white py-4">
     <div class="mx-auto max-w-6xl px-4">
-        <div class="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-sm text-center">
+        <div class="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-x-6 gap-y-1 text-sm text-center">
             <span class="font-semibold text-amber-300 uppercase tracking-wide text-xs">Your donation goes directly to:</span>
-            <div class="flex items-center gap-1.5">
-                <span class="text-amber-400 font-bold">£10</span>
-                <span class="text-green-100">feeds a child for one week</span>
-            </div>
-            <span class="hidden sm:block text-green-500">·</span>
-            <div class="flex items-center gap-1.5">
-                <span class="text-amber-400 font-bold">£20</span>
-                <span class="text-green-100">covers a month of schooling</span>
-            </div>
-            <span class="hidden sm:block text-green-500">·</span>
-            <div class="flex items-center gap-1.5">
-                <span class="text-amber-400 font-bold">£50</span>
-                <span class="text-green-100">helps support a family for a month</span>
+            <div class="flex flex-wrap justify-center items-center gap-x-4 gap-y-1">
+                <div class="flex items-center gap-1.5">
+                    <span class="text-amber-400 font-bold">£10</span>
+                    <span class="text-green-100">feeds a child for one week</span>
+                </div>
+                <span class="hidden sm:block text-green-500">·</span>
+                <div class="flex items-center gap-1.5">
+                    <span class="text-amber-400 font-bold">£20</span>
+                    <span class="text-green-100">covers a month of schooling</span>
+                </div>
+                <span class="hidden sm:block text-green-500">·</span>
+                <div class="flex items-center gap-1.5">
+                    <span class="text-amber-400 font-bold">£50</span>
+                    <span class="text-green-100">helps support a family for a month</span>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
 {{-- INTERACTIVE DONATION SLIDER --}}
-<section class="py-20 bg-white">
+<section class="py-10 sm:py-20 bg-white">
     <div class="mx-auto max-w-5xl px-4" x-data="donationSlider()" x-init="init()">
         <div class="text-center mb-16">
             <h2 class="text-4xl font-bold mb-3">See Your Impact</h2>
@@ -102,7 +104,7 @@
         </div>
 
         {{-- Main Slider Section --}}
-        <div class="bg-gradient-to-b from-green-50 to-white rounded-3xl border-2 border-green-100 p-8 mb-8">
+        <div class="bg-gradient-to-b from-green-50 to-white rounded-3xl border-2 border-green-100 p-4 sm:p-8 mb-8">
             {{-- Slider and Amount Display --}}
             <div class="flex items-end gap-6 mb-6">
                 {{-- Slider --}}
@@ -128,7 +130,7 @@
 
                 {{-- Amount Display --}}
                 <div class="text-right">
-                    <div class="text-6xl font-bold text-amber-500 leading-none mb-1">
+                    <div class="text-4xl sm:text-6xl font-bold text-amber-500 leading-none mb-1">
                         £<span x-text="amount"></span>
                     </div>
                     <p class="text-xs text-gray-600 font-semibold">
