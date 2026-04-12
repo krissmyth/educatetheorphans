@@ -44,7 +44,7 @@
                 </h1>
 
                 <p class="mt-5 text-lg text-gray-200">
-                    Our mission is to feed, clothe, and educate orphaned and needy children to give them hope and a future (Jeremiah 29:11)
+                    Our mission is to feed, clothe, and educate orphaned and needy children to give them hope and a future
                 </p>
 
                 <div class="mt-8 flex flex-wrap gap-3">
@@ -105,7 +105,7 @@
             <span class="hidden sm:block text-gray-300">|</span>
             <div class="flex items-center gap-2">
                 <span class="font-bold text-gray-900">3,000+</span>
-                <span>children supported</span>
+                <span>children educated</span>
             </div>
             <span class="hidden sm:block text-gray-300">|</span>
             <div class="flex items-center gap-2">
@@ -188,7 +188,7 @@
         <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 text-center">
             <div class="rounded-2xl border p-6">
                 <p class="text-4xl font-bold">1,000+</p>
-                <p class="mt-2 text-gray-600">Children supported</p>
+                <p class="mt-2 text-gray-600">Children sponsored</p>
             </div>
             <div class="rounded-2xl border p-6">
                 <p class="text-4xl font-bold">7</p>

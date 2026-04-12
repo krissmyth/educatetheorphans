@@ -70,7 +70,7 @@ class StoriesController extends Controller
                 'title' => 'Muthuuri Kabea: From Loss to Healing Professions',
                 'category' => 'Overcoming Adversity',
                 'category_color' => 'purple',
-                'description' => 'The photo above shows Muthuuri when he was 7 years old. He has 6 brothers and 1 sister. His father died after falling from a tree collecting honey. Despite losing his father at a young age, Muthuuri persevered through Educate the Orphans\' support. He was sponsored by T. Kelly and received his education at Karani school.' . "\n\n" . 'Muthuuri currently works as a radiographer at Chogoria Hospital.',
+                'description' => 'Muthuuri has 6 brothers and 1 sister. His father died after falling from a tree collecting honey. Despite losing his father at a young age, Muthuuri persevered through Educate the Orphans\' support. He was sponsored by T. Kelly and received his education at Karani school.' . "\n\n" . 'Muthuuri currently works as a radiographer at Chogoria Hospital.',
                 'quote' => 'I\'m now able to help others through my medical profession.',
                 'image' => 'muthuuri-kabea-job.jpg',
                 'image_child' => 'muthuuri-kabea-child.jpg',
