@@ -23,7 +23,7 @@ class StoriesController extends Controller
             ],
             [
                 'id' => 'christopher-gicugu-kauna',
-                'title' => "Christopher Gicugu Kauna: From Poacher to Jesus",
+                'title' => "Christopher Gicugu Kauna: From Poacher to Serving Jesus",
                 'category' => 'Founding Story',
                 'category_color' => 'teal',
                 'description' => 'Christopher Gicugu Kauna was once an elephant poacher in the Tharaka region of Kenya. In this powerful testimony, he shares how his life was transformed after encountering Bobby Moffett — and how that meeting inspired him to dedicate his life to helping orphaned and needy children in his home community.',
