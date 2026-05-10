@@ -22,6 +22,15 @@ class StoriesController extends Controller
                 'youtube_id' => 'i58iM1sJktI'
             ],
             [
+                'id' => 'christopher-gicugu-kauna',
+                'title' => "Christopher Gicugu Kauna: From Poacher to Jesus",
+                'category' => 'Founding Story',
+                'category_color' => 'teal',
+                'description' => 'Christopher Gicugu Kauna was once an elephant poacher in the Tharaka region of Kenya. In this powerful testimony, he shares how his life was transformed after encountering Bobby Moffett — and how that meeting inspired him to dedicate his life to helping orphaned and needy children in his home community.',
+                'quote' => 'My life was changed, and now I want to change the lives of others.',
+                'youtube_id' => '6uIG7PfmNAo'
+            ],
+            [
                 'id' => 'mutrii-mwari',
                 'title' => "Mutrii Mwari: Life Changed",
                 'category' => 'Featured Story',
@@ -50,7 +59,7 @@ class StoriesController extends Controller
                 'image' => 'livingstone-njeru-job.jpg',
                 'image_child' => 'livingstone-njeru-child.jpg',
                 'image_caption' => 'Livingstone today — Kenya Director',
-                'image_child_caption' => 'Livingstone working with ETO children',
+                'image_child_caption' => 'Livingstone as a young ETO sponsored child',
             ],
             [
                 'id' => 'makena-gilugu',

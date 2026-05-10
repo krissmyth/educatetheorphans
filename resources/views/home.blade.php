@@ -187,7 +187,7 @@
         <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 text-center">
             <div class="rounded-2xl border p-6">
                 <p class="text-4xl font-bold">1,000+</p>
-                <p class="mt-2 text-gray-600">Children sponsored</p>
+                <p class="mt-2 text-gray-600">Sponsored children's lives changed forever</p>
             </div>
             <div class="rounded-2xl border p-6">
                 <p class="text-4xl font-bold">7</p>
