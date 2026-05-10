@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContactSubmission;
 use App\Models\PageView;
 use Illuminate\View\View;
 
@@ -16,8 +17,10 @@ class DashboardController extends Controller
             'totalVisitors'      => PageView::getVisitorCount(30),
             'mostViewedPages'    => PageView::getMostViewedPages(5),
             'topReferrers'       => PageView::getTopReferrers(5),
-            'visitorsTrend'      => PageView::getVisitorsLastDays(7),
-            'pageViewsTrend'     => PageView::getPageViewsLastDays(7),
+            'visitorsTrend'       => PageView::getVisitorsLastDays(7),
+            'pageViewsTrend'      => PageView::getPageViewsLastDays(7),
+            'contactSubmissions'  => ContactSubmission::latest()->take(20)->get(),
+            'unreadContactCount'  => ContactSubmission::where('read', false)->count(),
         ]);
     }
 }

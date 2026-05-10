@@ -53,7 +53,7 @@
             <span class="font-semibold text-amber-300 uppercase tracking-wide text-xs">Your donation goes directly to:</span>
             <div class="flex flex-wrap justify-center items-center gap-x-4 gap-y-1">
                 <div class="flex items-center gap-1.5">
-                    <span class="text-amber-400 font-bold">£10</span>
+                    <span class="text-amber-400 font-bold">£15</span>
                     <span class="text-green-100">feeds a child for one week</span>
                 </div>
                 <span class="hidden sm:block text-green-500">·</span>

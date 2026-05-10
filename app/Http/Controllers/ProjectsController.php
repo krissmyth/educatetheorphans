@@ -47,9 +47,9 @@ class ProjectsController extends Controller
             [
                 'id' => 'education',
                 'title' => 'Education Programmes',
-                'description' => 'Operating schools across multiple locations serving over 3,000 children.',
-                'long_description' => 'Education is at the heart of everything we do. We operate seven schools across the Tharaka region, serving over 3,000 children annually. Our education programmes provide not just academic instruction, but also nutritional support, school supplies, and pastoral care.',
-                'impact' => 'Educates and feeds 3,000+ children annually across 7 schools',
+                'description' => 'Operating schools across multiple locations educating 1,500 children every year.',
+                'long_description' => 'Education is at the heart of everything we do. We operate seven schools across the Tharaka region, educating 1,500 children every year. Our education programmes provide not just academic instruction, but also nutritional support, school supplies, and pastoral care.',
+                'impact' => 'Educates and feeds 1,500 children every year across 7 schools',
                 'image' => 'education.jpg'
             ],
             [

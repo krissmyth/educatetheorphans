@@ -74,7 +74,7 @@
             <span class="font-semibold text-amber-300 uppercase tracking-wide text-xs">Your donation goes directly to:</span>
             <div class="flex flex-wrap justify-center items-center gap-x-4 gap-y-1">
                 <div class="flex items-center gap-1.5">
-                    <span class="text-amber-400 font-bold">£10</span>
+                    <span class="text-amber-400 font-bold">£15</span>
                     <span class="text-green-100">feeds a child for one week</span>
                 </div>
                 <span class="hidden sm:block text-green-500">·</span>
@@ -98,25 +98,22 @@
 
 {{-- STATS STRIP --}}
 <section class="bg-gray-50 border-b py-4">
-    <div class="mx-auto max-w-6xl px-4">
-        <div class="flex flex-wrap justify-center items-center gap-x-8 gap-y-2 text-sm text-center text-gray-700">
-            <div class="flex items-center gap-2">
-                <span class="font-bold text-gray-900">Since 1990</span>
+    <div class="mx-auto max-w-5xl px-4">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm text-center text-gray-700">
+            <div class="flex flex-col items-center">
+                <span class="font-bold text-gray-900 text-base">Since 1990</span>
                 <span>serving Kenya's Tharaka region</span>
             </div>
-            <span class="hidden sm:block text-gray-300">|</span>
-            <div class="flex items-center gap-2">
-                <span class="font-bold text-gray-900">3,000+</span>
-                <span>children educated</span>
+            <div class="flex flex-col items-center">
+                <span class="font-bold text-gray-900 text-base">1,500</span>
+                <span>children educated every year</span>
             </div>
-            <span class="hidden sm:block text-gray-300">|</span>
-            <div class="flex items-center gap-2">
-                <span class="font-bold text-gray-900">7 schools</span>
+            <div class="flex flex-col items-center">
+                <span class="font-bold text-gray-900 text-base">7 schools</span>
                 <span>across the region</span>
             </div>
-            <span class="hidden sm:block text-gray-300">|</span>
-            <div class="flex items-center gap-2">
-                <span class="font-bold text-gray-900">60,000+</span>
+            <div class="flex flex-col items-center">
+                <span class="font-bold text-gray-900 text-base">60,000+</span>
                 <span>people with clean water</span>
             </div>
         </div>
