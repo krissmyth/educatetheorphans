@@ -35,6 +35,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['au
 // Admin routes
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
     Route::post('/news/sync', [NewsSyncController::class, 'sync'])->name('news.sync');
+    Route::delete('/contact/{submission}', [ContactController::class, 'destroy'])->name('contact.destroy');
 });
 
 Route::middleware('auth')->group(function () {

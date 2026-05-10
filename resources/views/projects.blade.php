@@ -132,8 +132,8 @@
         <h2 class="text-3xl font-bold text-center mb-12">Our Collective Impact</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div class="rounded-2xl border bg-white p-8 text-center">
-                <p class="text-5xl font-bold text-green-600">3,000+</p>
-                <p class="mt-3 text-gray-700 font-semibold">Children Educated in our Schools</p>
+                <p class="text-5xl font-bold text-green-600">1,500</p>
+                <p class="mt-3 text-gray-700 font-semibold">Children Educated Every Year</p>
             </div>
             <div class="rounded-2xl border bg-white p-8 text-center">
                 <p class="text-5xl font-bold text-green-600">7</p>

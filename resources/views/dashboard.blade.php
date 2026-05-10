@@ -170,6 +170,71 @@
             @endif
         </div>
 
+        {{-- Contact Submissions --}}
+        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-bold text-gray-900">
+                    Contact Form Submissions
+                    @if($unreadContactCount > 0)
+                        <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                            {{ $unreadContactCount }} unread
+                        </span>
+                    @endif
+                </h3>
+            </div>
+
+            @if($contactSubmissions->isEmpty())
+                <p class="text-gray-400 text-sm">No contact submissions yet.</p>
+            @else
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b">
+                                <th class="text-left py-2 px-3 font-semibold text-gray-600">Date</th>
+                                <th class="text-left py-2 px-3 font-semibold text-gray-600">Name</th>
+                                <th class="text-left py-2 px-3 font-semibold text-gray-600">Email</th>
+                                <th class="text-left py-2 px-3 font-semibold text-gray-600">Subject</th>
+                                <th class="text-left py-2 px-3 font-semibold text-gray-600">Message</th>
+                                <th class="text-center py-2 px-3 font-semibold text-gray-600">Email Sent</th>
+                                <th class="py-2 px-3"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($contactSubmissions as $submission)
+                                <tr class="border-b hover:bg-gray-50 {{ !$submission->read ? 'bg-amber-50' : '' }}">
+                                    <td class="py-3 px-3 text-gray-500 whitespace-nowrap">{{ $submission->created_at->format('d M Y H:i') }}</td>
+                                    <td class="py-3 px-3 font-medium text-gray-900 whitespace-nowrap">{{ $submission->name }}</td>
+                                    <td class="py-3 px-3 text-gray-700">
+                                        <a href="mailto:{{ $submission->email }}" class="text-green-600 hover:underline">{{ $submission->email }}</a>
+                                    </td>
+                                    <td class="py-3 px-3 text-gray-700">{{ $submission->subject }}</td>
+                                    <td class="py-3 px-3 text-gray-600 max-w-xs truncate" title="{{ $submission->message }}">{{ $submission->message }}</td>
+                                    <td class="py-3 px-3 text-center">
+                                        @if($submission->email_sent)
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Sent</span>
+                                        @else
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Failed</span>
+                                        @endif
+                                    </td>
+                                    <td class="py-3 px-3">
+                                        <form method="POST" action="{{ route('admin.contact.destroy', $submission) }}"
+                                              onsubmit="return confirm('Delete this submission from {{ addslashes($submission->name) }}?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="text-xs text-red-600 hover:text-red-800 font-medium hover:underline">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @endif
+        </div>
+
         {{-- Quick Links --}}
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
