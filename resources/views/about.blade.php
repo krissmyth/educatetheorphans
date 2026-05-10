@@ -81,7 +81,7 @@
             </div>
             <div class="rounded-2xl border p-6">
                 <p class="text-4xl font-bold">1500 Children</p>
-                <p class="mt-2 text-gray-600">Receive an education each year in our schools</p>
+                <p class="mt-2 text-gray-600">Receive an education every year in our schools</p>
             </div>
         </div>
     </div>
