@@ -80,8 +80,8 @@
                 <p class="mt-2 text-gray-600">Operating education programmes across multiple locations</p>
             </div>
             <div class="rounded-2xl border p-6">
-                <p class="text-4xl font-bold">3,000+ Children</p>
-                <p class="mt-2 text-gray-600">Currently receiving an education in our schools</p>
+                <p class="text-4xl font-bold">1,500 Children</p>
+                <p class="mt-2 text-gray-600">Educated annually across our schools</p>
             </div>
         </div>
     </div>
