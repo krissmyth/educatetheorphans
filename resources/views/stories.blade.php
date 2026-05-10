@@ -151,7 +151,7 @@
         <div class="grid gap-8 md:grid-cols-3">
             <div class="text-center">
                 <p class="text-4xl font-bold text-green-600">1,000+</p>
-                <p class="mt-2 text-gray-700">Children with changed futures</p>
+                <p class="mt-2 text-gray-700">Sponsored children's lives changed forever</p>
             </div>
             <div class="text-center">
                 <p class="text-6xl font-bold text-blue-600">∞</p>
